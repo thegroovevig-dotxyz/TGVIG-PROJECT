@@ -1,0 +1,25 @@
+body{
+background:black;
+color:white;
+font-family:Arial;
+}
+
+h1,h2{
+color:gold;
+}
+
+button{
+background:gold;
+color:black;
+padding:10px;
+margin:10px;
+border:none;
+}
+
+.dashboardButtons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+justify-content:center;
+padding:40px;
+}
