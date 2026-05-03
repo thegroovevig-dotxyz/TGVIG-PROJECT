@@ -27,7 +27,7 @@ function WebFront() {
 
   const load = async (section, setter, isArray = false) => {
   try {
-    const res = await API.get(`/webcontent/${section}`);
+    const res = await API.get(`/api/webcontent/${section}`);
     setter(res.data?.content || (isArray ? [] : {}));
   } catch (err) {
     console.log(`No ${section}`);
