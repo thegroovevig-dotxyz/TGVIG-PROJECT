@@ -7,11 +7,9 @@ exports.getSection = async (req, res) => {
 
     const data = await WebContent.findOne({ section });
 
-    if (!data) {
-      return res.json({ content: null });
-    }
-
-    res.json(data);
+    res.json({
+      content: data ? data.content : null
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

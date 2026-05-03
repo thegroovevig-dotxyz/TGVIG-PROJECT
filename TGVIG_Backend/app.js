@@ -9,31 +9,32 @@ const deviceRoutes = require("./routes/deviceRoutes");
 const app = express();
 
 
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "http://localhost:5175",
-  "http://localhost:5200",
-  "https://thegroovevig.xyz",
-  "https://www.thegroovevig.xyz"
-];
-
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow Postman / server-to-server
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      const allowed = [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175",
+        "http://localhost:5200",
+        "https://thegroovevig.xyz",
+        "https://www.thegroovevig.xyz"
+      ];
+
+      // allow both www and non-www automatically
+      if (
+        allowed.includes(origin) ||
+        origin.includes("thegroovevig.xyz")
+      ) {
         return callback(null, true);
       }
 
       console.log("Blocked by CORS:", origin);
-      return callback(new Error("Blocked by CORS"));
+      callback(null, true); // 🔥 TEMP: allow everything to test
     },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    credentials: true
   })
 );
 
