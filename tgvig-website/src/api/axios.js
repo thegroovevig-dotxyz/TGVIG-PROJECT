@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://www.thegroovevig.xyz/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://tgvig-project.onrender.com",
 });
 
 API.interceptors.request.use((config) => {
