@@ -38,7 +38,7 @@ function WebFront() {
 
     const save = async (section, data) => {
     try {
-      await API.post(`/webcontent/${section}`, {
+      await API.post(`/api/webcontent/${section}`, {
         content: data,
       });
 
