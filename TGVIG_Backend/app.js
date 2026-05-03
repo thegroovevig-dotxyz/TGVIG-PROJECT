@@ -11,6 +11,8 @@ const app = express();
 
 console.log("🔥 SERVER STARTING...");
 
+console.log("🔥 THIS IS THE ACTIVE ENTRY FILE");
+
 app.get("/ping", (req, res) => {
   res.send("pong");
 });
@@ -44,6 +46,11 @@ app.use(
     credentials: true
   })
 );
+
+app.use("/api/webcontent", (req, res, next) => {
+  console.log("WEB CONTENT HIT");
+  next();
+});
 
 app.use(express.json());
 
