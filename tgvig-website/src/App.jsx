@@ -8,6 +8,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 
 // pages
+import WebFront from "./pages/WebFront";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Promotions from "./pages/Promotions";
@@ -22,27 +23,28 @@ import Events from "./pages/Events";
 import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
 import WebRewards from "./pages/WebRewards";
-import WebFront from "./pages/WebFront";
 
 function App() {
   return (
     <Routes>
-      {/* AUTH ROUTES */}
+      {/* 🔥 LANDING PAGE (PUBLIC) */}
+      <Route path="/" element={<WebFront />} />
+
+      {/* AUTH */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* PROTECTED WEB APP */}
+      {/* 🔒 PROTECTED APP */}
       <Route
-        path="/"
+        path="/app"
         element={
           <ProtectedRoute>
             <MainLayout />
           </ProtectedRoute>
         }
       >
-       
         <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="home" element={<Home />} />
         <Route path="menu" element={<Menu />} />
         <Route path="promotions" element={<Promotions />} />
         <Route path="cart" element={<Cart />} />
@@ -51,18 +53,14 @@ function App() {
         <Route path="orders" element={<Orders />} />
         <Route path="profile" element={<Profile />} />
         <Route path="rewards" element={<Rewards />} />
-        <Route path="/table-booking" element={<TableBooking />} />
-<Route path="/events" element={<Events />} />
- <Route path="benefits" element={<Benefits />} />
+        <Route path="table-booking" element={<TableBooking />} />
+        <Route path="events" element={<Events />} />
+        <Route path="benefits" element={<Benefits />} />
         <Route path="venues" element={<Venues />} />
-        <Route path="/webRewards" element={<WebRewards />} />
-        <Route path="/" element={<WebFront />} />
+        <Route path="webRewards" element={<WebRewards />} />
       </Route>
     </Routes>
   );
 }
-
-console.log("USER FROM STORAGE:", localStorage.getItem("user"));
-console.log("TOKEN:", localStorage.getItem("token"));
 
 export default App;
