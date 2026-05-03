@@ -34,6 +34,10 @@ function WebFront() {
   }
 };
 
+setG(Array.isArray(response.data) ? response.data : []);
+
+console.log("G VALUE:", g);
+
     const save = async (section, data) => {
     try {
       await API.post(`/webcontent/${section}`, {

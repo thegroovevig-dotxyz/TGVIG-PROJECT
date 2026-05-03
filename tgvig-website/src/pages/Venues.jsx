@@ -21,15 +21,15 @@ function Venues() {
     <div style={{ padding: "20px" }}>
       <h2>Venues</h2>
 
-      {rewards.map((r, i) => (
+      {venues.map((v, i) => (
   <div
     key={i}
-    onClick={() => navigate("/webRewards")}
+    onClick={() => navigate("/Venues")}
     style={{ cursor: "pointer", marginBottom: "15px" }}
   >
-    {r.image && <img src={r.image} width="200" />}
-    <h3>{r.title}</h3>
-    <p>{r.description}</p>
+    {v.image && <img src={r.image} width="200" />}
+    <h3>{v.title}</h3>
+    <p>{v.description}</p>
   </div>
 ))}
     </div>
