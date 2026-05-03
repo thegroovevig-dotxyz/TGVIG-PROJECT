@@ -11,6 +11,7 @@ function WebFront() {
   const [terms, setTerms] = useState({});
   const [contact, setContact] = useState({});
   const [socials, setSocials] = useState({});
+  const [data, setData] = useState([]);
 
    useEffect(() => {
   load("about", setAbout);
@@ -34,11 +35,6 @@ function WebFront() {
   }
 };
 
-const safeArray = Array.isArray(data) ? data : [];
-
-setG(Array.isArray(response.data) ? response.data : []);
-
-console.log("G VALUE:", g);
 
     const save = async (section, data) => {
     try {
