@@ -34,6 +34,8 @@ function WebFront() {
   }
 };
 
+const safeArray = Array.isArray(data) ? data : [];
+
 setG(Array.isArray(response.data) ? response.data : []);
 
 console.log("G VALUE:", g);
