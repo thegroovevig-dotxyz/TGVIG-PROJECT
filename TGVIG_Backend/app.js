@@ -9,8 +9,10 @@ console.log("🔥 SERVER FILE LOADED");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("ROOT WORKING");
+console.log("🔥 SERVER STARTING...");
+
+app.get("/ping", (req, res) => {
+  res.send("pong");
 });
 
 app.use(
@@ -19,6 +21,7 @@ app.use(
       if (!origin) return callback(null, true);
 
       const allowed = [
+        "http://localhost:5000",
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:5175",
