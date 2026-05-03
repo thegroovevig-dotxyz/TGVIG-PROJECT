@@ -5,9 +5,13 @@ const adminRoutes = require("./routes/admin.routes");
 const analyticsRoutes = require("./routes/analytics.routes");
 const deviceRoutes = require("./routes/deviceRoutes");
 
+console.log("🔥 SERVER FILE LOADED");
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("ROOT WORKING");
+});
 
 app.use(
   cors({
