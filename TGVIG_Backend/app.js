@@ -4,6 +4,7 @@ const cors = require("cors");
 const adminRoutes = require("./routes/admin.routes");
 const analyticsRoutes = require("./routes/analytics.routes");
 const deviceRoutes = require("./routes/deviceRoutes");
+const webcontentRoutes = require("./routes/webcontent.routes");
 
 console.log("🔥 SERVER FILE LOADED");
 
@@ -71,6 +72,7 @@ app.use("/api/settings", require("./routes/settingsRoutes"));
 app.use("/api/coupons", require("./routes/couponRoutes"));
 app.use("/api/devices", deviceRoutes);
 app.use("/api/webcontent", require("./routes/webContentRoutes"));
+app.use("/api/webcontent", webcontentRoutes);
 
 app.use("/uploads", express.static("uploads"));
 

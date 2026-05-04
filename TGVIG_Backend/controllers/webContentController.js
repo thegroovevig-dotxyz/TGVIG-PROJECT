@@ -45,3 +45,21 @@ exports.deleteSection = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getPageContent = async (req, res) => {
+  try {
+    const page = req.params.page;
+
+    const data = await WebContent.findOne({ page });
+
+    if (!data) {
+      return res.status(404).json({ message: "Page not found" });
+    }
+
+    res.json(data);
+
+  } catch (err) {
+    console.error("Webcontent error:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
