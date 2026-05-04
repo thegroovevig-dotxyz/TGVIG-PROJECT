@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/webContentController");
-const {
-  getPageContent
-} = require("../controllers/webcontent.controller");
-
+const webContentController = require("../controllers/webContentController");
 
 // GET section
 
@@ -14,6 +11,7 @@ router.post("/:section", ctrl.saveSection);
 // DELETE section
 router.delete("/:section", ctrl.deleteSection);
 
-router.get("/:page", getPageContent);
+router.get("/:section", webContentController.getContent);
+router.post("/:section", webContentController.saveContent);
 
 module.exports = router;

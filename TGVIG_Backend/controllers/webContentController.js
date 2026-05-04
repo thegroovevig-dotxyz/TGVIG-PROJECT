@@ -34,20 +34,61 @@ exports.deleteSection = async (req, res) => {
   }
 };
 
-exports.getPageContent = async (req, res) => {
+exports.getContent = async (req, res) => {
   try {
-    const page = req.params.page;
+    const { section } = req.params;
 
-    const data = await WebContent.findOne({ page });
+    const doc = await WebContent.findOne({ section });
 
-    if (!data) {
-      return res.status(404).json({ message: "Page not found" });
+    // Always return a consistent structure (prevents frontend crashes)
+    if (!doc) {
+      return res.status(200).json({
+        section,
+        content: null,
+        message: "No content found",
+      });
     }
 
-    res.json(data);
-
+    return res.status(200).json({
+      section: doc.section,
+      content: doc.content,
+    });
   } catch (err) {
-    console.error("Webcontent error:", err);
-    res.status(500).json({ error: err.message });
+    console.error("GET webcontent error:", err);
+
+    return res.status(500).json({
+      message: "Server error loading web content",
+    });
+  }
+};
+
+// POST /api/webcontent/:section
+exports.saveContent = async (req, res) => {
+  try {
+    const { section } = req.params;
+    const { content } = req.body;
+
+    if (!section) {
+      return res.status(400).json({ message: "Section is required" });
+    }
+
+    // Upsert = create if not exists, update if exists
+    const updated = await WebContent.findOneAndUpdate(
+      { section },
+      { content },
+      { new: true, upsert: true }
+    );
+
+    return res.status(200).json({
+      message: "Content saved",
+      section: updated.section,
+      content: updated.content,
+    });
+  } catch (err) {
+    console.error("POST webcontent error:", err);
+
+    return res.status(500).json({
+      message: "Server error saving web content",
+    });
   }
 };
