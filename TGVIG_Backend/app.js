@@ -1,3 +1,5 @@
+require("dotenv").config();
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 
@@ -71,7 +73,7 @@ app.use("/api/events", require("./routes/eventTicketRoutes"));
 app.use("/api/settings", require("./routes/settingsRoutes"));
 app.use("/api/coupons", require("./routes/couponRoutes"));
 app.use("/api/devices", deviceRoutes);
-app.use("/api/webcontent", require("./routes/webContentRoutes"));
+
 app.use("/api/webcontent", webcontentRoutes);
 
 app.use("/uploads", express.static("uploads"));

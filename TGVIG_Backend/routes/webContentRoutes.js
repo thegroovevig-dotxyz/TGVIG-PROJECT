@@ -6,7 +6,7 @@ const {
 
 
 // GET section
-router.get("/:section", ctrl.getSection);
+
 
 // SAVE section
 router.post("/:section", ctrl.saveSection);

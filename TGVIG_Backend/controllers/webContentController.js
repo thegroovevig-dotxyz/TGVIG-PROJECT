@@ -1,19 +1,7 @@
 const WebContent = require("../models/WebContent");
 
 // GET ONE SECTION
-exports.getSection = async (req, res) => {
-  try {
-    const { section } = req.params;
 
-    const data = await WebContent.findOne({ section });
-
-    res.json({
-      content: data ? data.content : null
-    });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
 
 // CREATE / UPDATE SECTION
 exports.saveSection = async (req, res) => {
