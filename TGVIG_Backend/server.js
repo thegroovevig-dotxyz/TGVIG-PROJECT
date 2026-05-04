@@ -9,6 +9,11 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 
+  require("dotenv").config();
+const connectDB = require("./db"); 
+
+connectDB();
+
 
 const PORT = process.env.PORT || 5000;
 
