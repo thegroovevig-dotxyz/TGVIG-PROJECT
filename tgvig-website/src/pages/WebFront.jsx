@@ -16,16 +16,20 @@ function WebFront() {
   const navigate = useNavigate();
 
   const load = async (section, setter, isArray = false) => {
-    try {
-      const res = await API.get(`/webcontent/${section}`);
-      const data = res.data?.content;
+  try {
+    const res = await API.get(`/webcontent/${section}`);
+    const data = res.data?.content;
 
-      setter(data || (isArray ? [] : {}));
-    } catch (err) {
-      console.log("Error loading:", section);
-      setter(isArray ? [] : {});
+    if (isArray) {
+      setter(Array.isArray(data) ? data : []);
+    } else {
+      setter(data && typeof data === "object" ? data : {});
     }
-  };
+  } catch (err) {
+    console.log("Error loading:", section);
+    setter(isArray ? [] : {});
+  }
+};
 
   useEffect(() => {
     load("about", setAbout);
