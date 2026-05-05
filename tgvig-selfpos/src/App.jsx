@@ -7,7 +7,7 @@ import Login from "./auth/Login";
 
 // pages
 import Home from "./pages/Home";
-import MenuGrid from "./pages/MenuGrid";
+
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
