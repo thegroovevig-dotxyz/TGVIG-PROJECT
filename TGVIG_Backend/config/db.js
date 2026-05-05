@@ -8,12 +8,7 @@ const connectDB = async () => {
 
     console.log("Using Mongo URI:", process.env.MONGO_URI);
 
-    await mongoose.connect("mongodb+srv://thegrooveuploads_db_user:D95ZQIJTruwcWJq1@cluster0.qt8lr32.mongodb.net/tgvig");
-
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGO_URI);
 
     console.log("MongoDB connected");
   } catch (err) {
