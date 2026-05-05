@@ -15,7 +15,7 @@ function WebFront() {
 
    useEffect(() => {
   load("about", setAbout);
-  load("rewards", setRewards, true);
+  load("webRewards", setRewards, true);
   load("benefits", setBenefits, true);
   load("venues", setVenues, true);
   load("support", setSupport);     // OBJECT
