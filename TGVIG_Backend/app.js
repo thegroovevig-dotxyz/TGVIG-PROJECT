@@ -22,10 +22,6 @@ app.get("/ping", (req, res) => {
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      app.options("*", cors());
-
       const allowed = [
         "http://localhost:5173",
         "http://localhost:5174",
@@ -35,18 +31,17 @@ app.use(
         "https://www.thegroovevig.xyz"
       ];
 
-      // allow both www and non-www automatically
-      if (
-        allowed.includes(origin) ||
-        origin.includes("thegroovevig.xyz")
-      ) {
+      if (!origin) return callback(null, true);
+
+      if (allowed.includes(origin) || origin.endsWith("thegroovevig.xyz")) {
         return callback(null, true);
       }
 
-      console.log("Blocked by CORS:", origin);
-      callback(null, true); // 🔥 TEMP: allow everything to test
+      console.log("❌ BLOCKED BY CORS:", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
   })
 );
 

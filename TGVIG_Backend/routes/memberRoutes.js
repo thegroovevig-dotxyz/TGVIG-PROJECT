@@ -1,15 +1,18 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/memberController");
-const { createMember } = require("../controllers/memberController");
 
-router.post("/", ctrl.createMember);
-router.post("/register", createMember);
+// CREATE / REGISTER
+router.post("/register", ctrl.createMember);
+
+// LOGIN
 router.post("/login", ctrl.login);
 
+// MEMBERS
 router.get("/", ctrl.getMembers);
 router.get("/:id", ctrl.getMember);
 router.put("/:id", ctrl.updateMember);
 
+// CARD
 router.post("/generate-card/:id", ctrl.generateCard);
 
 router.get("/", async (req, res) => {
