@@ -2,17 +2,22 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGO_URI;
-
-    if (!uri) {
-      throw new Error("MONGO_URI is missing in environment variables");
+    if (!process.env.MONGO_URI) {
+      throw new Error("MONGO_URI is NOT defined");
     }
 
-    await mongoose.connect(uri);
+    console.log("Using Mongo URI:", process.env.MONGO_URI);
 
-    console.log("✅ MongoDB CONNECTED");
+    await mongoose.connect("mongodb+srv://thegrooveuploads_db_user:D95ZQIJTruwcWJq1@cluster0.qt8lr32.mongodb.net/tgvig");
+
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("MongoDB connected");
   } catch (err) {
-    console.error("❌ MongoDB ERROR:", err.message);
+    console.error("MongoDB error:", err.message);
     process.exit(1);
   }
 };
