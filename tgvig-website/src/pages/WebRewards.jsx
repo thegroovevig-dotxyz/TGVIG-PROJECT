@@ -5,18 +5,18 @@ function WebRewards() {
   const [rewards, setRewards] = useState([]);
 
   useEffect(() => {
-    API.get("/webcontent/webRewards")
-      .then((res) => {
-        const data = res.data?.content;
-         if (Array.isArray(data)) {
-        setRewards(data);
-      } else if (Array.isArray(data?.items)) {
-        setRewards(data.items);
-      } else {
-        setRewards([]);
-      }
+  API.get("/webcontent/webRewards")
+    .then((res) => {
+      console.log("RESPONSE:", res.data); // ✅ correct place
+
+      const data = res.data?.content;
+
+      setRewards(Array.isArray(data) ? data : []);
     })
-    .catch(() => setRewards([]));
+    .catch((err) => {
+      console.log(err);
+      setRewards([]);
+    });
 }, []);
 
   return (
