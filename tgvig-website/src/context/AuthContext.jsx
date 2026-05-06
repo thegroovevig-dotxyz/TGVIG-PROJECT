@@ -1,22 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { authService } from "../auth/authService";
 
-// ✅ EXPORT THIS
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(authService.getUser());
 
-  const login = (data) => {
-    authService.setSession(data);
-    setUser(data.user);
+  const login = async (credentials) => {
+    const res = await authService.login(credentials); // ✅ USE THIS
+    setUser(res.user);
+    return res;
   };
 
   const logout = () => {
     authService.logout();
     setUser(null);
   };
-
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
