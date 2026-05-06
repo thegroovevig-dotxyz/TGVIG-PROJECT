@@ -191,15 +191,14 @@ function WebFront() {
       <section>
         <h2>Follow Us</h2>
 
-        {socials.map((s, i) => (
-          <div key={i}>
-            {s.image && <img src={s.image} width="50" />}
-            {socials.instagram && <p>Instagram: {socials.instagram}</p>}
+        {socials && (
+  <>
+    {socials.instagram && <p>Instagram: {socials.instagram}</p>}
     {socials.tiktok && <p>TikTok: {socials.tiktok}</p>}
     {socials.facebook && <p>Facebook: {socials.facebook}</p>}
     {socials.x && <p>X: {socials.x}</p>}
-          </div>
-        ))}
+  </>
+)}
       </section>
 
     </div>
