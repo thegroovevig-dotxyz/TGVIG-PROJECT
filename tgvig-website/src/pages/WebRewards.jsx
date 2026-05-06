@@ -10,10 +10,18 @@ function WebRewards() {
     API.get("/webcontent/webRewards")
       .then((res) => {
         const data = res.data?.content;
-        setRewards(Array.isArray(data) ? data : []);
-      })
-      .catch(() => setRewards([]));
-  }, []);
+        if (Array.isArray(data)) {
+        setRewards(data);
+      } else if (Array.isArray(data?.items)) {
+        setRewards(data.items);
+      } else {
+        setRewards([]);
+      }
+    })
+    .catch(() => setRewards([]));
+}, []);
+
+console.log("REWARDS API RESPONSE:", res.data);
 
   return (
     <div style={{ padding: "20px" }}>
