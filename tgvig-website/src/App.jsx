@@ -29,6 +29,9 @@ function App() {
     <Routes>
       {/* 🔥 LANDING PAGE (PUBLIC) */}
       <Route path="/" element={<WebFront />} />
+      <Route path="benefits" element={<Benefits />} />
+        <Route path="venues" element={<Venues />} />
+        <Route path="webrewards" element={<WebRewards />} />
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
@@ -55,9 +58,6 @@ function App() {
         <Route path="rewards" element={<Rewards />} />
         <Route path="table-booking" element={<TableBooking />} />
         <Route path="events" element={<Events />} />
-        <Route path="benefits" element={<Benefits />} />
-        <Route path="venues" element={<Venues />} />
-        <Route path="webrewards" element={<WebRewards />} />
       </Route>
     </Routes>
   );

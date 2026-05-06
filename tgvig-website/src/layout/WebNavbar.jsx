@@ -20,11 +20,11 @@ function WebNavbar() {
 
       {/* LINKS */}
       <div style={{ marginTop: "10px", textAlign: "center" }}>
-        <Link to="/">About</Link> |{" "}
-        <Link to="/webRewards">Rewards</Link> |{" "}
-        <Link to="/benefits">Benefits</Link> |{" "}
-        <Link to="/venues">Venues</Link>
-      </div>
+  <Link to="/">About</Link> |{" "}
+  <Link to="/webrewards">Rewards</Link> |{" "}
+  <Link to="/benefits">Benefits</Link> |{" "}
+  <Link to="/venues">Venues</Link>
+</div>
 
       {/* RIGHT SIDE */}
       <div style={{ position: "absolute", right: "20px", top: "20px" }}>

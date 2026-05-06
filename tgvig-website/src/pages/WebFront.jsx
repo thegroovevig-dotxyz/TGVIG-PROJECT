@@ -12,7 +12,7 @@ function WebFront() {
   const [privacy, setPrivacy] = useState({});
   const [terms, setTerms] = useState({});
   const [contact, setContact] = useState({});
-  const [socials, setSocials] = useState([]);
+  const [socials, setSocials] = useState({});
   const navigate = useNavigate();
 
   const load = async (section, setter, isArray = false) => {
@@ -40,7 +40,7 @@ function WebFront() {
     load("privacy", setPrivacy);
     load("terms", setTerms);
     load("contact", setContact);
-    load("socials", setSocials, true);
+    load("socials", setSocials);
   }, []);
 
   
