@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(authService.getUser());
 
   const login = async (credentials) => {
-    const res = await authService.login(credentials); // ✅ USE THIS
+    const res = await authService.login(credentials); 
     setUser(res.user);
     return res;
   };
