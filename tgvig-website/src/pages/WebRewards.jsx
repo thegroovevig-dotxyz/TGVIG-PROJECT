@@ -18,7 +18,9 @@ function WebRewards() {
       <h1>Rewards</h1>
 
       {rewards.map((r, i) => (
-        <div key={i}>
+        <div key={i}
+          onClick={() => navigate("/webrewards")}
+          style={{ cursor: "pointer", marginBottom: "15px" }}>
           {r.image && <img src={r.image} width="200" />}
           <h3>{r.title}</h3>
           <p>{r.description}</p>

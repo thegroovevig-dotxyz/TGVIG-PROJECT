@@ -31,7 +31,7 @@ function App() {
       <Route path="/" element={<WebFront />} />
       <Route path="benefits" element={<Benefits />} />
         <Route path="venues" element={<Venues />} />
-        <Route path="webrewards" element={<Rewards />} />
+        <Route path="webrewards" element={<WebRewards />} />
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
