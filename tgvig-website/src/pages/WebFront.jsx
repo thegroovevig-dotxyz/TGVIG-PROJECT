@@ -106,20 +106,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 🎁 REWARDS */}
-      <section>
-        <h2>Rewards</h2>
-
-        {rewards.map((r, i) => (
-          <div key={i}>
-            {r.image && <img src={r.image} width="200" />}
-            <h3>{r.title}</h3>
-            <p>{r.description}</p>
-          </div>
-        ))}
-      </section>
-
-      <hr />
+      
 
       {/* 💎 BENEFITS */}
       <section>
