@@ -154,7 +154,7 @@ function WebFront() {
       {/* 🛠 SUPPORT */}
       <section>
         <h2>Support</h2>
-        <p>{support.description}</p>
+        <p>{support.text}</p>
       </section>
 
       <hr />
@@ -162,7 +162,7 @@ function WebFront() {
       {/* 🔒 PRIVACY */}
       <section>
         <h2>Privacy Policy</h2>
-        <p>{privacy.description}</p>
+        <p>{privacy.text}</p>
       </section>
 
       <hr />
@@ -170,7 +170,7 @@ function WebFront() {
       {/* 📜 TERMS */}
       <section>
         <h2>Terms & Conditions</h2>
-        <p>{terms.description}</p>
+        <p>{terms.text}</p>
       </section>
 
       <hr />
@@ -178,7 +178,7 @@ function WebFront() {
       {/* 📞 CONTACT */}
       <section>
         <h2>Contact</h2>
-        <p>{contact.description}</p>
+        <p>{contact.text}</p>
       </section>
 
       <hr />
