@@ -27,20 +27,10 @@ function WebFront() {
 
   const load = async (section, setter, isArray = false) => {
   try {
-     const data = res.data;
-
-    const safe =
-      Array.isArray(data)
-        ? data
-        : Array.isArray(data?.content)
-        ? data.content
-        : isArray
-        ? []
-        : data?.content || {};
-
-    setter(safe);
+    const res = await API.get(`/webcontent/${section}`);
+    setter(res.data?.content || (isArray ? [] : {}));
   } catch (err) {
-    console.log(`No ${section}`, err);
+    console.log(`No ${section}`);
     setter(isArray ? [] : {});
   }
 };
@@ -97,66 +87,66 @@ function WebFront() {
       </button>
 
             <hr />
-      <h3>Rewards</h3>
+<h3>Rewards</h3>
 
-      {rewards.map((r, i) => (
-        <div key={i} style={{ marginBottom: 10 }}>
-          <input
-            placeholder="Title"
-            value={r.title || ""}
-            onChange={(e) => {
-              const updated = [...rewards];
-              updated[i].title = e.target.value;
-              setRewards(updated);
-            }}
-          />
+{rewards.map((r, i) => (
+  <div key={i} style={{ marginBottom: 10 }}>
+    <input
+      placeholder="Title"
+      value={r.title || ""}
+      onChange={(e) => {
+        const updated = [...rewards];
+        updated[i] = { ...updated[i], title: e.target.value };
+        setRewards(updated);
+      }}
+    />
 
-          <input
-            placeholder="Description"
-            value={r.description || ""}
-            onChange={(e) => {
-              const updated = [...rewards];
-              updated[i].description = e.target.value;
-              setRewards(updated);
-            }}
-          />
+    <input
+      placeholder="Description"
+      value={r.description || ""}
+      onChange={(e) => {
+        const updated = [...rewards];
+        updated[i] = { ...updated[i], description: e.target.value };
+        setRewards(updated);
+      }}
+    />
 
-          <input
-            placeholder="Image"
-            value={r.image || ""}
-            onChange={(e) => {
-              const updated = [...rewards];
-              updated[i].image = e.target.value;
-              setRewards(updated);
-            }}
-          />
+    <input
+      placeholder="Image"
+      value={r.image || ""}
+      onChange={(e) => {
+        const updated = [...rewards];
+        updated[i] = { ...updated[i], image: e.target.value };
+        setRewards(updated);
+      }}
+    />
 
-          {r.image && <img src={r.image} width="80" />}
+    {r.image && <img src={r.image} width="80" />}
 
-          <button
-            onClick={() =>
-              setRewards(rewards.filter((_, idx) => idx !== i))
-            }
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+    <button
+      onClick={() =>
+        setRewards(rewards.filter((_, idx) => idx !== i))
+      }
+    >
+      Delete
+    </button>
+  </div>
+))}
 
-      <button
-        onClick={() =>
-          setRewards([
-            ...rewards,
-            { title: "", description: "", image: "" },
-          ])
-        }
-      >
-        Add Reward
-      </button>
+<button
+  onClick={() =>
+    setRewards([
+      ...rewards,
+      { title: "", description: "", image: "" },
+    ])
+  }
+>
+  Add Reward
+</button>
 
-      <button onClick={() => save("rewards", rewards)}>
-        Save Rewards
-      </button>
+<button onClick={() => save("rewards", rewards)}>
+  Save Rewards
+</button>
 
             <hr />
       <h3>Benefits</h3>
