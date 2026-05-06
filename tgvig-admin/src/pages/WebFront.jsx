@@ -27,10 +27,20 @@ function WebFront() {
 
   const load = async (section, setter, isArray = false) => {
   try {
-    const res = await API.get(`/webcontent/${section}`);
-    setter(res.data?.content || (isArray ? [] : {}));
+     const data = res.data;
+
+    const safe =
+      Array.isArray(data)
+        ? data
+        : Array.isArray(data?.content)
+        ? data.content
+        : isArray
+        ? []
+        : data?.content || {};
+
+    setter(safe);
   } catch (err) {
-    console.log(`No ${section}`);
+    console.log(`No ${section}`, err);
     setter(isArray ? [] : {});
   }
 };
