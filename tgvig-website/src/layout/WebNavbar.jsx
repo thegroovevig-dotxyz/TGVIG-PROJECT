@@ -21,7 +21,6 @@ function WebNavbar() {
       {/* LINKS */}
       <div style={{ marginTop: "10px", textAlign: "center" }}>
   <Link to="/">About</Link> |{" "}
-  <Link to="/webrewards">Rewards</Link> |{" "}
   <Link to="/benefits">Benefits</Link> |{" "}
   <Link to="/venues">Venues</Link>
 </div>

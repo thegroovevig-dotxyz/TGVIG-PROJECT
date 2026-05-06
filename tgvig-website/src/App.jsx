@@ -22,7 +22,7 @@ import TableBooking from "./pages/TableBooking";
 import Events from "./pages/Events";
 import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
-import WebRewards from "./pages/WebRewards";
+
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
       <Route path="/" element={<WebFront />} />
       <Route path="benefits" element={<Benefits />} />
         <Route path="venues" element={<Venues />} />
-        <Route path="webrewards" element={<WebRewards />} />
+        
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />

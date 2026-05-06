@@ -3,7 +3,6 @@ import API from "../api/axios";
 
 function WebFront() {
   const [about, setAbout] = useState({});
-  const [rewards, setRewards] = useState([]);
   const [benefits, setBenefits] = useState([]);
   const [venues, setVenues] = useState([]);
   const [support, setSupport] = useState({});
@@ -15,7 +14,6 @@ function WebFront() {
 
    useEffect(() => {
   load("about", setAbout);
-  load("webRewards", setRewards, true);
   load("benefits", setBenefits, true);
   load("venues", setVenues, true);
   load("support", setSupport);     // OBJECT
@@ -87,68 +85,7 @@ function WebFront() {
       </button>
 
             <hr />
-<h3>Rewards</h3>
 
-{rewards.map((r, i) => (
-  <div key={i} style={{ marginBottom: 10 }}>
-    <input
-      placeholder="Title"
-      value={r.title || ""}
-      onChange={(e) => {
-        const updated = [...rewards];
-        updated[i] = { ...updated[i], title: e.target.value };
-        setRewards(updated);
-      }}
-    />
-
-    <input
-      placeholder="Description"
-      value={r.description || ""}
-      onChange={(e) => {
-        const updated = [...rewards];
-        updated[i] = { ...updated[i], description: e.target.value };
-        setRewards(updated);
-      }}
-    />
-
-    <input
-      placeholder="Image"
-      value={r.image || ""}
-      onChange={(e) => {
-        const updated = [...rewards];
-        updated[i] = { ...updated[i], image: e.target.value };
-        setRewards(updated);
-      }}
-    />
-
-    {r.image && <img src={r.image} width="80" />}
-
-    <button
-      onClick={() =>
-        setRewards(rewards.filter((_, idx) => idx !== i))
-      }
-    >
-      Delete
-    </button>
-  </div>
-))}
-
-<button
-  onClick={() =>
-    setRewards([
-      ...rewards,
-      { title: "", description: "", image: "" },
-    ])
-  }
->
-  Add Reward
-</button>
-
-<button onClick={() => save("rewards", rewards)}>
-  Save Rewards
-</button>
-
-            <hr />
       <h3>Benefits</h3>
 
       {benefits.map((b, i) => (
