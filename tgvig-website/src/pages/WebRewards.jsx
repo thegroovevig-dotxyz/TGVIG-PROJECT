@@ -9,21 +9,33 @@ function WebRewards() {
       .then((res) => {
         const data = res.data?.content;
 
-        // convert OBJECT → ARRAY
-        if (!data) {
-          setRewards([]);
-        } else if (Array.isArray(data)) {
-          setRewards(data);
+        // DEBUG (check what you're actually getting)
+        console.log("WEB REWARDS RAW:", data);
+
+        // FORCE CONSISTENT ARRAY
+        let fixed = [];
+
+        if (Array.isArray(data)) {
+          fixed = data;
+        } else if (data && typeof data === "object") {
+          fixed = [data]; // convert single object → array
         } else {
-          setRewards([data]); // 👈 key fix
+          fixed = [];
         }
+
+        setRewards(fixed);
       })
-      .catch(() => setRewards([]));
+      .catch((err) => {
+        console.log("WEB REWARDS ERROR:", err);
+        setRewards([]);
+      });
   }, []);
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Rewards</h1>
+
+      {rewards.length === 0 && <p>No rewards found</p>}
 
       {rewards.map((r, i) => (
         <div key={i} style={{ marginBottom: "15px" }}>
