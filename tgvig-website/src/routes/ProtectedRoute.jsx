@@ -4,9 +4,9 @@ import WebLayout from "../layout/WebLayout";
 import MainLayout from "../layout/MainLayout";
 
 import WebFront from "../pages/WebFront";
-import Benefits from "./pages/Benefits";
-import Venues from "./pages/Venues";
-import WebRewards from "./pages/WebRewards";
+import Benefits from "../pages/Benefits";
+import Venues from "../pages/Venues";
+import WebRewards from "../pages/WebRewards";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Home from "../pages/Home";
