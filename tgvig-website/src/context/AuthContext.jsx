@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  console.log("AUTH CONTEXT LOADED FRESH");
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
