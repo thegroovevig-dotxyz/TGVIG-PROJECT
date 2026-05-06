@@ -1,13 +1,14 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { authService } from "../auth/authService";
 
-const AuthContext = createContext();
+// ✅ EXPORT THIS
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(authService.getUser());
 
   const login = (data) => {
-    // data already stored in localStorage by authService.login()
+    authService.setSession(data);
     setUser(data.user);
   };
 
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     authService.logout();
     setUser(null);
   };
+
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
