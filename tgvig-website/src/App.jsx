@@ -57,7 +57,7 @@ function App() {
         <Route path="events" element={<Events />} />
         <Route path="benefits" element={<Benefits />} />
         <Route path="venues" element={<Venues />} />
-        <Route path="webRewards" element={<WebRewards />} />
+        <Route path="webrewards" element={<WebRewards />} />
       </Route>
     </Routes>
   );

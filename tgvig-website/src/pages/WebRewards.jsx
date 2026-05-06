@@ -6,7 +6,10 @@ function WebRewards() {
 
   useEffect(() => {
     API.get("/webcontent/webRewards")
-      .then((res) => setRewards(res.data?.content || []))
+      .then((res) => {
+        const data = res.data?.content;
+        setRewards(Array.isArray(data) ? data : []);
+      })
       .catch(() => setRewards([]));
   }, []);
 

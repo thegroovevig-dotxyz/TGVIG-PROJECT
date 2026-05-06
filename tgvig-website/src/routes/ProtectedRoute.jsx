@@ -23,7 +23,7 @@ function App() {
         <Route element={<WebLayout />}>
         <Route path="benefits" element={<Benefits />} />
                 <Route path="venues" element={<Venues />} />
-                <Route path="webRewards" element={<WebRewards />} />
+                <Route path="webrewards" element={<WebRewards />} />
           <Route path="/" element={<WebFront />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
