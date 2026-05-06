@@ -154,7 +154,9 @@ function WebFront() {
       {/* 🛠 SUPPORT */}
       <section>
         <h2>Support</h2>
-        <p>{support.text}</p>
+        <p>Email: {support.email}</p>
+    <p>Phone: {support.phone}</p>
+    <p>Address: {support.address}</p>
       </section>
 
       <hr />
@@ -178,7 +180,9 @@ function WebFront() {
       {/* 📞 CONTACT */}
       <section>
         <h2>Contact</h2>
-        <p>{contact.text}</p>
+        <p>Email: {contact.email}</p>
+    <p>Phone: {contact.phone}</p>
+    <p>Address: {contact.address}</p>
       </section>
 
       <hr />
@@ -190,7 +194,10 @@ function WebFront() {
         {socials.map((s, i) => (
           <div key={i}>
             {s.image && <img src={s.image} width="50" />}
-            <p>{s.title}</p>
+            {socials.instagram && <p>Instagram: {socials.instagram}</p>}
+    {socials.tiktok && <p>TikTok: {socials.tiktok}</p>}
+    {socials.facebook && <p>Facebook: {socials.facebook}</p>}
+    {socials.x && <p>X: {socials.x}</p>}
           </div>
         ))}
       </section>
