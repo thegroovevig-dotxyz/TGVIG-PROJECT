@@ -28,6 +28,8 @@ function Login() {
   alert("Access denied");
 }
 
+
+navigate("/home")
   
 
     } catch (err) {
