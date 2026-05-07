@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { authService } from "../auth/authService";
 import { useNavigate } from "react-router-dom";
 import useSettings from "../hooks/useSettings";
 
@@ -8,35 +8,24 @@ function Login() {
   const [password, setPassword] = useState("");
   const { login } = useAuth();
 
-  const navigate = useNavigate();
-
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await login({ email, password });
+  try {
+    const res = await authService.login({
+      email,
+      password,
+    });
 
-      const user = res.user;
+    console.log("LOGIN SUCCESS:", res);
 
-      console.log("USER:", user);
+    navigate("/home");
 
-      if (user.role === "admin") {
-  navigate("/home");
-} else if (user.role === "MEMBER") {
-  navigate("/home");
-} else {
-  alert("Access denied");
-}
-
-
-navigate("/home")
-  
-
-    } catch (err) {
-      console.log(err);
-      alert("Login failed");
-    }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Login failed");
+  }
+};
 
   const settings = useSettings();
 

@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import ProtectedRoute from "../components/ProtectedRoute";
+
 import WebLayout from "../layout/WebLayout";
 import MainLayout from "../layout/MainLayout";
 
