@@ -1,9 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-
+import { authService } from "../auth/authService";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+
+  const user = authService.getUser();
+
+  const logout = () => {
+    authService.logout();
+    navigate("/login");
+  };
 
   return (
     <nav style={{ padding: "10px", borderBottom: "1px solid #9b6c6c" }}>

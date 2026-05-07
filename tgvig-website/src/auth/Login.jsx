@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { authService } from "../auth/authService";
+import { authService } from "./authService";
 import { useNavigate } from "react-router-dom";
 import useSettings from "../hooks/useSettings";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  
 
   const handleLogin = async (e) => {
   e.preventDefault();
 
   try {
     const res = await authService.login({
-      email,
-      password,
-    });
+  email,
+  password,
+});
 
     console.log("LOGIN SUCCESS:", res);
 
