@@ -4,7 +4,7 @@ import App from "./App";
 
 import { BrowserRouter } from "react-router-dom";
 
-import { AuthProvider } from "./context/AuthContext";
+
 import { CartProvider } from "./context/CartContext";
 import { WalletProvider } from "./context/WalletContext";
 
