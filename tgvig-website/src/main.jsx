@@ -14,9 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
       <WalletProvider>
         <CartProvider>
-        
           <App />
-         
         </CartProvider>
       </WalletProvider>
   </BrowserRouter>
