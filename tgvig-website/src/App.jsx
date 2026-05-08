@@ -23,21 +23,20 @@ import Events from "./pages/Events";
 import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
 
-
 function App() {
   return (
     <Routes>
-      {/* 🔥 LANDING PAGE (PUBLIC) */}
+
+      {/* PUBLIC */}
       <Route path="/" element={<WebFront />} />
-      <Route path="benefits" element={<Benefits />} />
-        <Route path="venues" element={<Venues />} />
-        
+      <Route path="/benefits" element={<Benefits />} />
+      <Route path="/venues" element={<Venues />} />
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* 🔒 PROTECTED APP */}
+      {/* PRIVATE */}
       <Route
         path="/app"
         element={
@@ -59,6 +58,7 @@ function App() {
         <Route path="table-booking" element={<TableBooking />} />
         <Route path="events" element={<Events />} />
       </Route>
+
     </Routes>
   );
 }
