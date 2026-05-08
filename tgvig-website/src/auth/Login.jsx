@@ -20,7 +20,8 @@ function Login() {
 
     console.log("LOGIN SUCCESS:", res);
 
-    navigate("/home");
+    navigate("");
+    window.location.href = "/app/home";
 
   } catch (err) {
     console.log(err);
