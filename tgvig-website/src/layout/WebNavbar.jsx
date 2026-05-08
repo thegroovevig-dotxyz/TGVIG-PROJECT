@@ -28,7 +28,7 @@ function WebNavbar() {
       {/* RIGHT SIDE */}
       <div style={{ position: "absolute", right: "20px", top: "20px" }}>
         {user ? (
-          <button onClick={() => navigate("/home")}>Dashboard</button>
+          <button onClick={() => navigate("/login")}>Login</button>
         ) : (
           <>
             <button onClick={() => navigate("/login")}>Login</button>

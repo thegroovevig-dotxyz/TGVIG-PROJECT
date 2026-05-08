@@ -5,7 +5,6 @@ import WebNavbar from "../layout/WebNavbar";
 
 function WebFront() {
   const [about, setAbout] = useState({});
-  const [rewards, setRewards] = useState([]);
   const [benefits, setBenefits] = useState([]);
   const [venues, setVenues] = useState([]);
   const [support, setSupport] = useState({});
@@ -33,7 +32,6 @@ function WebFront() {
 
   useEffect(() => {
     load("about", setAbout);
-    load("webRewards", setRewards, true);
     load("benefits", setBenefits, true);
     load("venues", setVenues, true);
     load("support", setSupport);
@@ -97,7 +95,7 @@ function WebFront() {
 
 </div>
 
-      {/* 🟡 ABOUT */}
+      {/* ABOUT */}
       <section>
         <h1>{about.title || "The Groove VIG"}</h1>
         {about.image && <img src={about.image} width="100%" />}
@@ -108,7 +106,7 @@ function WebFront() {
 
       
 
-      {/* 💎 BENEFITS */}
+      {/* BENEFITS */}
       <section>
         <h2>Benefits</h2>
 
@@ -123,7 +121,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 📍 VENUES */}
+      {/* VENUES */}
       <section>
         <h2>Venues</h2>
 
@@ -138,7 +136,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 🛠 SUPPORT */}
+      {/* SUPPORT */}
       <section>
         <h2>Support</h2>
         <p>Email: {support.email}</p>
@@ -148,7 +146,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 🔒 PRIVACY */}
+      {/* PRIVACY */}
       <section>
         <h2>Privacy Policy</h2>
         <p>{privacy.text}</p>
@@ -156,7 +154,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 📜 TERMS */}
+      {/* TERMS */}
       <section>
         <h2>Terms & Conditions</h2>
         <p>{terms.text}</p>
@@ -164,7 +162,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 📞 CONTACT */}
+      {/* CONTACT */}
       <section>
         <h2>Contact</h2>
         <p>Email: {contact.email}</p>
@@ -174,7 +172,7 @@ function WebFront() {
 
       <hr />
 
-      {/* 🌍 SOCIALS */}
+      {/* SOCIALS */}
       <section>
         <h2>Follow Us</h2>
 
