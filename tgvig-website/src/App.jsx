@@ -38,7 +38,7 @@ function App() {
 
       {/* PRIVATE */}
       <Route
-        path="/app/*"
+        path="/app"
         element={
           <ProtectedRoute>
             <MainLayout />
