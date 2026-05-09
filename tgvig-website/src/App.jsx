@@ -38,15 +38,15 @@ function App() {
 
       {/* PRIVATE */}
       <Route
-        path="/app"
+        path="/app/home"
         element={
           <ProtectedRoute>
             <MainLayout />
           </ProtectedRoute>
         }
       >
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
+         <Route index element={<Home />} />
+  <Route path="home" element={<Home />} />
         <Route path="menu" element={<Menu />} />
         <Route path="promotions" element={<Promotions />} />
         <Route path="cart" element={<Cart />} />
