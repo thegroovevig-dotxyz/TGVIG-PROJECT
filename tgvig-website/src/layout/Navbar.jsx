@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <nav style={{ padding: "10px", borderBottom: "1px solid #9b6c6c" }}>
-      <Link to="/home">Home</Link> |{" "}
+      <Link to="/app">Home</Link> |{" "}
       <Link to="/menu">Menu</Link> |{" "}
       <Link to="/promotions">Promotions</Link> |{" "}
       <Link to="/cart">Cart</Link> |{" "}

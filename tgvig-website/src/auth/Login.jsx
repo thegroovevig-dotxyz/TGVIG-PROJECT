@@ -20,7 +20,7 @@ function Login() {
 
     console.log("LOGIN SUCCESS:", res);
 
-    navigate("/home")
+    navigate("/app")
 
   } catch (err) {
     console.log(err);
