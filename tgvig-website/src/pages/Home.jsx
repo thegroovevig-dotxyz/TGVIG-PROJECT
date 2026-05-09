@@ -17,20 +17,14 @@ function Home() {
   }
 };
 
-  useEffect(() => {
+useEffect(() => {
   if (!user) {
     navigate("/login");
     return;
   }
 
   loadBlogs();
-}, []);
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user, navigate]);
+}, [user, navigate]);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -84,21 +78,21 @@ function Home() {
 
       {/* NAVIGATION BUTTONS */}
       <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-        <button onClick={() => navigate("/menu")}>
+        <button onClick={() => navigate("/app/menu")}>
           Go to Menu
         </button>
 
-        <button onClick={() => navigate("/promotions")}>
+        <button onClick={() => navigate("/app/promotions")}>
           View Promotions
         </button>
 
         {/* 🪑 TABLE BOOKING */}
-        <button onClick={() => navigate("/table-booking")}>
+        <button onClick={() => navigate("/app/table-booking")}>
           Table Booking
         </button>
 
         {/* 🎟️ EVENT TICKETS */}
-        <button onClick={() => navigate("/events")}>
+        <button onClick={() => navigate("/app/events")}>
           Event Tickets
         </button>
       </div>
