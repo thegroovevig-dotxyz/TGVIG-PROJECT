@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const app = require("/app");
+const app = require("./app");
 const connectDB = require("./config/db");
 
 console.log("ENV CHECK:", process.env.MONGO_URI);
