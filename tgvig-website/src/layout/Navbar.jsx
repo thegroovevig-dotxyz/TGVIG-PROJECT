@@ -14,11 +14,11 @@ function Navbar() {
   return (
     <nav style={{ padding: "10px", borderBottom: "1px solid #9b6c6c" }}>
       <Link to="/app">Home</Link> |{" "}
-      <Link to="/menu">Menu</Link> |{" "}
-      <Link to="/promotions">Promotions</Link> |{" "}
-      <Link to="/cart">Cart</Link> |{" "}
-      <Link to="/wallet">Wallet</Link> |{" "}
-      <Link to="/profile">Profile</Link>
+      <Link to="/app/menu">Menu</Link> |{" "}
+      <Link to="/app/promotions">Promotions</Link> |{" "}
+      <Link to="/app/cart">Cart</Link> |{" "}
+      <Link to="/app/wallet">Wallet</Link> |{" "}
+      <Link to="/app/profile">Profile</Link>
 
       <div style={{ float: "right" }}>
         {user ? (
@@ -26,10 +26,8 @@ function Navbar() {
             <span style={{ marginRight: "10px" }}>
               {user.firstName}
             </span>
-            <button onClick={() => {
-              logout();
-              navigate("/login");
-            }}>
+
+            <button onClick={logout}>
               Logout
             </button>
           </>
