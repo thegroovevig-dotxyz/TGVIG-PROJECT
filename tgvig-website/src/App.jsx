@@ -38,7 +38,7 @@ function App() {
 
       {/* PRIVATE */}
       <Route
-        path="/app/home"
+        path="/app"
         element={
           <ProtectedRoute>
             <MainLayout />
@@ -46,7 +46,6 @@ function App() {
         }
       >
          <Route index element={<Home />} />
-  <Route path="home" element={<Home />} />
         <Route path="menu" element={<Menu />} />
         <Route path="promotions" element={<Promotions />} />
         <Route path="cart" element={<Cart />} />
