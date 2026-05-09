@@ -1,18 +1,15 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 
-const app = require("./app");
-const connectDB = require("./config/db");
+const app = express();
 
-console.log("ENV CHECK:", process.env.MONGO_URI);
-    console.log("MONGO_URI =", process.env.MONGO_URI);
+app.use(cors());
+app.use(express.json());
 
-connectDB();
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+app.get("/", (req, res) => {
+  res.send("API RUNNING");
 });
 
-module.exports = connectDB;
+app.listen(5000, "0.0.0.0", () => {
+  console.log("SERVER RUNNING ON 5000");
+});
