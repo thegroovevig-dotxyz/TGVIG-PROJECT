@@ -32,7 +32,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Home />} />
+          <Route path="/app" element={<Home />} />
         </Route>
 
       </Routes>

@@ -26,7 +26,7 @@ function Login() {
     console.log(err);
     alert("Login failed");
   }
-};
+}
 
   const settings = useSettings();
 
