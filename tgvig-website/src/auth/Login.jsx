@@ -20,7 +20,6 @@ function Login() {
 
     console.log("LOGIN SUCCESS:", res);
 
-    navigate("/home");
     window.location.href = "/home";
 
   } catch (err) {
