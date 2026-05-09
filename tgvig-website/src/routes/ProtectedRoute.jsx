@@ -14,7 +14,7 @@ import Home from "../pages/Home";
 
 function App() {
   return (
-    <BrowserRouter>
+
       <Routes>
 
         {/* 🌐 PUBLIC WEBSITE */}
@@ -36,7 +36,7 @@ function App() {
         </Route>
 
       </Routes>
-    </BrowserRouter>
+   
   );
 }
 
