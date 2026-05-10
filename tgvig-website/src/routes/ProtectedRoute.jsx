@@ -1,44 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "../routes/ProtectedRoute";
+import { Navigate } from "react-router-dom";
 
+export default function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
 
-import WebLayout from "../layout/WebLayout";
-import MainLayout from "../layout/MainLayout";
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
 
-import WebFront from "../pages/WebFront";
-import Login from "../auth/Login";
-import Register from "../auth/Register";
-import Home from "../pages/Home";
-
-
-
-
-function App() {
-  return (
-
-      <Routes>
-
-        {/* 🌐 PUBLIC WEBSITE */}
-        <Route element={<WebLayout />}>
-          <Route path="/" element={<WebFront />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-
-        {/* 🔒 PRIVATE APP */}
-        <Route
-          element={
-            <ProtectedRoute>
-              <MainLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/home" element={<Home />} />
-        </Route>
-
-      </Routes>
-   
-  );
+  return children;
 }
-
-export default App;

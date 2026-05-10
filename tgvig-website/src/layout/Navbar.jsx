@@ -1,13 +1,27 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { authService } from "../auth/authService";
 
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");
+function Navbar() {
+  const navigate = useNavigate();
+  const user = authService.getUser();
 
-  if (!token) {
-    return <Navigate to="/login" />;
-  }
+  return (
+    <nav style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
+      <button onClick={() => navigate("/home")}>Home</button>
+      <button onClick={() => navigate("/home/menu")}>Menu</button>
+      <button onClick={() => navigate("/home/promotions")}>Promotions</button>
 
-  return children;
+      <div style={{ float: "right" }}>
+        {user ? (
+          <button onClick={() => authService.logout()}>
+            Logout
+          </button>
+        ) : (
+          <button onClick={() => navigate("/login")}>Login</button>
+        )}
+      </div>
+    </nav>
+  );
 }
 
-export default ProtectedRoute;
+export default Navbar;

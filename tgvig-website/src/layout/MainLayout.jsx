@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function MainLayout() {
   return (
-    <div className="/home">
+    <div className="app-layout">
       <Navbar />
 
       <main style={{ minHeight: "80vh" }}>

@@ -78,21 +78,21 @@ useEffect(() => {
 
       {/* NAVIGATION BUTTONS */}
       <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-        <button onClick={() => navigate("/home/menu")}>
+        <button onClick={() => navigate("/menu")}>
           Go to Menu
         </button>
 
-        <button onClick={() => navigate("/home/promotions")}>
+        <button onClick={() => navigate("/promotions")}>
           View Promotions
         </button>
 
         {/* 🪑 TABLE BOOKING */}
-        <button onClick={() => navigate("/home/table-booking")}>
+        <button onClick={() => navigate("/table-booking")}>
           Table Booking
         </button>
 
         {/* 🎟️ EVENT TICKETS */}
-        <button onClick={() => navigate("/home/events")}>
+        <button onClick={() => navigate("/events")}>
           Event Tickets
         </button>
       </div>
