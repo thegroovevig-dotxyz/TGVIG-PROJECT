@@ -66,6 +66,16 @@ function Menu() {
             )}
 
             <h3>{item.name}</h3>
+            <p><b>{item.type}</b></p>
+
+             {/* SPECIAL */}
+            {item.type === "SPECIAL" && (
+              <>
+                <p> Points: {item.rewards?.points}</p>
+                <p> Reward: {item.rewards?.itemReward}</p>
+                <p> Discount: {item.rewards?.discount}%</p>
+              </>
+            )}
 
             {/* SIZE SELECTOR */}
             <div style={{ marginBottom: "10px" }}>

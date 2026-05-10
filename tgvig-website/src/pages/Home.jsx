@@ -43,6 +43,7 @@ useEffect(() => {
       <p>
         Hello {user?.name}, explore menus, promotions, and rewards.
       </p>
+      <p><b>Tier:</b> {profile.tier}</p>
 
       {/* 📰 BLOG FEED */}
 <div style={{ marginTop: "20px" }}>
