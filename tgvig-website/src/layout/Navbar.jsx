@@ -8,8 +8,8 @@ function Navbar() {
   return (
     <nav style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
       <button onClick={() => navigate("/home")}>Home</button>
-      <button onClick={() => navigate("/home/menu")}>Menu</button>
-      <button onClick={() => navigate("/home/promotions")}>Promotions</button>
+      <button onClick={() => navigate("/home/cart")}>Cart</button>
+      <button onClick={() => navigate("/home/profile")}>Profile</button>
 
       <div style={{ float: "right" }}>
         {user ? (
