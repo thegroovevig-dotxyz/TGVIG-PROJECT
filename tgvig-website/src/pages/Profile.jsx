@@ -13,11 +13,15 @@ function Profile() {
     return;
   }
 
-  getMember(user.id)
-    .then((res) => setProfile(res.data.member))
-    .catch(console.log);
+  getMember(user._id)
+    .then((res) => {
+      console.log("PROFILE RESPONSE:", res.data);
+      setProfile(res.data);
+    })
+    .catch((err) => {
+      console.log("PROFILE ERROR:", err.response?.data || err.message);
+    });
 }, []);
-
 
   return (
   <div style={{ padding: "20px" }}>
