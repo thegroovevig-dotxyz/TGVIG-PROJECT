@@ -33,10 +33,21 @@ function TableBooking() {
   // CREATE / UPDATE
 const handleSave = async () => {
   const payload = {
-    ...form,
-    totalTables: Number(form.totalTables),
-    soldTables: Number(form.soldTables),
-  };
+  clubId: form.clubId,
+  tier: form.tier,
+
+  totalTables: Number(form.totalTables),
+
+  soldTables: Number(form.soldTables),
+
+  numberOfTables: Number(form.totalTables),
+
+  pricePerTable: Number(form.pointsCost),
+
+  totalAmount:
+    Number(form.totalTables) *
+    Number(form.pointsCost),
+};
 
   try {
     let res;
