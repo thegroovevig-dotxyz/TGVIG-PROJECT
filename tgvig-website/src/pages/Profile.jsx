@@ -23,18 +23,20 @@ function Profile() {
     });
 }, []);
 
+if (!profile) return <p>Loading...</p>;
+
   return (
   <div style={{ padding: "20px" }}>
     <h2>PROFILE</h2>
 
-    <p><b>Name:</b> {profile.firstName} {profile.lastName}</p>
-        <p><b>Email:</b> {profile.email}</p>
-        <p><b>Membership No:</b> {profile.membershipNo}</p>
-        <p><b>Role:</b> {profile.role}</p>
-        <p><b>Status:</b> {profile.status}</p>
-        <p><b>Tier:</b> {profile.tier}</p>
-        <p><b>Wallet:</b> R {profile.walletBalance}</p>
-        <p><b>Points:</b> {profile.pointsBalance}</p>
+    <p><b>Name:</b> {profile?.firstName} {profile?.lastName}</p>
+<p><b>Email:</b> {profile?.email}</p>
+<p><b>Membership No:</b> {profile?.membershipNo}</p>
+<p><b>Role:</b> {profile?.role}</p>
+<p><b>Status:</b> {profile?.status}</p>
+<p><b>Tier:</b> {profile?.tier}</p>
+<p><b>Wallet:</b> R {profile?.walletBalance}</p>
+<p><b>Points:</b> {profile?.pointsBalance}</p>
   </div>
 );
 }
