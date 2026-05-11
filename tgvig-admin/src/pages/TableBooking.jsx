@@ -9,11 +9,12 @@ function TableBooking() {
   const [editingId, setEditingId] = useState(null);
 
   const [form, setForm] = useState({
-    clubId: "",
-    tier: "STANDARD",
-    totalTables: 0,
-   pricePerTable: 0,
-  });
+  clubId: "",
+  tier: "STANDARD",
+  totalTables: 0,
+  soldTables: 0,
+  pointsCost: 0,
+});
 
   useEffect(() => {
     loadClubs();
@@ -156,6 +157,18 @@ const handleSave = async () => {
   value={form.pricePerTable}
   onChange={(e) =>
     setForm({ ...form, pricePerTable: e.target.value })
+  }
+/>
+
+<input
+  type="number"
+  placeholder="Points Cost"
+  value={form.pointsCost}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      pointsCost: e.target.value,
+    })
   }
 />
 
