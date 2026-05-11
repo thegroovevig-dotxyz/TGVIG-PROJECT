@@ -13,7 +13,7 @@ function TableBooking() {
   tier: "STANDARD",
   totalTables: 0,
   soldTables: 0,
-  pointsCost: 0,
+  pricePerTable: 0,
 });
 
   useEffect(() => {
@@ -154,9 +154,12 @@ const handleSave = async () => {
       <input
   type="number"
   placeholder="Price Per Table"
-  value={form.pricePerTable}
+  value={form.pricePerTable || 0}
   onChange={(e) =>
-    setForm({ ...form, pricePerTable: e.target.value })
+    setForm({
+      ...form,
+      pricePerTable: e.target.value,
+    })
   }
 />
 
@@ -198,6 +201,10 @@ const handleSave = async () => {
       <b>Tier:</b>{" "}
       {i.tier || "STANDARD"}
     </p>
+
+    <p>
+  <b>Price:</b> R{i.pricePerTable}
+</p>
 
     <p>
       <b>Points Cost:</b>{" "}
