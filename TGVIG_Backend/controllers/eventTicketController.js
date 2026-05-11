@@ -14,6 +14,10 @@ exports.buyTicket = async (req, res) => {
     const { memberId, ticketId, paymentType } = req.body;
 
     const member = await Member.findById(member);
+
+if (member.pin !== pin) {
+  return res.status(400).json({ message: "Invalid PIN" });
+}
     const ticket = await EventTicket.findById(ticketId);
 
     let total = 0;
@@ -24,6 +28,7 @@ exports.buyTicket = async (req, res) => {
       if (member.walletBalance < total) {
         return res.status(400).json({ message: "Insufficient wallet" });
       }
+      
 
       member.walletBalance -= total;
     }

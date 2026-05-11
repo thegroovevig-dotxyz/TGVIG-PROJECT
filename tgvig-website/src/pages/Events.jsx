@@ -20,19 +20,30 @@ const [selectedTicket, setSelectedTicket] = useState(null);
 
   const buyTicket = async (ticketId, paymentType) => {
     try {
+       if (!user?._id) return alert("Login required");
+
       const res = await API.post("/events/buy", {
         memberId: user._id,
-        ticketId,
-        paymentType,
+      ticketId: selectedTicket._id,
+      paymentType: "WALLET",
+      pin,
       });
 
       alert("Ticket purchased!");
+      setCart([]);
+    setPin("");
       console.log(res.data);
     } catch (err) {
       console.log(err);
       alert(err.response?.data?.message || "Error buying ticket");
     }
   };
+
+  
+
+  const openPinModal = (ticket) => {
+  setSelectedTicket(ticket);
+};
 
   const addToCart = (ticket) => {
   setCart((prev) => [...prev, ticket]);
