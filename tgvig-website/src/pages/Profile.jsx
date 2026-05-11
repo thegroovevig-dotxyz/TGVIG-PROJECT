@@ -8,12 +8,16 @@ function Profile() {
   useEffect(() => {
   const user = authService.getUser();
 
-  if (!user || !user.id) {
-    console.log("No user or missing id");
+  console.log("USER:", user);
+
+  const id = user?._id || user?.id;
+
+  if (!id) {
+    console.log("NO VALID USER ID");
     return;
   }
 
-  getMember(user._id)
+  getMember(id)
     .then((res) => {
       console.log("PROFILE RESPONSE:", res.data);
       setProfile(res.data);
@@ -21,9 +25,7 @@ function Profile() {
     .catch((err) => {
       console.log("PROFILE ERROR:", err.response?.data || err.message);
     });
-}, []);
-
-if (!profile) return <p>Loading...</p>;
+}, []);if (!profile) return <p>Loading...</p>;
 
   return (
   <div style={{ padding: "20px" }}>
