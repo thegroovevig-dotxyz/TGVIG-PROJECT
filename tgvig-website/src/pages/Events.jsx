@@ -64,13 +64,6 @@ const buyTicket = async (ticket, paymentType) => {
   <div>
     <h2>Events</h2>
 
-    <input
-      type="password"
-      placeholder="Enter Membership PIN"
-      value={pin}
-      onChange={(e) => setPin(e.target.value)}
-    />
-
     <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
       {events.map((e) => (
         <div
@@ -93,13 +86,6 @@ const buyTicket = async (ticket, paymentType) => {
             Add To Cart
           </button>
 
-          <button onClick={() => buyTicket(e, "WALLET")}>
-            Buy Wallet
-          </button>
-
-          <button onClick={() => buyTicket(e, "POINTS")}>
-            Buy Points
-          </button>
         </div>
       ))}
     </div>
@@ -122,6 +108,22 @@ const buyTicket = async (ticket, paymentType) => {
         <h4>{t.eventName}</h4>
 
         <p>R{t.priceCash}</p>
+
+ <input
+      type="password"
+      placeholder="Enter Membership PIN"
+      value={pin}
+      onChange={(e) => setPin(e.target.value)}
+    />
+
+    <button onClick={() => buyTicket(e, "WALLET")}>
+            Buy Wallet
+          </button>
+
+          <button onClick={() => buyTicket(e, "POINTS")}>
+            Buy Points
+          </button>
+
       </div>
     ))}
   </div>
