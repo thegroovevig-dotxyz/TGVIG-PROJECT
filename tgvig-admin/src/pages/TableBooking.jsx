@@ -156,34 +156,56 @@ const handleSave = async () => {
       {/* LIST */}
       <h3>Club Table Inventory</h3>
 
-      {inventory.map((i) => (
-        <div
-          key={i._id}
-          style={{
-            marginBottom: "10px",
-            border: "1px solid #ccc",
-            padding: "10px",
-          }}
-        >
-          <p><b>Club:</b> {i.clubId?.name}</p>
-          <p><b>Tier:</b> {i.tier}</p>
-          <p>
-  <b>Points Cost:</b>{" "}
-  {Number(form.pricePerTable || 0) * Number(form.totalTables || 0)}
-</p>
+      {inventory.map((i, index) => (
+  <div
+    key={i._id || index}
+    style={{
+      marginBottom: "10px",
+      border: "1px solid #ccc",
+      padding: "10px",
+    }}
+  >
+    <p>
+      <b>Club:</b>{" "}
+      {i.clubId?.name || "N/A"}
+    </p>
 
-          <p><b>Total:</b> {i.totalTables}</p>
-          <p><b>Sold:</b> {i.soldTables}</p>
+    <p>
+      <b>Tier:</b>{" "}
+      {i.tier || "STANDARD"}
+    </p>
 
-          <p>
-            <b>Available:</b>{" "}
-            {Number(i.totalTables) - Number(i.soldTables)}
-          </p>
+    <p>
+      <b>Points Cost:</b>{" "}
+      {i.pointsCost || 0}
+    </p>
 
-          <button onClick={() => handleEdit(i)}>Edit</button>
-          <button onClick={() => handleDelete(i._id)}>Delete</button>
-        </div>
-      ))}
+    <p>
+      <b>Total:</b>{" "}
+      {Number(i.totalTables || 0)}
+    </p>
+
+    <p>
+      <b>Sold:</b>{" "}
+      {Number(i.soldTables || 0)}
+    </p>
+
+    <p>
+      <b>Available:</b>{" "}
+      {Number(i.totalTables || 0) -
+        Number(i.soldTables || 0)}
+    </p>
+
+    <button onClick={() => handleEdit(i)}>
+      Edit
+    </button>
+
+    <button onClick={() => handleDelete(i._id)}>
+      Delete
+    </button>
+  </div>
+))}
+   
     </div>
   );
 }
