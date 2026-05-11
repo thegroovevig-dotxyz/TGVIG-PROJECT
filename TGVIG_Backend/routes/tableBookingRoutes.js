@@ -8,4 +8,6 @@ router.get("/", ctrl.getBookings);
 router.put("/:id", ctrl.updateBooking);
 router.delete("/:id", ctrl.deleteBooking);
 
+console.log("TABLE BOOKING ROUTES ACTIVE");
+
 module.exports = router;

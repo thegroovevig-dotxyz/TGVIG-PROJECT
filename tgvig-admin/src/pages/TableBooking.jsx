@@ -12,7 +12,7 @@ function TableBooking() {
     clubId: "",
     tier: "STANDARD",
     totalTables: 0,
-    soldTables: 0,
+   pricePerTable: 0,
   });
 
   useEffect(() => {
@@ -31,47 +31,51 @@ function TableBooking() {
   };
 
   // CREATE / UPDATE
-  const handleSave = async () => {
-    const payload = {
-      ...form,
-      totalTables: Number(form.totalTables),
-      soldTables: Number(form.soldTables),
-    };
-
-    try {
-      if (editingId) {
-        await API.put(`/table-bookings/${id}`, payload);
-      } else {
-        await API.post("/table-bookings", payload);
-      }
-
-      setForm({
-        clubId: "",
-        tier: "STANDARD",
-        totalTables: 0,
-        soldTables: 0,
-      });
-
-      setEditingId(null);
-      loadInventory();
-    } catch (err) {
-      console.log(err);
-    }
+ const handleSave = async () => {
+  const payload = {
+    clubId: form.clubId,
+    tier: form.tier,
+    totalTables: Number(form.totalTables),
+    soldTables: Number(form.soldTables),
+    pricePerTable: Number(form.pricePerTable),
+    numberOfTables: Number(form.totalTables),
   };
+
+  try {
+    if (editingId) {
+      await API.put(`/table-bookings/${editingId}`, payload);
+    } else {
+      await API.post("/table-bookings", payload);
+    }
+
+    setForm({
+      clubId: "",
+      tier: "STANDARD",
+      totalTables: 0,
+      soldTables: 0,
+      pricePerTable: 0,
+    });
+
+    setEditingId(null);
+    loadInventory();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   const handleEdit = (item) => {
     setForm({
       clubId: item.clubId?._id,
       tier: item.tier,
       totalTables: item.totalTables,
-      soldTables: item.soldTables,
+      pricePerTable: item.pricePerTable,
     });
 
     setEditingId(item._id);
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`/table-bookings/${id}`);
+    await API.delete(`/table-booking/${id}`);
     loadInventory();
   };
 
@@ -116,6 +120,15 @@ function TableBooking() {
         }
       />
 
+      <input
+  type="number"
+  placeholder="Price Per Table"
+  value={form.pricePerTable}
+  onChange={(e) =>
+    setForm({ ...form, pricePerTable: e.target.value })
+  }
+/>
+
 
       <button onClick={handleSave}>
         {editingId ? "Update " : "Save "}
@@ -135,6 +148,10 @@ function TableBooking() {
         >
           <p><b>Club:</b> {i.clubId?.name}</p>
           <p><b>Tier:</b> {i.tier}</p>
+          <p>
+  <b>Points Cost:</b>{" "}
+  {Number(form.pricePerTable || 0) * Number(form.totalTables || 0)}
+</p>
 
           <p><b>Total:</b> {i.totalTables}</p>
           <p><b>Sold:</b> {i.soldTables}</p>
