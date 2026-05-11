@@ -7,7 +7,6 @@ function Home() {
   const navigate = useNavigate();
   const user = authService.getUser();
   const [blogs, setBlogs] = useState([]);
-  const [profile, setProfile] = useState(null);
 
   const loadBlogs = async () => {
   try {
@@ -19,19 +18,13 @@ function Home() {
 };
 
 useEffect(() => {
-  const user = authService.getUser();
-
-  if (!user?._id) {
+  if (!user) {
     navigate("/login");
     return;
   }
 
   loadBlogs();
-
-  API.get(`/members/${user._id}`)
-    .then((res) => setProfile(res.data))
-    .catch(console.log);
-}, []);
+}, [user, navigate]);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -50,7 +43,7 @@ useEffect(() => {
       <p>
         Hello {user?.name}, explore menus, promotions, and rewards.
       </p>
-    <p><b>Tier:</b> {profile?.tier}</p>
+      <p><b>Tier:</b> {user?.tier}</p>
 
       {/* 📰 BLOG FEED */}
 <div style={{ marginTop: "20px" }}>
