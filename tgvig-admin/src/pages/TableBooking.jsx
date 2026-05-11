@@ -31,7 +31,7 @@ function TableBooking() {
   };
 
   // CREATE / UPDATE
- const handleSave = async () => {
+const handleSave = async () => {
   const payload = {
     ...form,
     totalTables: Number(form.totalTables),
@@ -49,7 +49,14 @@ function TableBooking() {
 
       setInventory((prev) =>
         prev.map((i) =>
-          i._id === editingId ? res.data : i
+          i._id === editingId
+            ? {
+                ...res.data,
+                clubId: clubs.find(
+                  (c) => c._id === form.clubId
+                ),
+              }
+            : i
         )
       );
     } else {
@@ -58,8 +65,17 @@ function TableBooking() {
         payload
       );
 
-      setInventory((prev) => [res.data, ...prev]);
+      const newItem = {
+        ...res.data,
+        clubId: clubs.find(
+          (c) => c._id === form.clubId
+        ),
+      };
+
+      setInventory((prev) => [newItem, ...prev]);
     }
+
+    alert("Saved successfully");
 
   } catch (err) {
     console.log(err);
