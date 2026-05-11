@@ -1,47 +1,64 @@
 import { useEffect, useState } from "react";
 import { authService } from "../auth/authService";
 import { getMember } from "../api/member.api";
+import { QRCodeCanvas } from "qrcode.react";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-  const user = authService.getUser();
+    const user = authService.getUser();
 
-  console.log("USER:", user);
+    console.log("USER:", user);
 
-  const id = user?._id || user?.id;
+    const id = user?._id || user?.id;
 
-  if (!id) {
-    console.log("NO VALID USER ID");
-    return;
-  }
+    if (!id) {
+      console.log("NO VALID USER ID");
+      return;
+    }
 
-  getMember(id)
-    .then((res) => {
-      console.log("PROFILE RESPONSE:", res.data);
-      setProfile(res.data);
-    })
-    .catch((err) => {
-      console.log("PROFILE ERROR:", err.response?.data || err.message);
-    });
-}, []);if (!profile) return <p>Loading...</p>;
+    getMember(id)
+      .then((res) => {
+        console.log("PROFILE RESPONSE:", res.data);
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.log("PROFILE ERROR:", err.response?.data || err.message);
+      });
+  }, []);
+
+  if (!profile) return <p>Loading...</p>;
 
   return (
-  <div style={{ padding: "20px" }}>
-    <h2>PROFILE</h2>
+    <div style={{ padding: "20px" }}>
+      <h2>PROFILE</h2>
 
-    <p><b>Name:</b> {profile?.firstName} {profile?.lastName}</p>
-<p><b>Email:</b> {profile?.email}</p>
-<p><b>Membership No:</b> {profile?.membershipNo}</p>
-<p><b>Role:</b> {profile?.role}</p>
-<p><b>Status:</b> {profile?.status}</p>
-<p><b>Tier:</b> {profile?.tier}</p>
-<p><b>Wallet:</b> R {profile?.walletBalance}</p>
-<p><b>Points:</b> {profile?.pointsBalance}</p>
-  </div>
-);
+      <p><b>Name:</b> {profile.firstName} {profile.lastName}</p>
+      <p><b>Email:</b> {profile.email}</p>
+      <p><b>Membership No:</b> {profile.membershipNo}</p>
+      <p><b>Role:</b> {profile.role}</p>
+      <p><b>Status:</b> {profile.status}</p>
+      <p><b>Tier:</b> {profile.tier}</p>
+      <p><b>Wallet:</b> R {profile.walletBalance}</p>
+      <p><b>Points:</b> {profile.pointsBalance}</p>
+
+      {/* 🔥 QR CODE SECTION */}
+      <div style={{ marginTop: "20px" }}>
+        <h3>Member QR Code</h3>
+
+        <QRCodeCanvas
+          value={profile._id}   // or profile.membershipNo
+          size={150}
+          includeMargin={true}
+        />
+
+        <p style={{ fontSize: "12px" }}>
+          Scan for entry & rewards
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default Profile;
-
