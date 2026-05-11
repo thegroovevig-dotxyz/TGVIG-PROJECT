@@ -13,7 +13,7 @@ exports.buyTicket = async (req, res) => {
   try {
     const { memberId, ticketId, paymentType } = req.body;
 
-    const member = await Member.findById(memberId);
+    const member = await Member.findById(member);
     const ticket = await EventTicket.findById(ticketId);
 
     let total = 0;
@@ -29,7 +29,7 @@ exports.buyTicket = async (req, res) => {
     }
 
     if (paymentType === "POINTS") {
-      total = ticket.pricePoints;
+      ticket.pricePoints = parseInt(ticket.pricePoints);
 
       if (member.points < total) {
         return res.status(400).json({ message: "Insufficient points" });
