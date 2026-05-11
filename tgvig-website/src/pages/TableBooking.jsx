@@ -90,9 +90,9 @@ useEffect(() => {
     if (selectedTables.length === 0) return alert("Select tables");
     if (!pin) return alert("Enter PIN");
 
-    const stats = getTableStats(selectedClub);
+    const stats = getTableStats(selectedClub._id);
 
-    const totalPrice = selectedTables.length * 500; // example price
+    const totalPrice = selectedTables.length * stats.price;
     const deposit = totalPrice * 0.4;
 
     const bookingPayload = {
@@ -123,7 +123,7 @@ useEffect(() => {
       {/* CLUB LIST */}
       <div>
         {clubs.map((c) => {
-          const stats = getTableStats(c);
+          const stats = getTableStats(c._id);
 
           return (
             <div
