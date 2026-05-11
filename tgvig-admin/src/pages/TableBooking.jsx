@@ -33,31 +33,34 @@ function TableBooking() {
   // CREATE / UPDATE
  const handleSave = async () => {
   const payload = {
-    clubId: form.clubId,
-    tier: form.tier,
+    ...form,
     totalTables: Number(form.totalTables),
     soldTables: Number(form.soldTables),
-    pricePerTable: Number(form.pricePerTable),
-    numberOfTables: Number(form.totalTables),
   };
 
   try {
+    let res;
+
     if (editingId) {
-      await API.put(`/table-bookings/${id}`, payload);
+      res = await API.put(
+        `/table-bookings/${editingId}`,
+        payload
+      );
+
+      setInventory((prev) =>
+        prev.map((i) =>
+          i._id === editingId ? res.data : i
+        )
+      );
     } else {
-      await API.post("/table-bookings", payload);
+      res = await API.post(
+        "/table-bookings",
+        payload
+      );
+
+      setInventory((prev) => [res.data, ...prev]);
     }
 
-    setForm({
-      clubId: "",
-      tier: "STANDARD",
-      totalTables: 0,
-      soldTables: 0,
-      pricePerTable: 0,
-    });
-
-    setEditingId(null);
-    loadInventory();
   } catch (err) {
     console.log(err);
   }
