@@ -35,7 +35,7 @@ function Menu() {
   const pricePerUnit = item.price?.[size];
 
   const cartItem = {
-    _id: Date.now(), // IMPORTANT
+    _id: Date.now(), 
     name: item.name,
     size,
     quantity: qty,
