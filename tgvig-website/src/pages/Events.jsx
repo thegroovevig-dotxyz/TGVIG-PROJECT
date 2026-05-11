@@ -5,6 +5,9 @@ import { authService } from "../auth/authService";
 function Events() {
   const [events, setEvents] = useState([]);
   const user = authService.getUser();
+const [cart, setCart] = useState([]);
+const [pin, setPin] = useState("");
+const [selectedTicket, setSelectedTicket] = useState(null);
 
   useEffect(() => {
     loadEvents();
@@ -31,6 +34,10 @@ function Events() {
     }
   };
 
+  const addToCart = (ticket) => {
+  setCart((prev) => [...prev, ticket]);
+};
+
   return (
     <div>
       <h2>Events</h2>
@@ -54,6 +61,16 @@ function Events() {
           </div>
         ))}
       </div>
+<div>
+  <h3>Cart</h3>
+
+  {cart.map((t) => (
+    <div key={t._id}>
+      {t.name} - R{t.priceCash}
+    </div>
+  ))}
+</div>
+
     </div>
   );
 }
