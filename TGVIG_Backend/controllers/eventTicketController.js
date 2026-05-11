@@ -18,6 +18,25 @@ exports.buyTicket = async (req, res) => {
 if (member.pin !== pin) {
   return res.status(400).json({ message: "Invalid PIN" });
 }
+if (!memberId || !ticketId) {
+  return res.status(400).json({
+    message: "Missing memberId or ticketId",
+  });
+}
+
+if (!member) {
+  return res.status(404).json({
+    message: "Member not found",
+  });
+}
+
+if (!ticket) {
+  return res.status(404).json({
+    message: "Ticket not found",
+  });
+}
+
+console.log("REQ BODY:", req.body);
     const ticket = await EventTicket.findById(ticketId);
 
     let total = 0;

@@ -18,29 +18,37 @@ const [selectedTicket, setSelectedTicket] = useState(null);
     setEvents(res.data);
   };
 
-  const buyTicket = async (ticketId, paymentType) => {
-    try {
-       if (!user?._id) return alert("Login required");
-
-        console.log("BUYING:", ticket);
-
-
-      const res = await API.post("/events/buy", {
-        memberId: user._id,
-      ticketId: ticket._id,
-      paymentType: "WALLET",
-      pin,
-      });
-
-      alert("Ticket purchased!");
-      setCart([]);
-    setPin("");
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Error buying ticket");
+const buyTicket = async (ticket, paymentType) => {
+  try {
+    if (!user?._id) {
+      alert("Login required");
+      return;
     }
-  };
+
+    console.log("USER:", user);
+    console.log("TICKET:", ticket);
+
+    const payload = {
+      memberId: user._id,
+      ticketId: ticket._id,
+      paymentType,
+      pin,
+    };
+
+    console.log("PAYLOAD:", payload);
+
+    const res = await API.post("/events/buy", payload);
+
+    console.log("SUCCESS:", res.data);
+
+    alert("Ticket purchased!");
+  } catch (err) {
+    console.log("FULL ERROR:", err);
+    console.log("SERVER ERROR:", err.response?.data);
+
+    alert(err.response?.data?.message || "Server error");
+  }
+};
 
   
 
@@ -53,54 +61,71 @@ const [selectedTicket, setSelectedTicket] = useState(null);
 };
 
   return (
-    <div>
-      <h2>Events</h2>
+  <div>
+    <h2>Events</h2>
 
-      <div style={{ display: "flex", gap: "10px" }}>
-        {events.map((e) => (
-          <div key={e._id} style={{ border: "1px solid #ccc", padding: "10px" }}>
-            <img src={e.image} width="120" />
+    <input
+      type="password"
+      placeholder="Enter Membership PIN"
+      value={pin}
+      onChange={(e) => setPin(e.target.value)}
+    />
 
-            <h4>{e.eventName}</h4>
-            <p>R{e.priceCash}</p>
-            <p>{e.pricePoints} pts</p>
+    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+      {events.map((e) => (
+        <div
+          key={e._id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "10px",
+            width: "220px",
+          }}
+        >
+          <img src={e.image} width="120" />
 
-            <button onClick={() => addToCart(e)}>
-  Add To Cart
-</button>
+          <h4>{e.eventName}</h4>
 
-            <button
-  onClick={() => {
-    openPinModal(e);
-    buyTicket(e._id, "WALLET");
-  }}
->
-  Buy (Wallet)
-</button>
+          <p>Cash: R{e.priceCash}</p>
 
-<button
-  onClick={() => {
-    openPinModal(e);
-    buyTicket(e._id, "POINTS");
-  }}
->
-  Buy (Points)
-</button>
-          </div>
-        ))}
+          <p>Points: {e.pricePoints}</p>
+
+          <button onClick={() => addToCart(e)}>
+            Add To Cart
+          </button>
+
+          <button onClick={() => buyTicket(e, "WALLET")}>
+            Buy Wallet
+          </button>
+
+          <button onClick={() => buyTicket(e, "POINTS")}>
+            Buy Points
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <hr />
+
+    <h3>Ticket Cart</h3>
+
+    {cart.length === 0 && <p>No tickets in cart</p>}
+
+    {cart.map((t) => (
+      <div
+        key={t._id}
+        style={{
+          border: "1px solid gray",
+          marginBottom: "10px",
+          padding: "10px",
+        }}
+      >
+        <h4>{t.eventName}</h4>
+
+        <p>R{t.priceCash}</p>
       </div>
-<div>
-  <h3>Cart</h3>
-
-  {cart.map((t) => (
-    <div key={t._id}>
-      {t.eventName} - R{t.priceCash}
-    </div>
-  ))}
-</div>
-
-    </div>
-  );
+    ))}
+  </div>
+);
 }
 
 export default Events;
