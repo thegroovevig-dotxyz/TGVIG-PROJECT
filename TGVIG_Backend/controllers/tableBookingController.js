@@ -32,15 +32,14 @@ exports.createBooking = async (req, res) => {
 
 exports.getBookings = async (req, res) => {
   try {
-    const data = await TableBooking.find()
-      .populate("memberId clubId")
-      .sort({ createdAt: -1 });
-
+    const data = await TableBooking.find();
     res.json(data);
   } catch (err) {
+    console.log("ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 exports.updateBooking = async (req, res) => {
   try {

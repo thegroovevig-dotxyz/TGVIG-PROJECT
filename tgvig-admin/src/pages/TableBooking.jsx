@@ -140,15 +140,7 @@ function TableBooking() {
         }
       />
 
-      <input
-        type="number"
-        placeholder="Sold Tables"
-        value={form.soldTables}
-        onChange={(e) =>
-          setForm({ ...form, soldTables: e.target.value })
-        }
-      />
-
+    
       {/* PRICE */}
       <input
         type="number"

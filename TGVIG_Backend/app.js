@@ -6,6 +6,7 @@ const adminRoutes = require("./routes/admin.routes");
 const analyticsRoutes = require("./routes/analytics.routes");
 const deviceRoutes = require("./routes/deviceRoutes");
 const webContentRoutes = require("./routes/webContentRoutes");
+const tableBookingRoutes = require("./routes/tableBookingRoutes");
 
 
 console.log("🔥 SERVER FILE LOADED");
@@ -67,7 +68,7 @@ app.use("/api/events", require("./routes/eventTicketRoutes"));
 app.use("/api/settings", require("./routes/settingsRoutes"));
 app.use("/api/coupons", require("./routes/couponRoutes"));
 app.use("/api/devices", deviceRoutes);
-app.use("/api/table-inventory", tableInventoryRoutes);
+app.use("/api/table-bookings", tableBookingRoutes);
 
 app.use("/api/webcontent", webContentRoutes);
 

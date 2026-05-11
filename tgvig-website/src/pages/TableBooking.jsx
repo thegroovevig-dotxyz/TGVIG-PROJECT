@@ -3,6 +3,7 @@ import { getClubs } from "../api/clubs.api";
 import { useNavigate } from "react-router-dom";
 
 export default function TableBooking() {
+  const [inventory, setInventory] = useState([]);
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
 
@@ -25,19 +26,54 @@ export default function TableBooking() {
     }
   };
 
-  // ---- TABLE CALC (mock structure for now) ----
-  const getTableStats = (club) => {
-    const total = club.tables || 20;
-    const booked = club.bookedTables || 5;
-    const sold = club.soldTables || 2;
+  const loadData = async () => {
+  try {
+    const [clubsRes, invRes] = await Promise.all([
+      getClubs(),
+      fetch("http://localhost:5000/api/table-bookings")
+    ]);
 
+    const invData = await invRes.json();
+
+    setClubs(clubsRes.data || []);
+    setInventory(invData || []);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+useEffect(() => {
+  loadData();
+}, []);
+
+  // ---- TABLE CALC (mock structure for now) ----
+  const getTableStats = (clubId) => {
+  const inv = inventory.find(
+    (i) => i.clubId?._id === clubId
+  );
+
+  if (!inv) {
     return {
-      total,
-      booked,
-      sold,
-      available: total - booked - sold,
+      total: 0,
+      booked: 0,
+      sold: 0,
+      available: 0,
     };
+  }
+
+  const total = inv.totalTables || 0;
+  const sold = inv.soldTables || 0;
+  const booked = 0;
+
+  return {
+    total,
+    booked,
+    sold,
+    available: total - sold - booked,
+    price: inv.pricePerTable || 0,
+    points: inv.pointsCost || 0,
   };
+};
 
   const toggleTable = (tableId) => {
     setSelectedTables((prev) =>
@@ -106,9 +142,11 @@ export default function TableBooking() {
 
               {/* TABLE STATS */}
               <p>Total: {stats.total}</p>
-              <p>Booked: {stats.booked}</p>
-              <p>Sold: {stats.sold}</p>
-              <p>Available: {stats.available}</p>
+<p>Booked: {stats.booked}</p>
+<p>Sold: {stats.sold}</p>
+<p>Available: {stats.available}</p>
+<p>Price: {stats.price}</p>
+<p>Points: {stats.points}</p>
             </div>
           );
         })}
