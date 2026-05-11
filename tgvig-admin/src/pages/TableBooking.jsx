@@ -43,7 +43,7 @@ function TableBooking() {
 
   try {
     if (editingId) {
-      await API.put(`/table-bookings/${editingId}`, payload);
+      await API.put(`/table-bookings/${id}`, payload);
     } else {
       await API.post("/table-bookings", payload);
     }
