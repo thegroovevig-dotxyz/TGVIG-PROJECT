@@ -46,34 +46,36 @@ useEffect(() => {
   loadData();
 }, []);
 
-  // ---- TABLE CALC (mock structure for now) ----
-  const getTableStats = (clubId) => {
-  const inv = inventory.find(
-    (i) => i.clubId?._id === clubId
-  );
+ const getTableStats = (clubId) => {
+  const inv = inventory.find((i) => {
+    const id = i.clubId?._id || i.clubId;
+    return id === clubId;
+  });
 
   if (!inv) {
     return {
       total: 0,
-      booked: 0,
       sold: 0,
+      booked: 0,
       available: 0,
+      price: 0,
+      points: 0,
     };
   }
 
-  const total = inv.totalTables || 0;
-  const sold = inv.soldTables || 0;
-  const booked = 0;
+  const total = Number(inv.totalTables || 0);
+  const sold = Number(inv.soldTables || 0);
 
   return {
     total,
-    booked,
     sold,
-    available: total - sold - booked,
-    price: inv.pricePerTable || 0,
-    points: inv.pointsCost || 0,
+    booked: 0,
+    available: total - sold,
+    price: Number(inv.pricePerTable || 0),
+    points: Number(inv.pointsCost || 0),
   };
 };
+
 
   const toggleTable = (tableId) => {
     setSelectedTables((prev) =>
@@ -207,8 +209,8 @@ useEffect(() => {
           {/* RULES */}
           <div style={{ marginTop: "20px", fontSize: "12px" }}>
             <p>• Booking valid for 72 hours</p>
-            <p>• 40% upfront deposit required</p>
-            <p>• Sold tables: 50% refundable if cancelled</p>
+            <p>• Non refundable 40% upfront deposit required</p>
+            <p>• Sold tables: 50% refundable if cancelled within 72 hours</p>
             <p>• Points cannot be used for booking</p>
             <p>• No refunds on expired/no-show bookings</p>
           </div>
