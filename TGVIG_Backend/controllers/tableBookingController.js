@@ -4,37 +4,29 @@ const QRCode = require("qrcode");
 
 exports.createBooking = async (req, res) => {
   try {
-    const data = await TableBooking.create({
+    const booking = await TableBooking.create({
       clubId: req.body.clubId,
       tier: req.body.tier,
 
       totalTables: Number(req.body.totalTables || 0),
-
       soldTables: Number(req.body.soldTables || 0),
 
       pricePerTable: Number(req.body.pricePerTable || 0),
 
-      numberOfTables: Number(req.body.totalTables || 0),
+      // optional admin calc fields
+      pointsCost: Number(req.body.pointsCost || 0),
 
       totalAmount:
         Number(req.body.totalTables || 0) *
         Number(req.body.pricePerTable || 0),
-
-      status: "PENDING",
     });
 
-    const populated = await TableBooking.findById(
-      data._id
-    ).populate("clubId");
+    const populated = await TableBooking.findById(booking._id).populate("clubId");
 
     res.json(populated);
-
   } catch (err) {
     console.log(err);
-
-    res.status(500).json({
-      message: err.message,
-    });
+    res.status(500).json({ message: err.message });
   }
 };
 

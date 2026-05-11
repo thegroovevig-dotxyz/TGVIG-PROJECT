@@ -1,16 +1,11 @@
 const mongoose = require("mongoose");
 
-const tableBookingSchema = new mongoose.Schema(
+const tableInventorySchema = new mongoose.Schema(
   {
     clubId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Club",
       required: true,
-    },
-
-    memberId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Member",
     },
 
     tier: {
@@ -19,24 +14,9 @@ const tableBookingSchema = new mongoose.Schema(
       required: true,
     },
 
-    numberOfTables: {
-      type: Number,
-      required: true,
-    },
-
-    pricePerTable: Number,
-
-    totalAmount: Number,
-
-    paymentMethod: {
-      type: String,
-      enum: ["WALLET"],
-      default: "WALLET",
-    },
-
     totalTables: {
       type: Number,
-      default: 0,
+      required: true,
     },
 
     soldTables: {
@@ -44,15 +24,12 @@ const tableBookingSchema = new mongoose.Schema(
       default: 0,
     },
 
-    status: {
-      type: String,
-      enum: ["PENDING", "CONFIRMED", "CANCELLED"],
-      default: "PENDING",
+    pricePerTable: {
+      type: Number,
+      required: true,
     },
-
-    couponCode: String,
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("TableBooking", tableBookingSchema);
+module.exports = mongoose.model("TableInventory", tableInventorySchema);
