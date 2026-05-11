@@ -7,6 +7,7 @@ function Home() {
   const navigate = useNavigate();
   const user = authService.getUser();
   const [blogs, setBlogs] = useState([]);
+  const [profile, setProfile] = useState(null);
 
   const loadBlogs = async () => {
   try {
@@ -18,13 +19,19 @@ function Home() {
 };
 
 useEffect(() => {
-  if (!user) {
+  const user = authService.getUser();
+
+  if (!user?._id) {
     navigate("/login");
     return;
   }
 
   loadBlogs();
-}, [user, navigate]);
+
+  API.get(`/members/${user._id}`)
+    .then((res) => setProfile(res.data))
+    .catch(console.log);
+}, []);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -43,7 +50,7 @@ useEffect(() => {
       <p>
         Hello {user?.name}, explore menus, promotions, and rewards.
       </p>
-      <p><b>Tier:</b> {user?.tier}</p>
+    <p><b>Tier:</b> {profile?.tier}</p>
 
       {/* 📰 BLOG FEED */}
 <div style={{ marginTop: "20px" }}>
@@ -96,6 +103,11 @@ useEffect(() => {
         <button onClick={() => navigate("/home/events")}>
           Event Tickets
         </button>
+
+<button onClick={() => navigate("/home/wallet")}>
+  Wallet Top-Up
+</button>
+
       </div>
     </div>
   );
