@@ -26,7 +26,7 @@ function TableBooking() {
   };
 
   const loadInventory = async () => {
-    const res = await API.get("/table-inventory");
+    const res = await API.get("/table-bookings");
     setInventory(res.data || []);
   };
 
@@ -40,9 +40,9 @@ function TableBooking() {
 
     try {
       if (editingId) {
-        await API.put(`/table-inventory/${editingId}`, payload);
+        await API.put(`/table-bookings/${editingId}`, payload);
       } else {
-        await API.post("/table-inventory", payload);
+        await API.post("/table-bookings", payload);
       }
 
       setForm({
@@ -71,7 +71,7 @@ function TableBooking() {
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`/table-inventory/${id}`);
+    await API.delete(`/table-bookings/${id}`);
     loadInventory();
   };
 
@@ -116,17 +116,9 @@ function TableBooking() {
         }
       />
 
-      <input
-        type="number"
-        placeholder="Sold Tables"
-        value={form.soldTables}
-        onChange={(e) =>
-          setForm({ ...form, soldTables: e.target.value })
-        }
-      />
 
       <button onClick={handleSave}>
-        {editingId ? "Update Inventory" : "Save Inventory"}
+        {editingId ? "Update " : "Save "}
       </button>
 
       {/* LIST */}

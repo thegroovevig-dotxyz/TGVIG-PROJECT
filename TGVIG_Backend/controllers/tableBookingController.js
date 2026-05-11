@@ -1,42 +1,71 @@
 const TableBooking = require("../models/TableBooking");
 const Member = require("../models/Member");
-const { sendNotification } = require("../services/notificationService");
 const QRCode = require("qrcode");
 
 exports.createBooking = async (req, res) => {
   try {
-    const { memberId, clubId, tier, numberOfTables, pricePerTable } = req.body;
+    const {
+      memberId,
+      clubId,
+      tier,
+      numberOfTables,
+      pricePerTable,
+      paymentMethod, // WALLET | POINTS
+    } = req.body;
 
     const total = numberOfTables * pricePerTable;
 
     const member = await Member.findById(memberId);
 
-    if (!member || member.walletBalance < total) {
-      return res.status(400).json({ message: "Insufficient wallet balance" });
+    if (!member) {
+      return res.status(404).json({ message: "Member not found" });
     }
 
-    member.walletBalance -= total;
+    // =========================
+    // 💰 PAYMENT LOGIC
+    // =========================
+
+    if (paymentMethod === "WALLET") {
+      if (member.walletBalance < total) {
+        return res.status(400).json({ message: "Insufficient wallet balance" });
+      }
+      member.walletBalance -= total;
+    }
+
+    if (paymentMethod === "POINTS") {
+      if (member.pointsBalance < total) {
+        return res.status(400).json({ message: "Insufficient points" });
+      }
+
+      // convert 1 point = 1 unit (adjust if needed)
+      member.pointsBalance -= total;
+    }
+
     await member.save();
 
+    // =========================
+    // 🎟️ QR CODE
+    // =========================
+    const couponCode = `TABLE-${Date.now()}`;
+    const qr = await QRCode.toDataURL(couponCode);
+
+    // =========================
+    // 🧾 CREATE BOOKING
+    // =========================
     const booking = await TableBooking.create({
-      ...req.body,
+      memberId,
+      clubId,
+      tier,
+      numberOfTables,
+      pricePerTable,
       totalAmount: total,
+      paymentMethod,
       status: "CONFIRMED",
-      couponCode: `TABLE-${Date.now()}`,
+      couponCode,
+      qrCode: qr,
+      createdAt: new Date(),
+      expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000), // 72 hours
     });
-
-    const qr = await QRCode.toDataURL("COUPON-" + Date.now());
-
-    await sendNotification("booking", member, {
-  date,
-  table: numberOfTables,
-  totalAmount: total,
-      status: "CONFIRMED",
-      couponCode: `TABLE-${Date.now()}`,
-      qr,
-      code: coupon.code,
-  expiry: coupon.expiryDate,
-});
 
     res.json(booking);
   } catch (err) {
@@ -45,9 +74,13 @@ exports.createBooking = async (req, res) => {
 };
 
 exports.getBookings = async (req, res) => {
-  const data = await TableBooking.find()
-    .populate("memberId clubId")
-    .sort({ createdAt: -1 });
+  try {
+    const data = await TableBooking.find()
+      .populate("memberId clubId")
+      .sort({ createdAt: -1 });
 
-  res.json(data);
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
