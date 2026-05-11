@@ -64,7 +64,6 @@ app.use("/api/promotions", require("./routes/promotionRoutes"));
 app.use("/api/transactions", require("./routes/transactionRoutes"));
 app.use("/api/wallet", require("./routes/walletRoutes"));
 app.use("/api/blogs", require("./routes/blogRoutes"));
-app.use("/api/table-bookings", require("./routes/tableBookingRoutes"));
 app.use("/api/events", require("./routes/eventTicketRoutes"));
 app.use("/api/settings", require("./routes/settingsRoutes"));
 app.use("/api/coupons", require("./routes/couponRoutes"));
