@@ -4,22 +4,37 @@ const QRCode = require("qrcode");
 
 exports.createBooking = async (req, res) => {
   try {
-    const {
-      memberId,
-      clubId,
-      tier,
-      numberOfTables,
-      pricePerTable,
-      paymentMethod, // WALLET | POINTS
-    } = req.body;
+    const booking = await TableBooking.create({
+      clubId: req.body.clubId,
+      tier: req.body.tier,
 
-    const total = numberOfTables * pricePerTable;
+      totalTables: Number(req.body.totalTables),
 
-    const member = await Member.findById(memberId);
+      soldTables: Number(req.body.soldTables),
 
-    if (!member) {
-      return res.status(404).json({ message: "Member not found" });
-    }
+      numberOfTables: Number(req.body.totalTables),
+
+      pricePerTable: Number(req.body.pricePerTable || 0),
+
+      totalAmount:
+        Number(req.body.totalTables) *
+        Number(req.body.pricePerTable || 0),
+    });
+
+    const populated = await TableBooking.findById(
+      booking._id
+    ).populate("clubId");
+
+    res.json(populated);
+
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
 
     // =========================
     // 💰 PAYMENT LOGIC
