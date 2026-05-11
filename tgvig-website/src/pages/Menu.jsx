@@ -6,6 +6,7 @@ function Menu() {
 
   // store selected size per item
   const [selectedSize, setSelectedSize] = useState({});
+  const [quantity, setQuantity] = useState({});
 
   useEffect(() => {
     loadMenu();
@@ -22,21 +23,30 @@ function Menu() {
 
   // ✅ FIXED FUNCTION
   const addToCart = (item) => {
-    const size = selectedSize[item._id];
+  const size = selectedSize[item._id];
+  const qty = quantity[item._id] || 1;
 
-    if (!size) {
-      alert("Please select Single, x4 or x6");
-      return;
-    }
+  if (!size) {
+    alert("Select Single, x4 or x6");
+    return;
+  }
 
-    console.log("ADD TO CART:", {
-      item,
-      size,
-      price: item.price?.[size],
-    });
+  const pricePerUnit = item.price?.[size];
 
-    // later: send to cart context or backend
+  const cartItem = {
+    _id: item._id,
+    name: item.name,
+    size,
+    quantity: qty,
+    price: pricePerUnit,
+    total: pricePerUnit * qty,
   };
+
+  console.log("ADD TO CART:", cartItem);
+
+  addToCartContext(cartItem); // your cart function
+};
+
 
   return (
     <div style={{ padding: "20px" }}>
@@ -124,6 +134,24 @@ function Menu() {
                 />
                 x6 (R{item.price?.x6})
               </label>
+
+{/* QUANTITY */}
+<div style={{ marginTop: "10px" }}>
+  <label>Quantity: </label>
+  <input
+    type="number"
+    min="1"
+    value={quantity[item._id] || 1}
+    onChange={(e) =>
+      setQuantity((prev) => ({
+        ...prev,
+        [item._id]: Number(e.target.value),
+      }))
+    }
+    style={{ width: "60px" }}
+  />
+</div>
+
             </div>
 
             <button onClick={() => addToCart(item)}>

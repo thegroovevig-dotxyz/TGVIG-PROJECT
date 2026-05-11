@@ -11,9 +11,9 @@ function Cart() {
 
   // ✅ FIX TOTAL
   const total = cart.reduce(
-    (sum, item) => sum + Number(item.price?.single || 0),
-    0
-  );
+  (sum, item) => sum + Number(item.total || 0),
+  0
+);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -33,7 +33,10 @@ function Cart() {
           >
             <h4>{item.name}</h4>
 
-            <p>R {item.price?.single}</p>
+ <p>Size: {item.size}</p>
+            <p>Qty: {item.quantity}</p>
+    <p>Price: R {item.price}</p>
+    <p>Total: R {item.total}</p>
 
             <button onClick={() => removeFromCart(item._id)}>
               Remove
