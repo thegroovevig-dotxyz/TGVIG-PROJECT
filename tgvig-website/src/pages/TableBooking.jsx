@@ -148,7 +148,6 @@ useEffect(() => {
 <p>Sold: {stats.sold}</p>
 <p>Available: {stats.available}</p>
 <p>Price: {stats.price}</p>
-<p>Points: {stats.points}</p>
             </div>
           );
         })}
@@ -186,7 +185,7 @@ useEffect(() => {
               onChange={(e) => setPaymentMethod(e.target.value)}
             >
               <option value="WALLET">Wallet</option>
-              <option value="POINTS">Points (disabled rule)</option>
+              
             </select>
 
             <input
