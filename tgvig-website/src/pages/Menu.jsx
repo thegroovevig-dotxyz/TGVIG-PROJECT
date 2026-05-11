@@ -23,20 +23,19 @@ function Menu() {
     }
   };
 
-  // ✅ FIXED FUNCTION
  const addItemToCart = (item) => {
   const size = selectedSize[item._id];
   const qty = quantity[item._id] || 1;
 
   if (!size) {
-    alert("Select Single, x4 or x6");
+    alert("Select size");
     return;
   }
 
   const pricePerUnit = item.price?.[size];
 
   const cartItem = {
-    _id: item._id,
+    _id: Date.now(), // IMPORTANT
     name: item.name,
     size,
     quantity: qty,
@@ -44,12 +43,11 @@ function Menu() {
     total: pricePerUnit * qty,
   };
 
-  console.log("ADD TO CART:", cartItem);
+  console.log("ADDING:", cartItem);
 
-   // ✅ SAVE TO CONTEXT
   addToCart(cartItem);
 
-  // ✅ CLEAR FORM AFTER ADD
+  // CLEAR AFTER ADD
   setSelectedSize((prev) => ({
     ...prev,
     [item._id]: "",
@@ -60,7 +58,6 @@ function Menu() {
     [item._id]: 1,
   }));
 };
-
 
   return (
     <div style={{ padding: "20px" }}>
