@@ -8,24 +8,13 @@ function Profile() {
 
   useEffect(() => {
     const user = authService.getUser();
-
-    console.log("USER:", user);
-
     const id = user?._id || user?.id;
 
-    if (!id) {
-      console.log("NO VALID USER ID");
-      return;
-    }
+    if (!id) return;
 
     getMember(id)
-      .then((res) => {
-        console.log("PROFILE RESPONSE:", res.data);
-        setProfile(res.data);
-      })
-      .catch((err) => {
-        console.log("PROFILE ERROR:", err.response?.data || err.message);
-      });
+      .then((res) => setProfile(res.data))
+      .catch(console.log);
   }, []);
 
   if (!profile) return <p>Loading...</p>;
@@ -43,18 +32,22 @@ function Profile() {
       <p><b>Wallet:</b> R {profile.walletBalance}</p>
       <p><b>Points:</b> {profile.pointsBalance}</p>
 
-      {/* 🔥 QR CODE SECTION */}
-      <div style={{ marginTop: "20px" }}>
-        <h3>Member QR Code</h3>
+      {/* QR CODE UI ONLY */}
+      <div style={{ marginTop: "25px", textAlign: "center" }}>
+        <h3>Member QR</h3>
 
-        <QRCodeCanvas
-          value={profile._id}   // or profile.membershipNo
-          size={150}
-          includeMargin={true}
-        />
+        <div style={{
+          display: "inline-block",
+          padding: "10px",
+          background: "#fff",
+          border: "1px solid #ddd",
+          borderRadius: "10px"
+        }}>
+          <QRCodeCanvas value={profile._id} size={160} />
+        </div>
 
-        <p style={{ fontSize: "12px" }}>
-          Scan for entry & rewards
+        <p style={{ marginTop: "10px", fontSize: "12px" }}>
+          Show this at entry
         </p>
       </div>
     </div>
