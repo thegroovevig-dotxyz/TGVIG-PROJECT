@@ -40,9 +40,9 @@ function TableBooking() {
 
     try {
       if (editingId) {
-        await API.put(`/table-booking/${editingId}`, payload);
+        await API.put(`/table-bookings/${id}`, payload);
       } else {
-        await API.post("/table-booking", payload);
+        await API.post("/table-bookings", payload);
       }
 
       setForm({
@@ -71,7 +71,7 @@ function TableBooking() {
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`/table-booking/${id}`);
+    await API.delete(`/table-bookings/${id}`);
     loadInventory();
   };
 

@@ -84,3 +84,25 @@ exports.getBookings = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.updateBooking = async (req, res) => {
+  try {
+    const updated = await TableBooking.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.deleteBooking = async (req, res) => {
+  try {
+    await TableBooking.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
