@@ -1,13 +1,25 @@
 const router = require("express").Router();
-const ctrl = require("../controllers/tableBookingController");
 
-router.post("/", ctrl.createBooking);
-router.get("/", ctrl.getBookings);
+console.log("TABLE BOOKING ROUTES LOADED");
 
-// ADD THESE
-router.put("/:id", ctrl.updateBooking);
-router.delete("/:id", ctrl.deleteBooking);
+router.get("/", (req, res) => {
+  res.json([]);
+});
 
-console.log("TABLE BOOKING ROUTES ACTIVE");
+router.post("/", (req, res) => {
+  console.log("POST HIT");
+  res.json({
+    success: true,
+    body: req.body,
+  });
+});
+
+router.put("/:id", (req, res) => {
+  res.json({ updated: req.params.id });
+});
+
+router.delete("/:id", (req, res) => {
+  res.json({ deleted: req.params.id });
+});
 
 module.exports = router;
