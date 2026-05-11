@@ -20,7 +20,7 @@ function Profile() {
 
 
 
-  if (!profile) return <p>Loading...</p>;
+  
 
   return (
   <div style={{ padding: "20px" }}>
