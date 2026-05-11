@@ -6,6 +6,8 @@ function TableBooking() {
   const [clubs, setClubs] = useState([]);
   const [inventory, setInventory] = useState([]);
 
+  const [editingId, setEditingId] = useState(null);
+
   const [form, setForm] = useState({
     clubId: "",
     tier: "STANDARD",
@@ -20,21 +22,61 @@ function TableBooking() {
 
   const loadClubs = async () => {
     const res = await getClubs();
-    setClubs(res.data);
+    setClubs(res.data || []);
   };
 
   const loadInventory = async () => {
-    const res = await API.get("/table-bookings"); // (your inventory endpoint)
-    setInventory(res.data);
+    const res = await API.get("/table-inventory");
+    setInventory(res.data || []);
   };
 
-  const handleCreate = async () => {
-    await API.post("/table-bookings", form);
+  // CREATE / UPDATE
+  const handleSave = async () => {
+    const payload = {
+      ...form,
+      totalTables: Number(form.totalTables),
+      soldTables: Number(form.soldTables),
+    };
+
+    try {
+      if (editingId) {
+        await API.put(`/table-inventory/${editingId}`, payload);
+      } else {
+        await API.post("/table-inventory", payload);
+      }
+
+      setForm({
+        clubId: "",
+        tier: "STANDARD",
+        totalTables: 0,
+        soldTables: 0,
+      });
+
+      setEditingId(null);
+      loadInventory();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleEdit = (item) => {
+    setForm({
+      clubId: item.clubId?._id,
+      tier: item.tier,
+      totalTables: item.totalTables,
+      soldTables: item.soldTables,
+    });
+
+    setEditingId(item._id);
+  };
+
+  const handleDelete = async (id) => {
+    await API.delete(`/table-inventory/${id}`);
     loadInventory();
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Table Inventory</h2>
 
       {/* CLUB SELECT */}
@@ -64,7 +106,7 @@ function TableBooking() {
         <option value="VVIP">VVIP</option>
       </select>
 
-      {/* INPUTS (ONLY FOR SETTING INVENTORY) */}
+      {/* INPUTS */}
       <input
         type="number"
         placeholder="Total Tables"
@@ -83,25 +125,35 @@ function TableBooking() {
         }
       />
 
-      <button onClick={handleCreate}>
-        Save Inventory
+      <button onClick={handleSave}>
+        {editingId ? "Update Inventory" : "Save Inventory"}
       </button>
 
       {/* LIST */}
       <h3>Club Table Inventory</h3>
 
       {inventory.map((i) => (
-        <div key={i._id} style={{ marginBottom: "10px" }}>
-          <p><strong>Club:</strong> {i.clubId?.name}</p>
-          <p><strong>Tier:</strong> {i.tier}</p>
+        <div
+          key={i._id}
+          style={{
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+            padding: "10px",
+          }}
+        >
+          <p><b>Club:</b> {i.clubId?.name}</p>
+          <p><b>Tier:</b> {i.tier}</p>
 
-          <p><strong>Total:</strong> {i.totalTables}</p>
-          <p><strong>Sold:</strong> {i.soldTables}</p>
+          <p><b>Total:</b> {i.totalTables}</p>
+          <p><b>Sold:</b> {i.soldTables}</p>
 
           <p>
-            <strong>Available:</strong>{" "}
-            {i.totalTables - i.soldTables}
+            <b>Available:</b>{" "}
+            {Number(i.totalTables) - Number(i.soldTables)}
           </p>
+
+          <button onClick={() => handleEdit(i)}>Edit</button>
+          <button onClick={() => handleDelete(i._id)}>Delete</button>
         </div>
       ))}
     </div>
