@@ -22,9 +22,12 @@ const [selectedTicket, setSelectedTicket] = useState(null);
     try {
        if (!user?._id) return alert("Login required");
 
+        console.log("BUYING:", ticket);
+
+
       const res = await API.post("/events/buy", {
         memberId: user._id,
-      ticketId: selectedTicket._id,
+      ticketId: ticket._id,
       paymentType: "WALLET",
       pin,
       });
@@ -62,13 +65,27 @@ const [selectedTicket, setSelectedTicket] = useState(null);
             <p>R{e.priceCash}</p>
             <p>{e.pricePoints} pts</p>
 
-            <button onClick={() => buyTicket(e._id, "WALLET")}>
-              Buy (Wallet)
-            </button>
+            <button onClick={() => addToCart(e)}>
+  Add To Cart
+</button>
 
-            <button onClick={() => buyTicket(e._id, "POINTS")}>
-              Buy (Points)
-            </button>
+            <button
+  onClick={() => {
+    openPinModal(e);
+    buyTicket(e._id, "WALLET");
+  }}
+>
+  Buy (Wallet)
+</button>
+
+<button
+  onClick={() => {
+    openPinModal(e);
+    buyTicket(e._id, "POINTS");
+  }}
+>
+  Buy (Points)
+</button>
           </div>
         ))}
       </div>
@@ -77,7 +94,7 @@ const [selectedTicket, setSelectedTicket] = useState(null);
 
   {cart.map((t) => (
     <div key={t._id}>
-      {t.name} - R{t.priceCash}
+      {t.eventName} - R{t.priceCash}
     </div>
   ))}
 </div>
