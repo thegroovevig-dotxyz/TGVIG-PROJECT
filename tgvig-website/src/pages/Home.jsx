@@ -24,10 +24,8 @@ useEffect(() => {
   }
 
   loadBlogs();
-API.get(`/members/${user._id}`)
-    .then((res) => setProfile(res.data))
-    .catch(console.log);
-}, []);
+}, [user, navigate]);
+
   return (
     <div style={{ padding: "20px" }}>
 <img
