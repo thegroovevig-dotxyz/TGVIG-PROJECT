@@ -13,6 +13,11 @@ function Wallet() {
     expiry: "",
     cvv: "",
     name: "",
+     bankName: "",
+        branchNumber: "",
+        date: "",
+        contact: "",
+
   });
 
   const loadWallet = async () => {
@@ -44,6 +49,11 @@ function Wallet() {
         expiry: "",
         cvv: "",
         name: "",
+        bankName: "",
+        branchNumber: "",
+        date: "",
+        contact: "",
+
       });
 
       loadWallet();
@@ -101,6 +111,39 @@ function Wallet() {
             setCard({ ...card, name: e.target.value })
           }
         />
+
+<input
+          placeholder="Bank Name"
+          value={card.bank}
+          onChange={(e) =>
+            setCard({ ...card, name: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="Bank Branch Number"
+          value={card.branchNumber}
+          onChange={(e) =>
+            setCard({ ...card, name: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="Date"
+          value={card.date}
+          onChange={(e) =>
+            setCard({ ...card, name: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="Contact"
+          value={card.contact}
+          onChange={(e) =>
+            setCard({ ...card, name: e.target.value })
+          }
+        />
+
       </div>
 
       <button onClick={handleTopup} style={{ marginTop: "10px" }}>
