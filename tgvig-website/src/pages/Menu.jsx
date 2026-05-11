@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
+import { useCart } from "../context/CartContext";
 
 function Menu() {
   const [menu, setMenu] = useState([]);
@@ -7,6 +8,7 @@ function Menu() {
   // store selected size per item
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
+  const { addToCart } = useCart();
 
   useEffect(() => {
     loadMenu();
@@ -22,7 +24,7 @@ function Menu() {
   };
 
   // ✅ FIXED FUNCTION
-  const addToCart = (item) => {
+ const addItemToCart = (item) => {
   const size = selectedSize[item._id];
   const qty = quantity[item._id] || 1;
 
@@ -44,7 +46,19 @@ function Menu() {
 
   console.log("ADD TO CART:", cartItem);
 
-  addToCartContext(cartItem); // your cart function
+   // ✅ SAVE TO CONTEXT
+  addToCart(cartItem);
+
+  // ✅ CLEAR FORM AFTER ADD
+  setSelectedSize((prev) => ({
+    ...prev,
+    [item._id]: "",
+  }));
+
+  setQuantity((prev) => ({
+    ...prev,
+    [item._id]: 1,
+  }));
 };
 
 
@@ -154,7 +168,7 @@ function Menu() {
 
             </div>
 
-            <button onClick={() => addToCart(item)}>
+            <button onClick={() => addItemToCart(item)}>
               Add to Cart
             </button>
           </div>
