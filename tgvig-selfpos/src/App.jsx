@@ -22,7 +22,7 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       {/* APP */}
-      <Route path="/" element={<SelfPOSLayout />}>
+      <Route path="/" element={<Login />}>
         <Route index element={<Home />} />
         <Route path="selfpos/:clubId/:deviceId" element={<MenuGrid />} />
         <Route path="cart" element={<Cart />} />
