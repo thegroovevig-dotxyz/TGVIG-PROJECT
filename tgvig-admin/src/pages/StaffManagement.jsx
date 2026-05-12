@@ -63,13 +63,16 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
   const createStaff = async () => {
     try {
       await API.post("/members/register", {
-  ...form,
+  firstName: form.firstName,
+  lastName: form.lastName,
+  email: form.email,
+  password: form.password,
 
-  role: form.position,
+  role: "STAFF",            // fixed or selectable
+  position: form.position,  // OPERATOR / MONITOR / SELF_POS
 
   clubId: form.clubId,
   deviceId: form.deviceId,
-  position: form.position,
 });
 
 
@@ -188,6 +191,9 @@ clubId: "",
       ))}
   </select>
 
+  <option value="ADMIN">Admin</option>
+<option value="STAFF">Staff</option>
+
   {/* 🔥 POSITION */}
   <select
   value={form.position}
@@ -195,10 +201,9 @@ clubId: "",
     setForm({ ...form, position: e.target.value })
   }
 >
-  <option value="ADMIN">Admin</option>
-  <option value="STAFF">Staff / Monitor</option>
-  <option value="POS">POS Operator</option>
-  <option value="SELF_POS">Self POS</option>
+  <option value="OPERATOR">Operator</option>
+<option value="MONITOR">Monitor</option>
+<option value="SELF_POS">Self POS</option>
 </select>
   <button onClick={createStaff}>
     Create Staff

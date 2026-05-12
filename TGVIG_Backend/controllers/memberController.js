@@ -48,17 +48,16 @@ exports.createMember = async (req, res) => {
       address,
        clubId,
       deviceId,
-      role,
-      position
     } = req.body;
+
+    const role = req.body.role?.toUpperCase();
+const position = req.body.position?.toUpperCase();
 
     // check duplicate email
     const existing = await Member.findOne({ email });
     if (existing) {
       return res.status(400).json({ message: "Email already exists" });
     }
-
-    
 
     // generate unique values
     const membershipNo = "TGVIG" + Date.now();
@@ -95,6 +94,9 @@ deviceId,
 role,
 position
     });
+
+    if (!["ADMIN","STAFF","MEMBER"].includes(role)) throw Error("Invalid role");
+if (!["OPERATOR","MONITOR","SELF_POS"].includes(position)) throw Error("Invalid position");
 
     await member.save();
 
