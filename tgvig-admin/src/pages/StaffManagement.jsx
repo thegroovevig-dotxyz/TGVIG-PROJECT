@@ -5,17 +5,23 @@ import { getMembers, updateMember } from "../api/members.api";
 function StaffManagement() {
   const [users, setUsers] = useState([]);
   const [devices, setDevices] = useState([]);
+  const [clubs, setClubs] = useState([]);
 
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+
+  clubId: "",
+  deviceId: "",
+  position: "STAFF",
+});
 
   useEffect(() => {
     loadUsers();
     loadDevices();
+    loadClubs();
   }, []);
 
   // 🔥 LOAD STAFF
@@ -43,19 +49,37 @@ function StaffManagement() {
     }
   };
 
+  const loadClubs = async () => {
+  try {
+    const res = await API.get("/clubs");
+    setClubs(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
   // 🔥 CREATE STAFF
   const createStaff = async () => {
     try {
       await API.post("/members", {
-        ...form,
-        role: "STAFF",
-      });
+  ...form,
+
+  role: "STAFF",
+
+  clubId: form.clubId,
+  deviceId: form.deviceId,
+  position: form.position,
+});
+
 
       setForm({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
+clubId: "",
+  deviceId: "",
+  position: "STAFF",
       });
 
       loadUsers();
@@ -153,29 +177,50 @@ function StaffManagement() {
               {/* DEVICE SELECT */}
               <td>
                 <select
-                  onChange={(e) =>
-                    assignDevice(u._id, e.target.value)
-                  }
-                  value={u.deviceId || ""}
-                >
-                  <option value="">Select Device</option>
-                  {devices.map((d) => (
-                    <option key={d._id} value={d._id}>
-                      {d.name}
-                    </option>
-                  ))}
-                </select>
+  value={form.deviceId}
+  onChange={(e) =>
+    setForm({ ...form, deviceId: e.target.value })
+  }
+>
+  <option value="">Select Device</option>
+
+  {devices
+    .filter((d) => d.clubId?._id === form.clubId)
+    .map((d) => (
+      <option key={d._id} value={d._id}>
+        {d.name}
+      </option>
+    ))}
+</select>
               </td>
+
+              <select
+  value={form.clubId}
+  onChange={(e) =>
+    setForm({ ...form, clubId: e.target.value })
+  }
+>
+  <option value="">Select Club</option>
+
+  {clubs.map((c) => (
+    <option key={c._id} value={c._id}>
+      {c.name}
+    </option>
+  ))}
+</select>
 
               {/* ACTIONS */}
               <td>
-                <button onClick={() => changeRole(u._id, "STAFF")}>
-                  Staff
-                </button>
-
-                <button onClick={() => changeRole(u._id, "ADMIN")}>
-                  Admin
-                </button>
+               <select
+  value={form.position}
+  onChange={(e) =>
+    setForm({ ...form, position: e.target.value })
+  }
+>
+  <option value="ADMIN">Operator</option>
+  <option value="STAFF">Monitor</option>
+  <option value="SELF_POS">Self POS</option>
+</select>
 
                 <button onClick={() => deleteUser(u._id)}>
                   Delete

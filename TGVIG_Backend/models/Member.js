@@ -41,6 +41,16 @@ const memberSchema = new mongoose.Schema(
       default: "MEMBER"
     },
 
+    deviceId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Device",
+},
+
+position: {
+  type: String,
+  enum: ["ADMIN", "STAFF", "SELF_POS"],
+},
+
     // 🏢 RELATION
     clubId: {
       type: mongoose.Schema.Types.ObjectId,
