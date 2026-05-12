@@ -20,10 +20,10 @@ function Login() {
       console.log("USER:", user);
 
       // ADMIN ONLY CHECK
-      if (user.role !== "admin") {
-        alert("Access denied");
-        return;
-      }
+if (user.role !== "ADMIN") {
+  alert("Access denied");
+  return;
+}
 
       // store session
       localStorage.setItem("token", token);
