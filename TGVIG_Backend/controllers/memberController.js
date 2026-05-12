@@ -45,7 +45,7 @@ exports.createMember = async (req, res) => {
       password,
       idNumber,
       nationality,
-      address
+      address,
     } = req.body;
 
     // check duplicate email
@@ -85,7 +85,11 @@ const hashedPin = await bcrypt.hash(rawPin.toString(), 10);
       walletBalance: 0,
       pointsBalance: 0,
       status: "ACTIVE",
-       qrCode
+       qrCode,
+       clubId,
+deviceId,
+role,
+position
     });
 
     await member.save();

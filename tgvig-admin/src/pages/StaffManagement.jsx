@@ -65,7 +65,7 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
       await API.post("/members/register", {
   ...form,
 
-  role: "STAFF",
+  role: form.position,
 
   clubId: form.clubId,
   deviceId: form.deviceId,
@@ -85,6 +85,8 @@ clubId: "",
 
       loadUsers();
     } catch (err) {
+      console.log("CREATE STAFF ERROR:", err.response?.data || err.message);
+
       console.log(err);
       alert("Failed to create staff");
     }
