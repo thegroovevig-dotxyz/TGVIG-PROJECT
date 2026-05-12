@@ -27,13 +27,13 @@ function Login({ onSuccess }) {
       }
 
       // role routing
-      if (user.role === "admin") {
-        navigate("/admin");
-      } else if (user.role === "staff") {
-        navigate("/pos");
-      } else {
-        alert("Access denied");
-      }
+      if (user.role === "ADMIN") {
+  navigate("/admin");
+} else if (user.role === "STAFF") {
+  navigate("/pos");
+} else {
+  alert("Access denied");
+}
 
       // safe callback
       if (onSuccess && typeof onSuccess === "function") {

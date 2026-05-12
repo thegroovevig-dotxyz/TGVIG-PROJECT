@@ -240,7 +240,7 @@ if (!isMatch) {
     const token = jwt.sign(
       {
         id: user._id,
-        role: user.role,
+        role: user.role.toUpperCase(),
         email: user.email
       },
       "SECRET_KEY",
@@ -254,7 +254,7 @@ if (!isMatch) {
       user: {
         id: user._id,
         name: user.firstName,
-        role: user.role,
+        role: user.role.toUpperCase(),
         membershipNo: user.membershipNo,
         walletBalance: user.walletBalance,
         pointsBalance: user.pointsBalance
