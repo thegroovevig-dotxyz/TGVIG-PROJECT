@@ -1,14 +1,29 @@
 import { useState } from "react";
 import { login } from "../api/auth.api";
 import { useNavigate } from "react-router-dom";
-import Scanner from "../components/Scanner";
+import { Html5QrcodeScanner } from "html5-qrcode";
 import useSettings from "../hooks/useSettings";
 
 
 function Login() {
   const [membershipNo, setMembershipNo] = useState("");
   const [password, setPassword] = useState("");
-  const [scanMode, setScanMode] = useState(false);
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner(
+      "reader",
+      {
+        fps: 10,
+        qrbox: 200,
+      },
+      false
+    );
+
+    scanner.render((text) => {
+      onScan(text);
+    });
+
+    return () => scanner.clear();
+  }, []);
 
   const navigate = useNavigate();
 
