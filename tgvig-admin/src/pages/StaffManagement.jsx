@@ -61,7 +61,7 @@ function StaffManagement() {
   // 🔥 CREATE STAFF
   const createStaff = async () => {
     try {
-      await API.post("/members", {
+      await API.post("/members/register", {
   ...form,
 
   role: "STAFF",
@@ -114,122 +114,131 @@ clubId: "",
   return (
     <div>
       <h2>Staff Management</h2>
+{/* 🔥 ADD STAFF */}
+<div style={{ marginBottom: "20px" }}>
+  <h3>Add Staff</h3>
 
-      {/* 🔥 ADD STAFF */}
-      <div style={{ marginBottom: "20px" }}>
-        <h3>Add Staff</h3>
+  <input
+    placeholder="First Name"
+    value={form.firstName}
+    onChange={(e) =>
+      setForm({ ...form, firstName: e.target.value })
+    }
+  />
 
-        <input
-          placeholder="First Name"
-          value={form.firstName}
-          onChange={(e) =>
-            setForm({ ...form, firstName: e.target.value })
-          }
-        />
+  <input
+    placeholder="Last Name"
+    value={form.lastName}
+    onChange={(e) =>
+      setForm({ ...form, lastName: e.target.value })
+    }
+  />
 
-        <input
-          placeholder="Last Name"
-          value={form.lastName}
-          onChange={(e) =>
-            setForm({ ...form, lastName: e.target.value })
-          }
-        />
+  <input
+    placeholder="Email"
+    value={form.email}
+    onChange={(e) =>
+      setForm({ ...form, email: e.target.value })
+    }
+  />
 
-        <input
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
-        />
+  <input
+    placeholder="Password"
+    type="password"
+    value={form.password}
+    onChange={(e) =>
+      setForm({ ...form, password: e.target.value })
+    }
+  />
 
-        <input
-          placeholder="Password"
-          type="password"
-          value={form.password}
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
-        />
+  {/* 🔥 CLUB */}
+  <select
+    value={form.clubId}
+    onChange={(e) =>
+      setForm({ ...form, clubId: e.target.value })
+    }
+  >
+    <option value="">Select Club</option>
 
-        <button onClick={createStaff}>Create Staff</button>
-      </div>
-
-      {/* 🔥 TABLE */}
-      <table border="1" width="100%">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Device</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {users.map((u) => (
-            <tr key={u._id}>
-              <td>{u.firstName} {u.lastName}</td>
-              <td>{u.email}</td>
-              <td>{u.role}</td>
-
-              {/* DEVICE SELECT */}
-              <td>
-                <select
-  value={form.deviceId}
-  onChange={(e) =>
-    setForm({ ...form, deviceId: e.target.value })
-  }
->
-  <option value="">Select Device</option>
-
-  {devices
-    .filter((d) => d.clubId?._id === form.clubId)
-    .map((d) => (
-      <option key={d._id} value={d._id}>
-        {d.name}
+    {clubs.map((c) => (
+      <option key={c._id} value={c._id}>
+        {c.name}
       </option>
     ))}
-</select>
-              </td>
+  </select>
 
-              <select
-  value={form.clubId}
-  onChange={(e) =>
-    setForm({ ...form, clubId: e.target.value })
-  }
->
-  <option value="">Select Club</option>
+  {/* 🔥 DEVICE */}
+  <select
+    value={form.deviceId}
+    onChange={(e) =>
+      setForm({ ...form, deviceId: e.target.value })
+    }
+  >
+    <option value="">Select Device</option>
 
-  {clubs.map((c) => (
-    <option key={c._id} value={c._id}>
-      {c.name}
-    </option>
-  ))}
-</select>
+    {devices
+      .filter((d) => d.clubId?._id === form.clubId)
+      .map((d) => (
+        <option key={d._id} value={d._id}>
+          {d.name}
+        </option>
+      ))}
+  </select>
 
-              {/* ACTIONS */}
-              <td>
-               <select
-  value={form.position}
-  onChange={(e) =>
-    setForm({ ...form, position: e.target.value })
-  }
->
-  <option value="ADMIN">Operator</option>
-  <option value="STAFF">Monitor</option>
-  <option value="SELF_POS">Self POS</option>
-</select>
+  {/* 🔥 POSITION */}
+  <select
+    value={form.position}
+    onChange={(e) =>
+      setForm({ ...form, position: e.target.value })
+    }
+  >
+    <option value="OPERATOR">Operator</option>
+    <option value="MONITOR">Monitor</option>
+    <option value="SELF_POS">Self POS</option>
+  </select>
 
-                <button onClick={() => deleteUser(u._id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  <button onClick={createStaff}>
+    Create Staff
+  </button>
+</div>
+
+{/* 🔥 TABLE */}
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Device</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {users.map((u) => (
+      <tr key={u._id}>
+        <td>
+          {u.firstName} {u.lastName}
+        </td>
+
+        <td>{u.email}</td>
+
+        <td>{u.role}</td>
+
+        <td>
+          {devices.find((d) => d._id === u.deviceId)?.name ||
+            "No Device"}
+        </td>
+
+        <td>
+          <button onClick={() => deleteUser(u._id)}>
+            Delete
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>     
     </div>
   );
 }
