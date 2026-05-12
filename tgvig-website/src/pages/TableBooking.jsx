@@ -87,37 +87,37 @@ useEffect(() => {
   );
 };
 
-  const handleBooking = () => {
-    if (!selectedClub) return alert("Select club first");
-    if (selectedTables.length === 0) return alert("Select tables");
-    if (!pin) return alert("Enter PIN");
+  const handleBooking = (type) => {
+  if (!selectedClub) return alert("Select club first");
+  if (selectedTables.length === 0) return alert("Select tables");
+  if (!pin) return alert("Enter PIN");
 
-    const stats = getTableStats(selectedClub._id);
-    club.tables = [{ number: 1 }, { number: 2 }]
+  const stats = getTableStats(selectedClub._id);
 
-    const totalPrice = selectedTables.length * stats.price;
-    const deposit = totalPrice * 0.4;
+  const totalPrice = selectedTables.length * stats.price;
 
-    const bookingPayload = {
-      clubId: selectedClub._id,
-      tables: selectedTables,
-      totalPrice,
-      deposit,
-      paymentMethod,
-      pin,
-      rules: {
-        validHours: 72,
-        refundableSold: 0.5,
-        refundableBooking: false,
-        pointsAllowed: false,
-      },
-    };
+  const deposit = totalPrice * 0.4;
 
-    console.log("BOOKING:", bookingPayload);
-
-    // navigate to checkout if you want
-    navigate("/home/checkout", { state: bookingPayload });
+  const bookingPayload = {
+    clubId: selectedClub._id,
+    tables: selectedTables,
+    totalPrice,
+    deposit,
+    paymentType: type, // 👈 NEW FIELD
+    paymentMethod,
+    pin,
+    rules: {
+      validHours: 72,
+      refundableSold: 0.5,
+      refundableBooking: false,
+      pointsAllowed: false,
+    },
   };
+
+  console.log("BOOKING:", bookingPayload);
+
+  navigate("/home/checkout", { state: bookingPayload });
+};
 
   return (
     <div style={{ padding: "20px" }}>
@@ -208,12 +208,29 @@ useEffect(() => {
           </div>
 
           {/* BOOK BUTTON */}
-          <button
-            onClick={handleBooking}
-            style={{ marginTop: "20px", padding: "10px" }}
-          >
-            Book Tables (40% Deposit)
-          </button>
+        <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+  <button
+    onClick={() => handleBooking("DEPOSIT")}
+    style={{
+      padding: "10px",
+      background: "#f0ad4e",
+      color: "white",
+    }}
+  >
+    40% Deposit Booking
+  </button>
+
+  <button
+    onClick={() => handleBooking("FULL")}
+    style={{
+      padding: "10px",
+      background: "green",
+      color: "white",
+    }}
+  >
+    Full Payment
+  </button>
+</div>
 
           {/* RULES */}
           <div style={{ marginTop: "20px", fontSize: "12px" }}>

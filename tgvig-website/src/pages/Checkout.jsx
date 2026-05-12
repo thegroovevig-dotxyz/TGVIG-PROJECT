@@ -10,10 +10,16 @@ function Checkout() {
   const [loading, setLoading] = useState(false);
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
+  
+  
 
   const handleCheckout = async () => {
     if (cart.length === 0) return;
-
+if (location.state.paymentType === "DEPOSIT") {
+  amount = deposit;
+} else {
+  amount = totalPrice;
+}
     setLoading(true);
 
     try {
