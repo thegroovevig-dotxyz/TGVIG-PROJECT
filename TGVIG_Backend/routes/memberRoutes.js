@@ -11,7 +11,7 @@ router.post("/login", ctrl.login);
 router.get("/", ctrl.getMembers);
 router.get("/:id", ctrl.getMember);
 router.put("/:id", ctrl.updateMember);
-
+router.delete("/:id", ctrl.deleteMember);
 // CARD
 router.post("/generate-card/:id", ctrl.generateCard);
 

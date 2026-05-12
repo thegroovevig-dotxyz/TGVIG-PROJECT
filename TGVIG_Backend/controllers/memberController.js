@@ -295,3 +295,21 @@ exports.generateCard = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+// STAFF
+
+exports.deleteMember = async (req, res) => {
+  try {
+    const member = await Member.findById(req.params.id);
+
+    if (!member) {
+      return res.status(404).json({ message: "Member not found" });
+    }
+
+    await member.deleteOne();
+
+    res.json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

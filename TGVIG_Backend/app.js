@@ -26,6 +26,7 @@ app.use(
     origin: function (origin, callback) {
       const allowed = [
         "http://localhost:5173",
+        "http://localhost:5174",
         "http://localhost:5175",
         "http://localhost:5200",
         "https://tgvig-pos.onrender.com",
