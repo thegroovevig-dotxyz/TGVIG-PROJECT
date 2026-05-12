@@ -48,6 +48,7 @@ exports.createMember = async (req, res) => {
       address,
        clubId,
       deviceId,
+      role,
       position
     } = req.body;
 
