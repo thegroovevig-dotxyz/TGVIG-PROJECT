@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+
 
 import SelfPOSLayout from "./layout/SelfPOSLayout";
 
@@ -19,13 +19,10 @@ import MenuGrid from "./pages/MenuGrid";
 function App() {
   return (
     <Routes>
-      {/* DEFAULT ROUTE → LOGIN */}
-      <Route path="/" element={<Navigate to="/login" />} />
-
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
 
-      {/* APP (PROTECTED AREA) */}
+      {/* APP */}
       <Route path="/" element={<SelfPOSLayout />}>
         <Route index element={<Home />} />
         <Route path="selfpos/:clubId/:deviceId" element={<MenuGrid />} />
