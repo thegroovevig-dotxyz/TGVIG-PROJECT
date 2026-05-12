@@ -46,6 +46,9 @@ exports.createMember = async (req, res) => {
       idNumber,
       nationality,
       address,
+       clubId,
+      deviceId,
+      position
     } = req.body;
 
     // check duplicate email
