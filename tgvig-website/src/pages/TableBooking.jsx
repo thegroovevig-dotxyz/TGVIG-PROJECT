@@ -77,13 +77,15 @@ useEffect(() => {
 };
 
 
-  const toggleTable = (tableId) => {
-    setSelectedTables((prev) =>
-      prev.includes(tableId)
-        ? prev.filter((t) => t !== tableId)
-        : [...prev, tableId]
-    );
-  };
+  const toggleTable = (clubId, tableNo) => {
+  const key = `${clubId}-${tableNo}`;
+
+  setSelectedTables((prev) =>
+    prev.includes(key)
+      ? prev.filter((t) => t !== key)
+      : [...prev, key]
+  );
+};
 
   const handleBooking = () => {
     if (!selectedClub) return alert("Select club first");
@@ -164,20 +166,24 @@ useEffect(() => {
   {Array.from(
   { length: getTableStats(selectedClub._id).total },
   (_, i) => i + 1
-).map((t) => (
+).map((t) => {
+  const key = `${selectedClub._id}-${t}`;
+
+  return (
     <button
-      key={t.number}
-      onClick={() => toggleTable(t.number)}
+      key={key}
+      onClick={() => toggleTable(selectedClub._id, t)}
       style={{
         padding: "10px",
-        background: selectedTables.includes(t.number)
+        background: selectedTables.includes(key)
           ? "green"
           : "#eee",
       }}
     >
-      Table {t.number}
+      Table {t}
     </button>
-  ))}
+  );
+})}
 </div>
 
           {/* PAYMENT */}
