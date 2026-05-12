@@ -31,8 +31,11 @@ function StaffManagement() {
     console.log("ALL USERS FROM API:", res.data);
 
     const staffOnly = res.data.filter(
-      (u) => u.role === "STAFF" || u.role === "ADMIN"
-    );
+  (u) =>
+    u.role?.toLowerCase() === "staff" ||
+    u.role?.toLowerCase() === "admin"
+);
+console.log("RAW USERS ROLES:", res.data.map(u => u.role));
 
     console.log("FILTERED STAFF:", staffOnly);
 
