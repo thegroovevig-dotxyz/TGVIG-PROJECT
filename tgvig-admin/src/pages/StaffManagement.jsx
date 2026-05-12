@@ -15,6 +15,7 @@ function StaffManagement() {
 
   clubId: "",
   deviceId: "",
+  role: "STAFF",
   position: "OPERATOR",
 });
 
@@ -69,12 +70,19 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
   password: form.password,
 
   role: "STAFF",            // fixed or selectable
-  position: form.position,  // OPERATOR / MONITOR / SELF_POS
+  position: "OPERATOR",  // OPERATOR / MONITOR / SELF_POS
 
   clubId: form.clubId,
   deviceId: form.deviceId,
 });
 
+if (!["ADMIN","STAFF","MEMBER"].includes(role)) {
+  throw new Error("Invalid role");
+}
+
+if (!["OPERATOR","MONITOR","SELF_POS"].includes(position)) {
+  throw new Error("Invalid position");
+}
 
       setForm({
         firstName: "",
@@ -191,8 +199,16 @@ clubId: "",
       ))}
   </select>
 
+  <select
+  value={form.role}
+  onChange={(e) =>
+    setForm({ ...form, role: e.target.value })
+  }
+>
   <option value="ADMIN">Admin</option>
-<option value="STAFF">Staff</option>
+  <option value="STAFF">Staff</option>
+  <option value="MEMBER">Member</option>
+</select>
 
   {/* 🔥 POSITION */}
   <select
