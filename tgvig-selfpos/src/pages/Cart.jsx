@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
-// import Scanner from "../components/Scanner"; // <- use your existing scanner
+import Scanner from "../components/Scanner";
 
 function Cart() {
   const { cart, removeFromCart } = useCart();
