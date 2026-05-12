@@ -161,7 +161,10 @@ useEffect(() => {
 
           {/* MOCK TABLES */}
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-  {selectedClub?.tables?.map((t) => (
+  {Array.from(
+  { length: getTableStats(selectedClub._id).total },
+  (_, i) => i + 1
+).map((t) => (
     <button
       key={t.number}
       onClick={() => toggleTable(t.number)}
