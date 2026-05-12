@@ -1,14 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import SelfPOSLayout from "./layout/SelfPOSLayout";
-
-// auth
 import Login from "./auth/Login";
 
-// pages
 import Home from "./pages/Home";
-
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
@@ -19,12 +14,15 @@ import MenuGrid from "./pages/MenuGrid";
 function App() {
   return (
     <Routes>
+      {/* DEFAULT → LOGIN */}
+      <Route path="/" element={<Navigate to="/login" />} />
+
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
 
       {/* APP */}
       <Route path="/" element={<SelfPOSLayout />}>
-        <Route index element={<Home />} />
+        <Route path="home" element={<Home />} />
         <Route path="selfpos" element={<MenuGrid />} />
         <Route path="cart" element={<Cart />} />
         <Route path="pos" element={<POS />} />

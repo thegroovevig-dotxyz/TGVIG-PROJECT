@@ -41,7 +41,7 @@ function Login() {
 
       // redirect based on role (POS system safe)
       if (user.role === "admin") navigate("/dashboard");
-      else navigate("/pos");
+      else navigate("/home");
 
     } catch (err) {
       console.log(err);
