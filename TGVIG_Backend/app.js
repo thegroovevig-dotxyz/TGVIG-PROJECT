@@ -29,7 +29,7 @@ app.use(
         "http://localhost:5174",
         "http://localhost:5175",
         "http://localhost:5200",
-        "https://tgvig-pos.onrender.com",
+       "https://tgvig-project-pos.onrender.com",
         "https://thegroovevig.xyz",
         "https://www.thegroovevig.xyz"
       ];
