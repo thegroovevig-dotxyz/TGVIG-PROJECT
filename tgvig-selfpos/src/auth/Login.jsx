@@ -58,25 +58,16 @@ function Login() {
       </button>
 
 {/* CAMERA SCANNER */}
-<div
-  style={{
-    position: "fixed",
-    inset: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "rgba(0,0,0,0.6)", // dark overlay
-    zIndex: 9999,
-  }}
->
+{scanMode && (
   <div
     style={{
-      width: "280px",
-      height: "280px",
-      background: "#000",
-      borderRadius: "12px",
-      overflow: "hidden",
-      position: "relative",
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "220px",
+      height: "220px",
+      zIndex: 9999,
     }}
   >
     <Scanner
@@ -89,22 +80,8 @@ function Login() {
         height: "100%",
       }}
     />
-
-    {/* close button */}
-    <button
-      onClick={() => setScanMode(false)}
-      style={{
-        position: "absolute",
-        top: 5,
-        right: 5,
-        padding: "5px 8px",
-        fontSize: "12px",
-      }}
-    >
-      X
-    </button>
   </div>
-</div>
+)}
 
       {settings?.logo && (
   <img src={settings.logo} width="120" />
