@@ -63,6 +63,15 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
   // 🔥 CREATE STAFF
   const createStaff = async () => {
     try {
+
+if (!["ADMIN","STAFF","MEMBER"].includes(form.role)) {
+  throw new Error("Invalid role");
+}
+
+if (!["OPERATOR","MONITOR","SELF_POS"].includes(form.position)) {
+  throw new Error("Invalid position");
+}
+
       await API.post("/members/register", {
   firstName: form.firstName,
   lastName: form.lastName,
@@ -77,13 +86,6 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
   deviceId: form.deviceId,
 });
 
-if (!["ADMIN","STAFF","MEMBER"].includes(role)) {
-  throw new Error("Invalid role");
-}
-
-if (!["OPERATOR","MONITOR","SELF_POS"].includes(position)) {
-  throw new Error("Invalid position");
-}
 
       setForm({
         firstName: "",
