@@ -57,15 +57,25 @@ function Login() {
         Login
       </button>
 
-{/* 🔥 ALWAYS ON SCANNER */}
-<div style={{ position: "relative" }}>
+{/* 🔥 SMALL QR SCANNER */}
+<div
+  style={{
+    width: "220px",
+    height: "220px",
+    overflow: "hidden",
+    borderRadius: "12px",
+    border: "2px solid #ccc",
+  }}
+>
   <Scanner
     onScan={(code) => {
       if (!code) return;
-
       setMembershipNo(code);
-
       console.log("SCANNED:", code);
+    }}
+    style={{
+      width: "100%",
+      height: "100%",
     }}
   />
 </div>
