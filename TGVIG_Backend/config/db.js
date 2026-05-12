@@ -8,7 +8,10 @@ const connectDB = async () => {
 
     console.log("Using Mongo URI:", process.env.MONGO_URI);
 
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      tls: true,
+      tlsAllowInvalidCertificates: true,
+    });
 
     console.log("MongoDB connected");
   } catch (err) {
