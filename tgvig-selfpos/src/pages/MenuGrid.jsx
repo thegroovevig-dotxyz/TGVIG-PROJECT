@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import API from "../api/axios";
 import { useCart } from "../context/CartContext";
 
 function MenuGrid() {
   const [menu, setMenu] = useState([]);
 
-  const { clubId, deviceId } = useParams();
+  // HARD CODED
+  const clubId = "69e9284d26961ca9fbef1c08";
+  const deviceId = "69f32f056119ac5b6afe3b9b";
 
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
@@ -14,30 +15,24 @@ function MenuGrid() {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    if (!clubId || !deviceId) {
-      console.log("Missing route params:", { clubId, deviceId });
-      return;
-    }
-
-    loadMenu();
-  }, [clubId, deviceId]);
+  loadMenu();
+}, []);
 
   const loadMenu = async () => {
-    try {
-      const res = await API.get("/menu", {
-        params: {
-          clubId,
-          deviceId,
-          type: "SELF_POS",
-        },
-      });
+  try {
+    const res = await API.get("/menu", {
+      params: {
+        clubId,
+        deviceId,
+        type: "SELF_POS",
+      },
+    });
 
-      setMenu(res.data || []);
-    } catch (err) {
-      console.log("MENU ERROR:", err.response?.data || err.message);
-    }
-  };
-
+    setMenu(res.data || []);
+  } catch (err) {
+    console.log("MENU ERROR:", err.response?.data || err.message);
+  }
+};
   const addItemToCart = (item) => {
     const size = selectedSize[item._id];
     const qty = quantity[item._id] || 1;
