@@ -57,27 +57,53 @@ function Login() {
         Login
       </button>
 
-{/* 🔥 SMALL QR SCANNER */}
+{/* CAMERA SCANNER */}
 <div
   style={{
-    width: "220px",
-    height: "220px",
-    overflow: "hidden",
-    borderRadius: "12px",
-    border: "2px solid #ccc",
+    position: "fixed",
+    inset: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(0,0,0,0.6)", // dark overlay
+    zIndex: 9999,
   }}
 >
-  <Scanner
-    onScan={(code) => {
-      if (!code) return;
-      setMembershipNo(code);
-      console.log("SCANNED:", code);
-    }}
+  <div
     style={{
-      width: "100%",
-      height: "100%",
+      width: "280px",
+      height: "280px",
+      background: "#000",
+      borderRadius: "12px",
+      overflow: "hidden",
+      position: "relative",
     }}
-  />
+  >
+    <Scanner
+      onScan={(code) => {
+        setMembershipNo(code);
+        setScanMode(false);
+      }}
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    />
+
+    {/* close button */}
+    <button
+      onClick={() => setScanMode(false)}
+      style={{
+        position: "absolute",
+        top: 5,
+        right: 5,
+        padding: "5px 8px",
+        fontSize: "12px",
+      }}
+    >
+      X
+    </button>
+  </div>
 </div>
 
       {settings?.logo && (
