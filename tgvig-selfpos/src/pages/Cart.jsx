@@ -9,11 +9,13 @@ function Cart() {
   const [paymentMethod, setPaymentMethod] = useState("WALLET");
   const [pin, setPin] = useState("");
 
-  // ✅ FIX PRICE STRUCTURE
-  const total = cart.reduce(
-    (sum, item) => sum + Number(item.price?.single || 0),
-    0
-  );
+  // ✅ FIXED TOTAL (supports SELF POS + WEB)
+  const total = cart.reduce((sum, item) => {
+    const itemTotal =
+      item.total || (item.price * item.quantity) || 0;
+
+    return sum + Number(itemTotal);
+  }, 0);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -23,8 +25,25 @@ function Cart() {
         <p>No items in cart</p>
       ) : (
         cart.map((item) => (
-          <div key={item._id}>
-            {item.name} - R{item.price?.single}
+          <div
+            key={item._id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "10px",
+            }}
+          >
+            <div>
+              <b>{item.name}</b>
+
+              {item.size && (
+                <span> ({item.size})</span>
+              )}
+
+              <p>
+                R{item.price} x {item.quantity} = R{item.total}
+              </p>
+            </div>
 
             <button onClick={() => removeFromCart(item._id)}>
               Remove
@@ -35,7 +54,7 @@ function Cart() {
 
       <h3>Total: R{total}</h3>
 
-      {/* 🔥 PAYMENT METHOD */}
+      {/* PAYMENT */}
       <div style={{ marginTop: "20px" }}>
         <h4>Payment Method</h4>
 
@@ -48,7 +67,7 @@ function Cart() {
         </select>
       </div>
 
-      {/* 🔐 PIN */}
+      {/* PIN */}
       <div style={{ marginTop: "10px" }}>
         <input
           type="password"
@@ -58,7 +77,7 @@ function Cart() {
         />
       </div>
 
-      {/* 🚀 CHECKOUT */}
+      {/* CHECKOUT */}
       <button
         disabled={cart.length === 0 || !pin}
         onClick={() =>
