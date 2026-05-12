@@ -29,7 +29,7 @@ function Login({ onSuccess }) {
       // role routing
       if (user.role === "admin") {
         navigate("/admin");
-      } else if (user.role === "pos") {
+      } else if (user.role === "staff") {
         navigate("/pos");
       } else {
         alert("Access denied");
