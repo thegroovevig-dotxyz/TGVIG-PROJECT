@@ -57,20 +57,18 @@ function Login() {
         Login
       </button>
 
-{/* 🔥 SCANNER BUTTON */}
-      <button onClick={() => setScanMode(!scanMode)}>
-        {scanMode ? "Close Scanner" : "Scan Card"}
-      </button>
+{/* 🔥 ALWAYS ON SCANNER */}
+<div style={{ position: "relative" }}>
+  <Scanner
+    onScan={(code) => {
+      if (!code) return;
 
-      {/* CAMERA SCANNER */}
-      {scanMode && (
-        <Scanner
-          onScan={(code) => {
-            setMembershipNo(code);
-            setScanMode(false);
-          }}
-        />
-      )}
+      setMembershipNo(code);
+
+      console.log("SCANNED:", code);
+    }}
+  />
+</div>
 
       {settings?.logo && (
   <img src={settings.logo} width="120" />
