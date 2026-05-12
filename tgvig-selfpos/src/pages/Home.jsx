@@ -1,5 +1,5 @@
 import API from "../api/axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -15,7 +15,7 @@ const deviceId = import.meta.env.VITE_DEVICE_ID;
       <h1>WELCOME TO SELF POS</h1>
 
       <button
-        onClick={() => navigate(`/selfpos`)}
+        onClick={() => navigate(`/selfpos/${clubId}/${deviceId}`)}
       >
         Start Order
       </button>
