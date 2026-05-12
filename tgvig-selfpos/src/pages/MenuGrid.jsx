@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import API from "../api/axios";
 import { useCart } from "../context/CartContext";
-import { useParams } from "react-router-dom";
 
 function MenuGrid() {
   const [menu, setMenu] = useState([]);
 
-  
+  const { clubId, deviceId } = useParams();
 
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
