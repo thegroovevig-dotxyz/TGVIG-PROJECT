@@ -14,14 +14,26 @@ function MenuGrid() {
     loadMenu();
   }, []);
 
-  const loadMenu = async () => {
-    try {
-      const res = await API.get("/menu?type=SELF_POS");
-      setMenu(res.data || []);
-    } catch (err) {
-      console.log("MENU ERROR:", err);
+ const loadMenu = async () => {
+  try {
+    if (!clubId || !deviceId) {
+      console.log("Missing params:", { clubId, deviceId });
+      return;
     }
-  };
+
+    const res = await API.get("/menu", {
+      params: {
+        clubId,
+        deviceId,
+        type: "SELF_POS",
+      },
+    });
+
+    setMenu(res.data || []);
+  } catch (err) {
+    console.log("MENU ERROR:", err.response?.data || err.message);
+  }
+};
 
   // ✅ SAME LOGIC AS WEB
   const addItemToCart = (item) => {
