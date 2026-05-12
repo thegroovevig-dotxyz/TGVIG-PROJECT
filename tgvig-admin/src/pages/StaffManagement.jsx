@@ -69,8 +69,9 @@ console.log("RAW USERS ROLES:", res.data.map(u => u.role));
   email: form.email,
   password: form.password,
 
-  role: "STAFF",            // fixed or selectable
-  position: "OPERATOR",  // OPERATOR / MONITOR / SELF_POS
+  role: form.role,         
+      position: form.position, 
+
 
   clubId: form.clubId,
   deviceId: form.deviceId,
@@ -91,6 +92,7 @@ if (!["OPERATOR","MONITOR","SELF_POS"].includes(position)) {
         password: "",
 clubId: "",
   deviceId: "",
+  role: "STAFF",
   position: "OPERATOR",
       });
 
