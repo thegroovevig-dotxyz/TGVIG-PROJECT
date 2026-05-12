@@ -5,12 +5,10 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
 
-  const clubId = "69e9284d26961ca9fbef1c08";
-  const deviceId = "69f32f056119ac5b6afe3b9b";
+ const clubId = import.meta.env.VITE_CLUB_ID;
+const deviceId = import.meta.env.VITE_DEVICE_ID;
 
-  useEffect(() => {
-    API.get("/blogs"); // optional: you can even remove this too
-  }, []);
+  
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
