@@ -24,6 +24,12 @@ const tableInventorySchema = new mongoose.Schema(
       default: 0,
     },
 
+    tables: [
+  {
+    number: Number
+  }
+],
+
     pricePerTable: {
       type: Number,
       required: true,

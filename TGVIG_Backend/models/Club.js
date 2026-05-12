@@ -48,6 +48,12 @@ coverImage: String,
       }
     ],
 
+    tables: [
+  {
+    number: Number
+  }
+],
+
     // 📊 STATUS
     status: {
       type: String,

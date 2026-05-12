@@ -160,21 +160,25 @@ useEffect(() => {
 
           {/* MOCK TABLES */}
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-            {[1, 2, 3, 4, 5].map((t) => (
-              <button
-                key={t}
-                onClick={() => toggleTable(t)}
-                style={{
-                  padding: "10px",
-                  background: selectedTables.includes(t)
-                    ? "green"
-                    : "#eee",
-                }}
-              >
-                Table {t}
-              </button>
-            ))}
-          </div>
+  {[...Array(stats.total || 0)].map((_, i) => {
+    const tableNumber = i + 1;
+
+    return (
+      <button
+        key={tableNumber}
+        onClick={() => toggleTable(tableNumber)}
+        style={{
+          padding: "10px",
+          background: selectedTables.includes(tableNumber)
+            ? "green"
+            : "#eee",
+        }}
+      >
+        Table {tableNumber}
+      </button>
+    );
+  })}
+</div>
 
           {/* PAYMENT */}
           <div style={{ marginTop: "20px" }}>
