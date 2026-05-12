@@ -15,7 +15,7 @@ function StaffManagement() {
 
   clubId: "",
   deviceId: "",
-  position: "STAFF",
+  position: "OPERATOR",
 });
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function StaffManagement() {
         password: "",
 clubId: "",
   deviceId: "",
-  position: "STAFF",
+  position: "OPERATOR",
       });
 
       loadUsers();

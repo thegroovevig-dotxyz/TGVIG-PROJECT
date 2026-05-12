@@ -48,7 +48,7 @@ const memberSchema = new mongoose.Schema(
 
 position: {
   type: String,
-  enum: ["ADMIN", "STAFF", "SELF_POS"],
+  enum: ["OPERATOR", "MONITOR", "SELF_POS"]
 },
 
     // 🏢 RELATION
