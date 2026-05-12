@@ -57,12 +57,14 @@ function Login() {
         Login
       </button>
 
-{/* CAMERA SCANNER ALWAYS ON */}
-<Scanner
-  onScan={(code) => {
-    setMembershipNo(code);
-  }}
-/>
+{/* ALWAYS ON CAMERA SCANNER */}
+<div style={{ width: "250px", height: "250px" }}>
+  <Scanner
+    onScan={(code) => {
+      setMembershipNo(code);
+    }}
+  />
+</div>
 
       {settings?.logo && (
   <img src={settings.logo} width="120" />
