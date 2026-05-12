@@ -2,9 +2,7 @@ import API from "../api/axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
- useEffect(() => {
-    API.get("/blogs").then(res => setBlogs(res.data));
-  }, []);
+
 
 function Home() {
   const navigate = useNavigate();
