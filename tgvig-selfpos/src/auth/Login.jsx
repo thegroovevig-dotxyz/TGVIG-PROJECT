@@ -60,9 +60,9 @@ function Login() {
 {/* ALWAYS ON CAMERA SCANNER */}
 <div style={{ width: "250px", height: "250px" }}>
   <Scanner
-    onScan={(code) => {
-      setMembershipNo(code);
-    }}
+  onScan={(code) => setMembershipNo(code)}
+  controls={false}
+
   />
 </div>
 
