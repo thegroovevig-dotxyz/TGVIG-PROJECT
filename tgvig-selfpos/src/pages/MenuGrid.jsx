@@ -4,6 +4,9 @@ import { useCart } from "../context/CartContext";
 
 function MenuGrid() {
   const [menu, setMenu] = useState([]);
+  const params = useParams();
+const clubId = params?.clubId;
+const deviceId = params?.deviceId;
 
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
@@ -11,16 +14,16 @@ function MenuGrid() {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    loadMenu();
-  }, []);
+  if (!clubId || !deviceId) {
+    console.log("Missing route params:", { clubId, deviceId });
+    return;
+  }
 
- const loadMenu = async () => {
+  loadMenu();
+}, [clubId, deviceId]);
+
+const loadMenu = async () => {
   try {
-    if (!clubId || !deviceId) {
-      console.log("Missing params:", { clubId, deviceId });
-      return;
-    }
-
     const res = await API.get("/menu", {
       params: {
         clubId,
