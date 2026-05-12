@@ -190,16 +190,16 @@ clubId: "",
 
   {/* 🔥 POSITION */}
   <select
-    value={form.position}
-    onChange={(e) =>
-      setForm({ ...form, position: e.target.value })
-    }
-  >
-    <option value="OPERATOR">Operator</option>
-    <option value="MONITOR">Monitor</option>
-    <option value="SELF_POS">Self POS</option>
-  </select>
-
+  value={form.position}
+  onChange={(e) =>
+    setForm({ ...form, position: e.target.value })
+  }
+>
+  <option value="ADMIN">Admin</option>
+  <option value="STAFF">Staff / Monitor</option>
+  <option value="POS">POS Operator</option>
+  <option value="SELF_POS">Self POS</option>
+</select>
   <button onClick={createStaff}>
     Create Staff
   </button>
