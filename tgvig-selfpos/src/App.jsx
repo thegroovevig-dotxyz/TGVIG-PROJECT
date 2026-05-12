@@ -13,6 +13,7 @@ import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import OrderSuccess from "./pages/OrderSuccess";
 import POS from "./pages/POS";
+import MenuGrid from "./pages/MenuGrid";
 
 function App() {
   return (
