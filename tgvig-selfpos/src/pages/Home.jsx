@@ -15,7 +15,7 @@ const deviceId = import.meta.env.VITE_DEVICE_ID;
       <h1>WELCOME TO SELF POS</h1>
 
       <button
-        onClick={() => navigate('/selfpos')}
+        onClick={() => navigate('/MenuGrid')}
       >
         Start Order
       </button>
