@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 console.log("ENV CHECK:", process.env.MONGO_URI);
     console.log("MONGO_URI =", process.env.MONGO_URI);
     tls: true,
-  tlsAllowInvalidCertificates; true,
+  tlsAllowInvalidCertificates, true,
 
 connectDB();
 
