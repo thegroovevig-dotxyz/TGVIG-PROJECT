@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function MenuGrid() {
   const [menu, setMenu] = useState([]);
 
-  const { clubId, deviceId } = useParams() || {};
+  
 
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
