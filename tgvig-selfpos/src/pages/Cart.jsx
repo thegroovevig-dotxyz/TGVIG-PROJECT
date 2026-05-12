@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+// import Scanner from "../components/Scanner"; // <- use your existing scanner
 
 function Cart() {
   const { cart, removeFromCart } = useCart();
@@ -9,7 +10,10 @@ function Cart() {
   const [paymentMethod, setPaymentMethod] = useState("WALLET");
   const [pin, setPin] = useState("");
 
-  // ✅ FIXED TOTAL (supports SELF POS + WEB)
+  // 🔥 NEW STATES (ADDED ONLY)
+  const [scanMode, setScanMode] = useState(false);
+  const [approved, setApproved] = useState(false);
+
   const total = cart.reduce((sum, item) => {
     const itemTotal =
       item.total || (item.price * item.quantity) || 0;
@@ -36,9 +40,7 @@ function Cart() {
             <div>
               <b>{item.name}</b>
 
-              {item.size && (
-                <span> ({item.size})</span>
-              )}
+              {item.size && <span> ({item.size})</span>}
 
               <p>
                 R{item.price} x {item.quantity} = R{item.total}
@@ -77,9 +79,44 @@ function Cart() {
         />
       </div>
 
+      {/* 🔥 NEW: CARD SCAN BUTTON */}
+      <div style={{ marginTop: "15px" }}>
+        <button onClick={() => setScanMode(true)}>
+          Scan Card (Pay)
+        </button>
+      </div>
+
+      {/* 🔥 NEW: SCANNER ALWAYS ACTIVE WHEN OPEN */}
+      {scanMode && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div style={{ width: "300px", background: "#fff", padding: 10 }}>
+            <Scanner
+              onScan={(code) => {
+                setPin(code);       // auto-fill PIN
+                setApproved(true);  // mark approved
+                setScanMode(false); // close scanner
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* CHECKOUT */}
       <button
-        disabled={cart.length === 0 || !pin}
+        disabled={cart.length === 0 || !pin || !approved}
         onClick={() =>
           navigate("/checkout", {
             state: {
