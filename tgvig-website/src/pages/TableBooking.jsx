@@ -91,6 +91,7 @@ useEffect(() => {
     if (!pin) return alert("Enter PIN");
 
     const stats = getTableStats(selectedClub._id);
+    club.tables = [{ number: 1 }, { number: 2 }]
 
     const totalPrice = selectedTables.length * stats.price;
     const deposit = totalPrice * 0.4;
@@ -160,24 +161,20 @@ useEffect(() => {
 
           {/* MOCK TABLES */}
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-  {[...Array(stats.total || 0)].map((_, i) => {
-    const tableNumber = i + 1;
-
-    return (
-      <button
-        key={tableNumber}
-        onClick={() => toggleTable(tableNumber)}
-        style={{
-          padding: "10px",
-          background: selectedTables.includes(tableNumber)
-            ? "green"
-            : "#eee",
-        }}
-      >
-        Table {tableNumber}
-      </button>
-    );
-  })}
+  {selectedClub?.tables?.map((t) => (
+    <button
+      key={t.number}
+      onClick={() => toggleTable(t.number)}
+      style={{
+        padding: "10px",
+        background: selectedTables.includes(t.number)
+          ? "green"
+          : "#eee",
+      }}
+    >
+      Table {t.number}
+    </button>
+  ))}
 </div>
 
           {/* PAYMENT */}
