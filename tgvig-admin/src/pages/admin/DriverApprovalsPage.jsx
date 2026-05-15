@@ -14,7 +14,7 @@ function DriverApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/drivers/pending"
+        "/drivers"
       );
 
       setDrivers(res.data);

@@ -49,7 +49,7 @@ function PropertyApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/property/reject",
+        "/admin/property",
         { propertyId: id }
       );
 

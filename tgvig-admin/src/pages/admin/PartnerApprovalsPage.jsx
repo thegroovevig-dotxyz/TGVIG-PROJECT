@@ -49,7 +49,7 @@ function PartnerApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/partner/reject",
+        "/admin/partner",
         { partnerId: id }
       );
 
