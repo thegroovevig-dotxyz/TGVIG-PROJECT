@@ -13,7 +13,7 @@ function PropertyApprovalsPage() {
 
     try {
 
-      const res = API.get(
+      const res = await api.get(
         "/properties/pending"
       );
 
@@ -30,7 +30,7 @@ function PropertyApprovalsPage() {
 
     try {
 
-      API.post(
+      await api.post(
         "/admin/property/approve",
         { propertyId: id }
       );
@@ -48,7 +48,7 @@ function PropertyApprovalsPage() {
 
     try {
 
-      API.post(
+      await api.post(
         "/admin/property/reject",
         { propertyId: id }
       );
