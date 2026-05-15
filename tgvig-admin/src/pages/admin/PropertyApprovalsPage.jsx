@@ -14,7 +14,7 @@ function PropertyApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/properties/pending"
+        "/properties"
       );
 
       setProperties(res.data);
@@ -31,7 +31,7 @@ function PropertyApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/property/approve",
+        "/admin/property",
         { propertyId: id }
       );
 

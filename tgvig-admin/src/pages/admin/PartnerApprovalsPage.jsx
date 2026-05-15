@@ -14,7 +14,7 @@ function PartnerApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/partners/pending"
+        "/partners"
       );
 
       setPartners(res.data);
@@ -31,7 +31,7 @@ function PartnerApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/partner/approve",
+        "/admin/partner",
         { partnerId: id }
       );
 

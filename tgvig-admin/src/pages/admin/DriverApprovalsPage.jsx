@@ -31,7 +31,7 @@ function DriverApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/driver/approve",
+        "/admin/driver",
         { driverId: id }
       );
 
@@ -49,7 +49,7 @@ function DriverApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/driver/reject",
+        "/admin/driver",
         { driverId: id }
       );
 
