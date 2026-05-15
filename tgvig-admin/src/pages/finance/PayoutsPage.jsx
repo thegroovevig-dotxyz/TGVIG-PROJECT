@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function PayoutsPage() {
 
@@ -8,7 +8,7 @@ function PayoutsPage() {
 
   useEffect(() => {
 
-    api
+    API
       .get("/payouts/all")
       .then((res) => {
         setPayouts(res.data.payouts);

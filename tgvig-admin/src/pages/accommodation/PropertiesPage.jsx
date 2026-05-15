@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function PropertiesPage() {
 
@@ -8,7 +8,7 @@ function PropertiesPage() {
 
   useEffect(() => {
 
-    api
+    API
       .get("/properties")
       .then((res) => {
         setProperties(res.data);

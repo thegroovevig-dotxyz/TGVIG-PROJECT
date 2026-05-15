@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function DriversPage() {
 
@@ -8,7 +8,7 @@ function DriversPage() {
 
   useEffect(() => {
 
-    api
+    API
       .get("/drivers")
       .then((res) => {
         setDrivers(res.data);

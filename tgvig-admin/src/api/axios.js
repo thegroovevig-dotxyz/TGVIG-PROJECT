@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
+const API = axios.create({
   baseURL:
     import.meta.env.MODE === "development"
       ? "http://localhost:5000/api"
@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 // 🔐 Attach token automatically
-api.interceptors.request.use((req) => {
+API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -19,7 +19,7 @@ api.interceptors.request.use((req) => {
 });
 
 // 🚨 GLOBAL ERROR HANDLER
-api.interceptors.response.use(
+API.interceptors.response.use(
 
   (response) => response,
 

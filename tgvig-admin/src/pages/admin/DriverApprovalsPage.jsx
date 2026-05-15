@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function DriverApprovalsPage() {
 
@@ -13,7 +13,7 @@ function DriverApprovalsPage() {
 
     try {
 
-      const res = await api.get(
+      const res = await API.get(
         "/drivers/pending"
       );
 
@@ -30,7 +30,7 @@ function DriverApprovalsPage() {
 
     try {
 
-      await api.post(
+      await API.post(
         "/admin/driver/approve",
         { driverId: id }
       );
@@ -48,7 +48,7 @@ function DriverApprovalsPage() {
 
     try {
 
-      await api.post(
+      await API.post(
         "/admin/driver/reject",
         { driverId: id }
       );

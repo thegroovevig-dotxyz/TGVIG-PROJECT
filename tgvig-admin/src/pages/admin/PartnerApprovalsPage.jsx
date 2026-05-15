@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function PartnerApprovalsPage() {
 
@@ -13,7 +13,7 @@ function PartnerApprovalsPage() {
 
     try {
 
-      const res = await api.get(
+      const res = await API.get(
         "/partners/pending"
       );
 
@@ -30,7 +30,7 @@ function PartnerApprovalsPage() {
 
     try {
 
-      await api.post(
+      await API.post(
         "/admin/partner/approve",
         { partnerId: id }
       );
@@ -48,7 +48,7 @@ function PartnerApprovalsPage() {
 
     try {
 
-      await api.post(
+      await API.post(
         "/admin/partner/reject",
         { partnerId: id }
       );

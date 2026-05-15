@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import api from "../../services/api";
+import API from "../../services/api";
 
 function PartnersPage() {
 
@@ -8,7 +8,7 @@ function PartnersPage() {
 
   useEffect(() => {
 
-    api
+    API
       .get("/partners")
       .then((res) => {
         setPartners(res.data);
