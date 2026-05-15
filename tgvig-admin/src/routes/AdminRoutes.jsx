@@ -26,7 +26,7 @@ import BookingsPage from "../pages/accommodation/BookingsPage";
 import PartnersPage from "../pages/accommodation/PartnersPage";
 import ParkingPage from "../pages/parking/ParkingPage";
 import ParkingSessionsPage from "../pages/parking/ParkingSessionsPage";
-import PayoutsPage from "./pages/finance/PayoutsPage";
+import PayoutsPage from "../pages/finance/PayoutsPage";
 import DriverApprovalsPage from "../pages/admin/DriverApprovalsPage";
 import PropertyApprovalsPage from "../pages/admin/PropertyApprovalsPage";
 import PartnerApprovalsPage from "../pages/admin/PartnerApprovalsPage";
