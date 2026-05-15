@@ -23,13 +23,13 @@ import DriversPage from "../pages/taxi/DriversPage";
 import RidesPage from "../pages/taxi/RidesPage";
 import PropertiesPage from "../pages/accommodation/PropertiesPage";
 import BookingsPage from "../pages/accommodation/BookingsPage";
-import PartnersPage from "./pages/accommodation/PartnersPage";
+import PartnersPage from "../pages/accommodation/PartnersPage";
 import ParkingPage from "../pages/parking/ParkingPage";
-import ParkingSessionsPage from "./pages/parking/ParkingSessionsPage";
+import ParkingSessionsPage from "../pages/parking/ParkingSessionsPage";
 import PayoutsPage from "./pages/finance/PayoutsPage";
-import DriverApprovalsPage from "./pages/admin/DriverApprovalsPage";
-import PropertyApprovalsPage from "./pages/admin/PropertyApprovalsPage";
-import PartnerApprovalsPage from "./pages/admin/PartnerApprovalsPage";
+import DriverApprovalsPage from "../pages/admin/DriverApprovalsPage";
+import PropertyApprovalsPage from "../pages/admin/PropertyApprovalsPage";
+import PartnerApprovalsPage from "../pages/admin/PartnerApprovalsPage";
 
 
 
