@@ -24,3 +24,8 @@ exports.createPayment = async ({ memberId, amount }) => {
 
   return response.data;
 };
+
+createPayment()
+verifyPayment()
+handleWebhook()
+refundPayment()

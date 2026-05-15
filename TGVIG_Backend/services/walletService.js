@@ -73,3 +73,10 @@ exports.redeemPoints = async ({ memberId, points, clubId }) => {
 
   return { member, transaction };
 };
+
+debitWallet()
+topupWallet()
+refundWallet()
+reserveFunds()
+releaseFunds()
+getBalance()

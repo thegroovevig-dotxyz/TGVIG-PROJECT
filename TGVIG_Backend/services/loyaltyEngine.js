@@ -8,8 +8,11 @@ const POINT_VALUE = 1;  // 1 point = R1
 exports.processLoyalty = async ({
   memberId,
   amount = 0,
-  method = "CASH", // CASH | WALLET | POINTS
-  type = "PURCHASE", // PURCHASE | TOPUP | REDEEM
+  method = ["CASH", "WALLET", "POINTS"], // CASH | WALLET | POINTS
+  type = ["PURCHASE", "RIDE",
+"BOOKING",
+"PARKING",
+"TOPUP"], // PURCHASE | TOPUP 
   promotion = null
 }) => {
 
@@ -79,12 +82,10 @@ exports.processLoyalty = async ({
   if (spend >= 10000) {
     member.tier = "BLACK";
   } else if (spend >= 3000) {
-    member.tier = "DIAMOND";
+    member.tier = "SILVER";
   } else if (spend >= 750) {
-    member.tier = "PLATINUM";
-  } else {
     member.tier = "GOLD";
-  }
+  } 
 
   // =========================
   // 7. PROMOTION HOOK (OPTIONAL)
@@ -119,3 +120,8 @@ exports.processLoyalty = async ({
     pointsSpent
   };
 };
+
+calculatePoints()
+updateTier()
+processRewards()
+applyPromotion()

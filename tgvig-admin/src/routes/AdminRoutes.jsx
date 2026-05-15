@@ -18,6 +18,18 @@ import DeviceBlogs from "../pages/DeviceBlogs";
 import Coupons from "../pages/Coupons";
 import Notifications from "../pages/Notifications";
 import WebFront from "../pages/WebFront";
+import TaxiPage from "./pages/taxi/TaxiPage";
+import DriversPage from "./pages/taxi/DriversPage";
+import RidesPage from "./pages/taxi/RidesPage";
+import PropertiesPage from "./pages/accommodation/PropertiesPage";
+import BookingsPage from "./pages/accommodation/BookingsPage";
+import PartnersPage from "./pages/accommodation/PartnersPage";
+import ParkingPage from "./pages/parking/ParkingPage";
+import ParkingSessionsPage from "./pages/parking/ParkingSessionsPage";
+import PayoutsPage from "./pages/finance/PayoutsPage";
+import DriverApprovalsPage from "./pages/admin/DriverApprovalsPage";
+import PropertyApprovalsPage from "./pages/admin/PropertyApprovalsPage";
+import PartnerApprovalsPage from "./pages/admin/PartnerApprovalsPage";
 
 
 
@@ -44,6 +56,29 @@ function AdminRoutes() {
         <Route path="coupons" element={<Coupons />} />
 <Route path="notifications" element={<Notifications />} />
 <Route path="webfront" element={<WebFront />} />
+ <Route path="taxi" element={<TaxiPage />} />
+          <Route path="drivers" element={<DriversPage />} />
+          <Route path="rides" element={<RidesPage />} />
+          <Route path="properties" element={<PropertiesPage />} />
+          <Route path="bookings" element={<BookingsPage />} />
+          <Route path="partners" element={<PartnersPage />} />
+           <Route path="parking" element={<ParkingPage />} />
+          <Route path="parking-sessions" element={<ParkingSessionsPage />} />
+           <Route path="payouts" element={<PayoutsPage />} />
+           <Route
+  path="admin/drivers"
+  element={<DriverApprovalsPage />}
+/>
+
+<Route
+  path="admin/properties"
+  element={<PropertyApprovalsPage />}
+/>
+
+<Route
+  path="admin/partners"
+  element={<PartnerApprovalsPage />}
+/>
 
       </Route>
     </Routes>

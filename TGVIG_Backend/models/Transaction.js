@@ -12,14 +12,38 @@ const transactionSchema = new mongoose.Schema(
     // 🏢 WHERE
     clubId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Club",
-      required: true
+      ref: "Club"
     },
 
-    // 🧾 WHAT TYPE
+    // 🔗 SERVICE REFERENCES
+    rideId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ride"
+    },
+
+    bookingId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking"
+    },
+
+    parkingSessionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ParkingSession"
+    },
+
+    // 🧾 TRANSACTION TYPE
     type: {
       type: String,
-      enum: ["PURCHASE", "TOPUP", "REDEEM"],
+      enum: [
+        "PURCHASE",
+        "TOPUP",
+        "REDEEM",
+        "RIDE",
+        "BOOKING",
+        "PARKING",
+        "PAYOUT",
+        "REFUND"
+      ],
       required: true
     },
 
@@ -29,13 +53,35 @@ const transactionSchema = new mongoose.Schema(
       required: true
     },
 
+    // 💳 PAYMENT METHOD
     method: {
       type: String,
-      enum: ["CASH", "WALLET", "POINTS"],
+      enum: [
+        "CASH",
+        "WALLET",
+        "POINTS",
+        "CARD",
+        "EFT",
+        "ONLINE"
+      ],
       required: true
     },
 
-    // 🍔 ITEMS (FOR PURCHASES)
+    // 🖥️ SOURCE
+    source: {
+      type: String,
+      enum: [
+        "WEBSITE",
+        "MOBILE-APP",
+        "POS",
+        "MINI_POS",
+        "SELF_POS",
+        "ADMIN"
+      ],
+      default: "WEB"
+    },
+
+    // 🍔 ITEMS
     items: [
       {
         name: String,
@@ -51,15 +97,48 @@ const transactionSchema = new mongoose.Schema(
       default: 0
     },
 
-    reference: {
-    type: String,
-    unique: true   // 🔐 prevents duplicate payments
-  },
+    // 💸 PLATFORM SPLITS
+    platformFee: {
+      type: Number,
+      default: 0
+    },
 
-    // 🎉 PROMOTION LINK
+    partnerPayout: {
+      type: Number,
+      default: 0
+    },
+
+    payoutStatus: {
+      type: String,
+      enum: ["PENDING", "PAID"],
+      default: "PENDING"
+    },
+
+    // 🔐 PAYMENT REFERENCE
+    reference: {
+      type: String,
+      unique: true
+    },
+
+    paymentGatewayRef: String,
+
+    // 🎉 PROMOTION
     promotionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Promotion"
+    },
+
+    // 📍 STATUS
+    status: {
+      type: String,
+      enum: [
+        "PENDING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLED",
+        "REFUNDED"
+      ],
+      default: "PENDING"
     }
   },
   {

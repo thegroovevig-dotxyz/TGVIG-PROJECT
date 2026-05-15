@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/paymentController");
+const auth = require("../middleware/auth");
 
-// 💳 INITIATE PAYMENT (protected)
-router.post("/topup", require("../middleware/auth"), ctrl.topUp);
+// 💳 INITIATE PEACH TOPUP
+router.post("/topup", auth, ctrl.topUp);
 
-// 🔔 WEBHOOK (PUBLIC - NO AUTH)
+// 🔔 PEACH WEBHOOK (PUBLIC)
 router.post("/webhook/peach", ctrl.peachWebhook);
 
 module.exports = router;

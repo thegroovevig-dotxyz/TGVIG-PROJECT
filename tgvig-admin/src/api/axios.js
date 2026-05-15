@@ -18,4 +18,25 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// 🚨 GLOBAL ERROR HANDLER
+api.interceptors.response.use(
+
+  (response) => response,
+
+  (error) => {
+
+    // 🔐 AUTO LOGOUT IF TOKEN BAD
+    if (error.response?.status === 401) {
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      window.location.href = "/";
+    }
+
+    return Promise.reject(error);
+  }
+
+);
+
 export default API;

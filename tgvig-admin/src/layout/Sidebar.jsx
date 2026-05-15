@@ -29,6 +29,20 @@ function Sidebar() {
 <Link to="/notifications">Notifications</Link>
 <Link to="/coupons">Coupons</Link>
 <Link to="/webfront">Web Front</Link>
+ <Link to="/taxi">Taxi (VIG)</Link>
+      <Link to="/drivers">Drivers</Link>
+      <Link to="/rides">Ride Management</Link>
+      <Link to="/properties">Hotels & Lodges</Link>
+      <Link to="/bookings">Bookings</Link>
+      <Link to="/partners">Partners</Link>
+      <Link to="/parking">Parking System</Link>
+      <Link to="/parking-sessions">Sessions</Link>
+      <Link to="/payouts">Payouts</Link>
+      <Link to="/wallet">Wallet</Link>
+      <Link to="/payments">Payments</Link>
+      <Link to="/admin/drivers">Driver Approvals</Link>
+      <Link to="/admin/properties">Property Approvals</Link>
+      <Link to="/admin/partners">Partner Approvals</Link>
     </div>
   );
 }
