@@ -14,7 +14,7 @@ function PartnerApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/admin/partners/"
+        "/admin/partners"
       );
 
       setPartners(res.data);

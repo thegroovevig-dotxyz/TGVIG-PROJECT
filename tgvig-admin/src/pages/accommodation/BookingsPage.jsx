@@ -8,7 +8,7 @@ function BookingsPage() {
   useEffect(() => {
 
     axios
-      .get("/API/bookings/")
+      .get("/API/bookings")
       .then((res) => {
         setBookings(res.data);
       })
