@@ -10,10 +10,15 @@ function BookingsPage() {
     axios
       .get("/API/bookings")
       .then((res) => {
-        setBookings(res.data);
+
+        console.log(res.data);
+
+        setBookings(res.data.bookings || []);
+
       })
       .catch((err) => {
         console.log(err);
+        setBookings([]);
       });
 
   }, []);
