@@ -74,3 +74,22 @@ exports.payRide = async (req, res) => {
     });
   }
 };
+
+exports.getMyRides = async (req, res) => {
+  try {
+
+    const rides = await Ride.find({
+      user: req.user._id
+    });
+
+    res.json({
+      success: true,
+      rides
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+};
