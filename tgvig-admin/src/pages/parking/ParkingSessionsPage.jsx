@@ -8,7 +8,7 @@ function ParkingSessionsPage() {
   useEffect(() => {
 
     axios
-      .get("/API/parking")
+      .get("/parking")
       .then((res) => {
         setSessions(res.data);
       })

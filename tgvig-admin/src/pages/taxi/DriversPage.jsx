@@ -8,8 +8,7 @@ function DriversPage() {
 
   useEffect(() => {
 
-    API
-      .get("/drivers/admin/summary")
+    get("/drivers")
       .then((res) => {
         setDrivers(res.data);
       })

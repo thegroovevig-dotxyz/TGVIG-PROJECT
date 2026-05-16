@@ -8,8 +8,7 @@ function PartnersPage() {
 
   useEffect(() => {
 
-    API
-      .get("/partners")
+    get("/partners")
       .then((res) => {
         setPartners(res.data);
       })
