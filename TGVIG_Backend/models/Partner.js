@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const partnerSchema = new mongoose.Schema({
   memberId: {
     type: mongoose.Schema.Types.ObjectId,

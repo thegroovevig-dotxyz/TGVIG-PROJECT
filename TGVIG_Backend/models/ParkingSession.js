@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const parkingSessionSchema = new mongoose.Schema({
   memberId: {
     type: mongoose.Schema.Types.ObjectId,
