@@ -50,7 +50,7 @@ app.use(
   })
 );
 
-app.use("/api/webcontent", (req, res, next) => {
+app.use("/API/webcontent", (req, res, next) => {
   console.log("WEB CONTENT HIT");
   next();
 });
@@ -58,22 +58,33 @@ app.use("/api/webcontent", (req, res, next) => {
 app.use(express.json());
 
 // ROUTES
-app.use("/api/admin", adminRoutes);
-app.use("/api/analytics", analyticsRoutes);
-app.use("/api/members", require("./routes/memberRoutes"));
-app.use("/api/clubs", require("./routes/clubRoutes"));
-app.use("/api/menu", require("./routes/menuRoutes"));
-app.use("/api/promotions", require("./routes/promotionRoutes"));
-app.use("/api/transactions", require("./routes/transactionRoutes"));
-app.use("/api/wallet", require("./routes/walletRoutes"));
-app.use("/api/blogs", require("./routes/blogRoutes"));
-app.use("/api/events", require("./routes/eventTicketRoutes"));
-app.use("/api/settings", require("./routes/settingsRoutes"));
-app.use("/api/coupons", require("./routes/couponRoutes"));
-app.use("/api/devices", deviceRoutes);
-app.use("/api/table-bookings", tableBookingRoutes);
+app.use("/API/admin", adminRoutes);
+app.use("/API/analytics", analyticsRoutes);
+app.use("/API/members", require("./routes/memberRoutes"));
+app.use("/API/clubs", require("./routes/clubRoutes"));
+app.use("/API/menu", require("./routes/menuRoutes"));
+app.use("/API/promotions", require("./routes/promotionRoutes"));
+app.use("/API/transactions", require("./routes/transactionRoutes"));
+app.use("/API/wallet", require("./routes/walletRoutes"));
+app.use("/API/blogs", require("./routes/blogRoutes"));
+app.use("/API/events", require("./routes/eventTicketRoutes"));
+app.use("/API/settings", require("./routes/settingsRoutes"));
+app.use("/API/coupons", require("./routes/couponRoutes"));
+app.use("/API/devices", deviceRoutes);
+app.use("/API/table-bookings", tableBookingRoutes);
+app.use("/API/payments", require("./routes/paymentRoutes"));
+app.use("/API/wallet", require("./routes/walletRoutes"));
+app.use("/API/rides", require("./routes/rideRoutes"));
+app.use("/API/drivers", require("./routes/driverRoutes"));
+app.use("/API/bookings", require("./routes/bookingRoutes"));
+app.use("/API/properties", require("./routes/propertyRoutes"));
+app.use("/API/parking", require("./routes/parkingRoutes"));
+app.use("/API/partners", require("./routes/partnerRoutes"))
+app.use("/API/payouts", require("./routes/payoutRoutes"));
 
-app.use("/api/webcontent", webContentRoutes);
+app.use("/API/admin", require("./routes/adminRoutes"));
+
+app.use("/API/webcontent", webContentRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
