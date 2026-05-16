@@ -14,7 +14,7 @@ function PropertyApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/properties"
+        "/admin/properties/"
       );
 
       setProperties(res.data);

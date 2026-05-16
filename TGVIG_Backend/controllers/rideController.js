@@ -93,3 +93,20 @@ exports.getMyRides = async (req, res) => {
     });
   }
 };
+
+exports.getAllRides = async (req, res) => {
+  try {
+
+    const rides = await Ride.find()
+      .sort({ createdAt: -1 });
+
+    res.json(rides);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};

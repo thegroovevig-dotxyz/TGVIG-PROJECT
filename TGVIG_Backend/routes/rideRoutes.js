@@ -11,4 +11,6 @@ router.post("/pay", auth, ctrl.payRide);
 // 📋 MY RIDES
 router.get("/my", auth, ctrl.getMyRides);
 
+router.get("/", auth, ctrl.getAllRides);
+
 module.exports = router;

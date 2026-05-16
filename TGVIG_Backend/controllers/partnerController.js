@@ -76,3 +76,20 @@ exports.updatePartner = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getAllPartners = async (req, res) => {
+  try {
+
+    const partners = await Partner.find()
+      .sort({ createdAt: -1 });
+
+    res.json(partners);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};

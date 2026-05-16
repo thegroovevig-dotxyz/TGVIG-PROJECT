@@ -76,3 +76,20 @@ exports.getMyParking = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getAllParking = async (req, res) => {
+  try {
+
+    const parking = await Parking.find()
+      .sort({ createdAt: -1 });
+
+    res.json(parking);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};

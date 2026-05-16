@@ -14,7 +14,7 @@ function DriverApprovalsPage() {
     try {
 
       const res = await API.get(
-        "/drivers"
+        "/admin/summary"
       );
 
       setDrivers(res.data);

@@ -11,4 +11,7 @@ router.get("/me", auth, ctrl.getMyPartner);
 // 🤝 UPDATE BUSINESS
 router.put("/update", auth, ctrl.updatePartner);
 
+// 🤝 ALL PARTNERS (ADMIN)
+router.get("/", auth, ctrl.getAllPartners);
+
 module.exports = router;

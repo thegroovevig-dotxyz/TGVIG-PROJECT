@@ -11,4 +11,7 @@ router.post("/end", auth, ctrl.endParking);
 // 📋 MY SESSIONS
 router.get("/my", auth, ctrl.getMyParking);
 
+// 🅿️ ALL PARKING
+router.get("/", auth, ctrl.getAllParking);
+
 module.exports = router;

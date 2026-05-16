@@ -80,3 +80,20 @@ exports.getMyBookings = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getAllBookings = async (req, res) => {
+  try {
+
+    const bookings = await Booking.find()
+      .sort({ createdAt: -1 });
+
+    res.json(bookings);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
