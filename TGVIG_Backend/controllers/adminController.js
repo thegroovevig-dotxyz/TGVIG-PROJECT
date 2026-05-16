@@ -184,3 +184,23 @@ exports.rejectProperty = async (req, res) => {
     });
   }
 };
+
+exports.getSystemSummary = async (req, res) => {
+  try {
+
+    const summary = {
+      message: "System summary endpoint working",
+      timestamp: new Date()
+    };
+
+    res.json({
+      success: true,
+      summary
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+};
