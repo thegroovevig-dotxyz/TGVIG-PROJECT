@@ -31,7 +31,7 @@ function PartnerApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/partner",
+        "/admin/partner/approve",
         { partnerId: id }
       );
 
@@ -49,7 +49,7 @@ function PartnerApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/partner",
+        "/admin/partner/reject",
         { partnerId: id }
       );
 

@@ -86,3 +86,11 @@ exports.getProperty = async (req, res) => {
     });
   }
 };
+
+exports.getMyProperties = async (req, res) => {
+  try {
+    res.json([]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

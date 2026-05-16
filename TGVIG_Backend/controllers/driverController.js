@@ -100,3 +100,16 @@ exports.getMyProfile = async (req, res) => {
     });
   }
 };
+
+// GET ALL DRIVERS
+exports.getDrivers = async (req, res) => {
+  try {
+    const drivers = await Driver.find();
+
+    res.json(drivers);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};

@@ -31,7 +31,7 @@ function PropertyApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/property",
+        "/admin/property/approve",
         { propertyId: id }
       );
 
@@ -49,7 +49,7 @@ function PropertyApprovalsPage() {
     try {
 
       await API.post(
-        "/admin/property",
+        "/admin/property/reject",
         { propertyId: id }
       );
 

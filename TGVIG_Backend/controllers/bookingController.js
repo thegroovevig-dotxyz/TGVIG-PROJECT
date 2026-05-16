@@ -72,3 +72,11 @@ exports.payBooking = async (req, res) => {
     });
   }
 };
+
+exports.getMyBookings = async (req, res) => {
+  try {
+    res.json([]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

@@ -3,6 +3,9 @@ const ctrl = require("../controllers/payoutController");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 
+// 📊 PENDING PAYOUTS
+router.get("/pending", auth, admin, ctrl.getPendingPayouts);
+
 // 📊 ALL PAYOUTS (ADMIN)
 router.get("/all", auth, admin, ctrl.getAllPayouts);
 

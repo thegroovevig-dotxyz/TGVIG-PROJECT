@@ -66,3 +66,13 @@ exports.getMyPartner = async (req, res) => {
     });
   }
 };
+
+exports.updatePartner = async (req, res) => {
+  try {
+    res.json({
+      updated: true
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
