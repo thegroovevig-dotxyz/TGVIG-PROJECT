@@ -4,6 +4,8 @@ import { useCart } from "../context/CartContext";
 
 function Menu() {
   const [menu, setMenu] = useState([]);
+  const [clubs, setClubs] = useState([]);
+const [selectedClub, setSelectedClub] = useState("");
 
   // store selected size per item
   const [selectedSize, setSelectedSize] = useState({});
@@ -11,12 +13,25 @@ function Menu() {
   const { addToCart } = useCart();
 
   useEffect(() => {
+  loadClubs();
+}, []);
+
+  const loadClubs = async () => {
+  try {
+    const res = await API.get("/clubs");
+    setClubs(res.data.clubs || []);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+  useEffect(() => {
     loadMenu();
   }, []);
 
   const loadMenu = async () => {
     try {
-      const res = await API.get("/menu?type=WEB");
+      const res = await API.get("/menu?type=WEB&clubId=${clubId}");
       setMenu(res.data);
     } catch (err) {
       console.log(err);
@@ -62,6 +77,23 @@ function Menu() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>MENU</h2>
+
+      <div style={{ marginBottom: "20px" }}>
+  <label>Select Club: </label>
+
+  <select
+    value={selectedClub}
+    onChange={(e) => setSelectedClub(e.target.value)}
+  >
+    <option value="">-- Select Club --</option>
+
+    {clubs.map((c) => (
+      <option key={c._id} value={c._id}>
+        {c.name}
+      </option>
+    ))}
+  </select>
+</div>
 
       <div style={{ display: "grid", gap: "15px" }}>
         {menu.map((item) => (
