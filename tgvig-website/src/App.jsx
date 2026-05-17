@@ -24,12 +24,9 @@ import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
 import DriverLayout from "./driver/DriverLayout";
 import PartnerLayout from "./partner/PartnerLayout";
-// DRIVER
-import DriverLayout from "./driver/DriverLayout";
+
 import DriverHome from "./driver/pages/DriverHome";
 import Rides from "./driver/pages/Rides";
-// PARTNER
-import PartnerLayout from "./partner/PartnerLayout";
 import PartnerHome from "./partner/pages/PartnerHome";
 import PartnerBookings from "./partner/pages/PartnerBookings";
 import ParkingSessions from "./partner/pages/ParkingSessions";
