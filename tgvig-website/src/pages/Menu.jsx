@@ -27,7 +27,7 @@ const loadData = async () => {
 };
 
 useEffect(() => {
-  if (!selectedClub) return;
+  if (!selectedClub?._id) return;
 
   loadMenu(selectedClub._id);
 }, [selectedClub]);
@@ -90,7 +90,10 @@ const loadMenu = async (clubId) => {
 
   <select
     value={selectedClub}
-    onChange={(e) => setSelectedClub(e.target.value)}
+    onChange={(e) => {
+  const club = clubs.find(c => c._id === e.target.value);
+  setSelectedClub(club);
+}}
   >
     <option value="">-- Select Club --</option>
 
