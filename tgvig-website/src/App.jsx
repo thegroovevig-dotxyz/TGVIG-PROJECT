@@ -24,7 +24,7 @@ import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
 import TableBooking from "./pages/TableBooking";
 import Events from "./pages/Events";
-import Rides from "./pages/Rides";
+
 import Parking from "./pages/Parking";
 import Properties from "./pages/Properties";
 // driver
