@@ -101,6 +101,21 @@ useEffect(() => {
   Wallet Top-Up
 </button>
 
+ {/* 🚗 NEW: RIDE SYSTEM */}
+    <button onClick={() => navigate("/home/rides")}>
+      🚗 Book Ride
+    </button>
+
+    {/* 🅿️ NEW: PARKING SYSTEM */}
+    <button onClick={() => navigate("/home/parking")}>
+      🅿️ Parking
+    </button>
+
+    {/* 🏨 NEW: PROPERTY BOOKINGS */}
+    <button onClick={() => navigate("/home/properties")}>
+      🏨 Hotels & Lodges
+    </button>
+
       </div>
     </div>
   );

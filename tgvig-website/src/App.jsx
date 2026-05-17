@@ -24,7 +24,9 @@ import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
 import TableBooking from "./pages/TableBooking";
 import Events from "./pages/Events";
-
+import Rides from "./pages/Rides";
+import Parking from "./pages/Parking";
+import Properties from "./pages/Properties";
 // driver
 import DriverLayout from "./driver/DriverLayout";
 import DriverHome from "./driver/pages/DriverHome";
@@ -74,12 +76,16 @@ function App() {
         <Route path="rewards" element={<Rewards />} />
         <Route path="table-booking" element={<TableBooking />} />
         <Route path="events" element={<Events />} />
+        <Route path="rides" element={<Rides />} />
+<Route path="parking" element={<Parking />} />
+<Route path="properties" element={<Properties />} />
       </Route>
 
       {/* DRIVER SYSTEM */}
       <Route path="/driver/*" element={<DriverLayout />}>
         <Route index element={<DriverHome />} />
         <Route path="rides" element={<Rides />} />
+
       </Route>
 
       {/* PARTNER SYSTEM */}
