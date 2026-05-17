@@ -81,7 +81,7 @@ function App() {
         <Route path="events" element={<Events />} />
 <Route path="parking" element={<Parking />} />
 <Route path="properties" element={<Properties />} />
-<Route path="/home/rides" element={<MemberRides />} />
+<Route path="rides" element={<MemberRides />} />
       </Route>
 
       {/* DRIVER SYSTEM */}
