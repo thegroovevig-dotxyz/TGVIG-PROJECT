@@ -49,31 +49,86 @@ function Login() {
 
   const settings = useSettings();
 
-  return (
-    <form onSubmit={handleLogin}>
+return (
+  <form onSubmit={handleLogin}>
 
- {/*  LOGO FROM ADMIN SETTINGS */}
-      {settings?.logo && (
-        <img
-          src={settings.logo}
-          alt="logo"
-          style={{ width: "120px", marginBottom: "20px" }}
-        />
-      )}
+    {/* LOGO */}
+    {settings?.logo && (
+      <img
+        src={settings.logo}
+        alt="logo"
+        style={{
+          width: "120px",
+          marginBottom: "20px"
+        }}
+      />
+    )}
 
-      <input onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
+    {/* EMAIL */}
+    <input
+      placeholder="Email"
+      onChange={(e) =>
+        setEmail(e.target.value)
+      }
+    />
 
-<button
-  type="button"
-  onClick={() => navigate("/register")}
->
-  Register
-</button>
+    {/* PASSWORD */}
+    <input
+      type="password"
+      placeholder="Password"
+      onChange={(e) =>
+        setPassword(e.target.value)
+      }
+    />
 
-    </form>
-  );
+    {/* LOGIN */}
+    <button type="submit">
+      Login
+    </button>
+
+    {/* MEMBER REGISTER */}
+    <button
+      type="button"
+      onClick={() => navigate("/register")}
+    >
+      Join Free
+    </button>
+
+    <hr />
+
+    {/* DRIVER */}
+    <p>
+      New driver?
+    </p>
+
+    <button
+      type="button"
+      onClick={() =>
+        navigate("/register/driver")
+      }
+    >
+      Create Driver Account
+    </button>
+
+    <br />
+    <br />
+
+    {/* PROPERTY */}
+    <p>
+      Own a hotel, lodge or parking business?
+    </p>
+
+    <button
+      type="button"
+      onClick={() =>
+        navigate("/register/property")
+      }
+    >
+      Register Property Business
+    </button>
+
+  </form>
+);
 }
 
       
