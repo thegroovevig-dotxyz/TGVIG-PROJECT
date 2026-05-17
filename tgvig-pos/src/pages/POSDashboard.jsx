@@ -65,6 +65,21 @@ const [selectedDevice, setSelectedDevice] = useState(null);
     Wallet Top-Up
   </button>
 
+  {/* 🚗 RIDES */}
+  <button onClick={() => navigate("/pos/rides")}>
+    Ride Request
+  </button>
+
+  {/* 🅿️ PARKING */}
+  <button onClick={() => navigate("/pos/parking")}>
+    Parking
+  </button>
+
+  {/* 🪑 BOOKINGS */}
+  <button onClick={() => navigate("/pos/bookings")}>
+    Table Booking
+  </button>
+
 {blogs.map((b) => (
   <div key={b._id}>
     <h4>{b.title}</h4>

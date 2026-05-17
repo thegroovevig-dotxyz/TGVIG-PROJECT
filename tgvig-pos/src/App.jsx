@@ -9,6 +9,9 @@ import Login from "./auth/Login";
 import StartSale from "./pages/StartSale";
 import RegisterMember from "./pages/RegisterMember";
 import WalletTopUp from "./pages/WalletTopUp";
+import POSRide from "./pos/POSRide";
+import POSParking from "./pos/POSParking";
+import POSBooking from "./pos/POSBooking";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -34,6 +37,9 @@ function App() {
         <Route path="/start-sale/:clubId/:deviceId" element={<StartSale />} />
         <Route path="/register-member" element={<RegisterMember />} />
         <Route path="/wallet-topup" element={<WalletTopUp />} />
+        <Route path="/pos/rides" element={<POSRide />} />
+<Route path="/pos/parking" element={<POSParking />} />
+<Route path="/pos/bookings" element={<POSBooking />} />
       </Route>
 
     </Routes>
