@@ -26,8 +26,10 @@ const [selectedClub, setSelectedClub] = useState("");
 };
 
   useEffect(() => {
-    loadMenu();
-  }, []);
+  if (selectedClub) {
+    loadMenu(selectedClub);
+  }
+}, [selectedClub]);
 
   const loadMenu = async () => {
     try {
