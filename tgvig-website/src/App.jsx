@@ -76,7 +76,6 @@ function App() {
         <Route path="rewards" element={<Rewards />} />
         <Route path="table-booking" element={<TableBooking />} />
         <Route path="events" element={<Events />} />
-        <Route path="rides" element={<Rides />} />
 <Route path="parking" element={<Parking />} />
 <Route path="properties" element={<Properties />} />
       </Route>
