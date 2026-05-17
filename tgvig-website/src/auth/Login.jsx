@@ -33,11 +33,11 @@ function Login() {
     }
 
     if (user.role === "DRIVER") {
-      navigate("/driver");
+      navigate("/driver/rides");
     }
 
     if (user.role === "PARTNER") {
-      navigate("/partner");
+      navigate("/partner/bookings");
     }
 
    
