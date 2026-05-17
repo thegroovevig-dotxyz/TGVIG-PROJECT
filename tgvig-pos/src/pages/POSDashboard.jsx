@@ -7,21 +7,21 @@ import { useNavigate } from "react-router-dom";
 function POSDashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
+
   const [blogs, setBlogs] = useState([]);
   const [devices, setDevices] = useState([]);
-const [selectedDevice, setSelectedDevice] = useState(null);
-  
-
- useEffect(() => {
-  API.get("/devices").then(res => {
-    setDevices(res.data);
-    setSelectedDevice(res.data[0]); // auto select first
-  });
-}, []);
+  const [selectedDevice, setSelectedDevice] = useState(null);
 
   useEffect(() => {
-  API.get("/blogs").then(res => setBlogs(res.data));
-}, []);
+    API.get("/devices").then(res => {
+      setDevices(res.data);
+      setSelectedDevice(res.data?.[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    API.get("/blogs").then(res => setBlogs(res.data));
+  }, []);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -30,63 +30,27 @@ const [selectedDevice, setSelectedDevice] = useState(null);
       <p>Welcome: {user?.name}</p>
       <p>Role: {user?.role}</p>
 
-      {blogs.map((b) => (
-  <img key={b._id} src={b.image} width="100%" />
-))}
-
-      {/* 🔥 ACTION BUTTONS (RESTORED) */}
-      <div style={{ marginBottom: "15px", display: "flex", gap: "10px" }}>
-       <button
-  onClick={() => {
-    if (!selectedDevice) {
-      console.log("❌ No device selected");
-      return;
-    }
-
-    console.log("CLICKED", selectedDevice);
-
-    navigate(`/start-sale/${selectedDevice.clubId}/${selectedDevice._id}`);
-  }}
->
-  Start Sale
-</button>
-
-
-        <button onClick={() => navigate("/member")}>
-          Search Member
+      {/* ACTIONS */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
+        <button
+          onClick={() =>
+            selectedDevice &&
+            navigate(`/start-sale/${selectedDevice.clubId}/${selectedDevice._id}`)
+          }
+        >
+          Start Sale
         </button>
+
+        <button onClick={() => navigate("/member")}>Search Member</button>
+        <button onClick={() => navigate("/register-member")}>Register Member</button>
+        <button onClick={() => navigate("/wallet-topup")}>Wallet Top-Up</button>
+
+        <button onClick={() => navigate("/pos/rides")}>Ride Request</button>
+        <button onClick={() => navigate("/pos/parking")}>Parking</button>
+        <button onClick={() => navigate("/pos/bookings")}>Room Booking</button>
       </div>
 
-<button onClick={() => navigate("/register-member")}>
-  Register Member
-</button>
-
- <button onClick={() => navigate("/wallet-topup")}>
-    Wallet Top-Up
-  </button>
-
-  {/* 🚗 RIDES */}
-  <button onClick={() => navigate("/pos/rides")}>
-    Ride Request
-  </button>
-
-  {/* 🅿️ PARKING */}
-  <button onClick={() => navigate("/pos/parking")}>
-    Parking
-  </button>
-
-  {/* 🪑 BOOKINGS */}
-  <button onClick={() => navigate("/pos/bookings")}>
-    Room Booking
-  </button>
-
-{blogs.map((b) => (
-  <div key={b._id}>
-    <h4>{b.title}</h4>
-  </div>
-))}
-
-      {/* 🔥 LIVE POS AREA */}
+      {/* POS CORE */}
       <div style={{ display: "flex", gap: "20px" }}>
         <div style={{ flex: 1 }}>
           <Cart />
