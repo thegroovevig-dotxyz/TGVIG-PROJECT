@@ -77,7 +77,7 @@ const [selectedDevice, setSelectedDevice] = useState(null);
 
   {/* 🪑 BOOKINGS */}
   <button onClick={() => navigate("/pos/bookings")}>
-    Table Booking
+    Room Booking
   </button>
 
 {blogs.map((b) => (
