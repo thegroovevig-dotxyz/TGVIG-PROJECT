@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import API from "../../services/api";
 
 function PayoutsPage() {
@@ -8,35 +7,26 @@ function PayoutsPage() {
 
   useEffect(() => {
 
-    get("/API/payouts/all")
+    API.get("/payouts/all")
       .then((res) => {
-        setPayouts(res.data.payouts);
+        setPayouts(res.data.payouts || []);
       })
       .catch((err) => {
         console.log(err);
+        setPayouts([]);
       });
 
   }, []);
 
   return (
     <div>
-
       <h1>💸 Payouts</h1>
 
       {payouts.map((payout) => (
-        <div
-          key={payout._id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        >
-          <p>Amount: R{payout.partnerPayout}</p>
-          <p>Status: {payout.payoutStatus}</p>
+        <div key={payout._id}>
+          <p>{payout.status}</p>
         </div>
       ))}
-
     </div>
   );
 }

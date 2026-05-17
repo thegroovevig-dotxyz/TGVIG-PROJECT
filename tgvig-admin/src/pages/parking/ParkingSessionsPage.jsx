@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../services/api";
 
 function ParkingSessionsPage() {
 
@@ -7,37 +7,26 @@ function ParkingSessionsPage() {
 
   useEffect(() => {
 
-    axios
-      API.get("/parking")
+    API.get("/parking")
       .then((res) => {
-        setSessions(res.data);
+        setSessions(res.data.sessions || res.data || []);
       })
       .catch((err) => {
         console.log(err);
+        setSessions([]);
       });
 
   }, []);
 
   return (
     <div>
-
       <h1>🅿️ Parking Sessions</h1>
 
       {sessions.map((session) => (
-        <div
-          key={session._id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        >
-          <p>Status: {session.status}</p>
-          <p>Vehicle: {session.vehicleNumber}</p>
-          <p>Amount: R{session.amount}</p>
+        <div key={session._id}>
+          <p>{session.status}</p>
         </div>
       ))}
-
     </div>
   );
 }

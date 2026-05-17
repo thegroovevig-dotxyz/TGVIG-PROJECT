@@ -11,4 +11,7 @@ router.post("/pay", auth, ctrl.payBooking);
 // 📋 MY BOOKINGS
 router.get("/my", auth, ctrl.getMyBookings);
 
+// 📋 ALL BOOKINGS (ADMIN)
+router.get("/", auth, ctrl.getAllBookings);
+
 module.exports = router;

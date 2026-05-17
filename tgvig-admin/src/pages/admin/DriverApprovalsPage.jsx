@@ -13,18 +13,15 @@ function DriverApprovalsPage() {
 
     try {
 
-      const res = await API.get(
-        "/admin/summary"
-      );
+      const res = await API.get("/drivers");
 
-      setDrivers(res.data);
+      setDrivers(res.data.drivers || res.data || []);
 
     } catch (err) {
       console.log(err);
+      setDrivers([]);
     }
   };
-
-
 
   const approveDriver = async (id) => {
 
@@ -42,8 +39,6 @@ function DriverApprovalsPage() {
     }
   };
 
-
-
   const rejectDriver = async (id) => {
 
     try {
@@ -60,52 +55,23 @@ function DriverApprovalsPage() {
     }
   };
 
-
-
   return (
     <div>
-
       <h1>🚗 Driver Approvals</h1>
 
       {drivers.map((driver) => (
+        <div key={driver._id}>
+          <p>{driver.status}</p>
 
-        <div
-          key={driver._id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        >
-
-          <h3>
-            {driver.firstName} {driver.lastName}
-          </h3>
-
-          <p>
-            Vehicle: {driver.vehicleType}
-          </p>
-
-          <button
-            onClick={() =>
-              approveDriver(driver._id)
-            }
-          >
+          <button onClick={() => approveDriver(driver._id)}>
             Approve
           </button>
 
-          <button
-            onClick={() =>
-              rejectDriver(driver._id)
-            }
-          >
+          <button onClick={() => rejectDriver(driver._id)}>
             Reject
           </button>
-
         </div>
-
       ))}
-
     </div>
   );
 }

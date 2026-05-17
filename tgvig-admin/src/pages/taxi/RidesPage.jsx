@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../services/api";
 
 function RidesPage() {
 
@@ -7,38 +7,26 @@ function RidesPage() {
 
   useEffect(() => {
 
-    axios
-      API.get("/rides")
+    API.get("/rides")
       .then((res) => {
-        setRides(res.data);
+        setRides(res.data.rides || res.data || []);
       })
       .catch((err) => {
         console.log(err);
+        setRides([]);
       });
 
   }, []);
 
   return (
     <div>
-
-      <h1>🚕 Ride Management</h1>
+      <h1>🚕 Rides</h1>
 
       {rides.map((ride) => (
-        <div
-          key={ride._id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        >
-          <p>Pickup: {ride.pickupLocation}</p>
-          <p>Destination: {ride.destination}</p>
-          <p>Status: {ride.status}</p>
-          <p>Fare: R{ride.fare}</p>
+        <div key={ride._id}>
+          <p>{ride.status}</p>
         </div>
       ))}
-
     </div>
   );
 }
