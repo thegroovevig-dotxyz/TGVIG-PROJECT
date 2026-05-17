@@ -22,6 +22,8 @@ import TableBooking from "./pages/TableBooking";
 import Events from "./pages/Events";
 import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
+import DriverLayout from "./driver/DriverLayout";
+import PartnerLayout from "./partner/PartnerLayout";
 
 function App() {
   return (
@@ -45,6 +47,25 @@ function App() {
           </ProtectedRoute>
         }
       >
+        {/* DRIVER */}
+<Route
+  path="/driver/*"
+  element={
+    <ProtectedRoute allowedRoles={["DRIVER"]}>
+      <DriverLayout />
+    </ProtectedRoute>
+  }
+/>
+
+{/* PARTNER (Hotels / Parking / Lodges) */}
+<Route
+  path="/partner/*"
+  element={
+    <ProtectedRoute allowedRoles={["PARTNER"]}>
+      <PartnerLayout />
+    </ProtectedRoute>
+  }
+/>
          <Route index element={<Home />} />
          <Route path="home" element={<Home />} />
         <Route path="menu" element={<Menu />} />
@@ -57,6 +78,8 @@ function App() {
         <Route path="rewards" element={<Rewards />} />
         <Route path="table-booking" element={<TableBooking />} />
         <Route path="events" element={<Events />} />
+<Route path="/driver/*" element={<DriverLayout />} />
+<Route path="/partner/*" element={<PartnerLayout />} />
       </Route>
 
     </Routes>

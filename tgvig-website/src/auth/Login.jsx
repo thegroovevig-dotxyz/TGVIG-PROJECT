@@ -14,19 +14,38 @@ function Login() {
 
   try {
     const res = await authService.login({
-  email,
-  password,
-});
+      email,
+      password,
+    });
 
     console.log("LOGIN SUCCESS:", res);
 
-    navigate("/home")
+    const user = res.user;
 
+    if (!user) {
+      alert("No user returned");
+      return;
+    }
+
+    // ROLE ROUTING
+    if (user.role === "MEMBER") {
+      navigate("/home");
+    }
+
+    if (user.role === "DRIVER") {
+      navigate("/driver");
+    }
+
+    if (user.role === "PARTNER") {
+      navigate("/partner");
+    }
+
+   
   } catch (err) {
     console.log(err);
     alert("Login failed");
   }
-}
+};
 
   const settings = useSettings();
 

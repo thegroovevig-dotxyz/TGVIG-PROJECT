@@ -25,17 +25,29 @@ function WebNavbar() {
   <Link to="/venues">Venues</Link>
 </div>
 
-      {/* RIGHT SIDE */}
-      <div style={{ position: "absolute", right: "20px", top: "20px" }}>
-        {user ? (
-          <button onClick={() => navigate("/login")}>Login</button>
-        ) : (
-          <>
-            <button onClick={() => navigate("/login")}>Login</button>
-            <button onClick={() => navigate("/register")}>Join Free</button>
-          </>
-        )}
-      </div>
+{/* RIGHT SIDE */}
+<div style={{ position: "absolute", right: "20px", top: "20px", display: "flex", gap: "10px" }}>
+
+  {/* MEMBER */}
+  <button onClick={() => navigate("/login")}>
+    Login
+  </button>
+
+  <button onClick={() => navigate("/register")}>
+    Join Free
+  </button>
+
+  {/* DRIVER */}
+  <button onClick={() => navigate("/login/driver")}>
+    Driver Access 
+  </button>
+
+  {/* PROPERTY (Hotels / Parking / Lodges) */}
+  <button onClick={() => navigate("/login/property")}>
+    Property Access
+  </button>
+
+</div>
 
     </nav>
   );
