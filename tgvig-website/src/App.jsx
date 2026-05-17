@@ -37,6 +37,9 @@ import PartnerBookings from "./partner/pages/PartnerBookings";
 import ParkingSessions from "./partner/pages/ParkingSessions";
 import MiniPOS from "./partner/pages/MiniPOS";
 
+import DriverRegister from "./auth/DriverRegister";
+import PropertyRegister from "./auth/PropertyRegister";
+
 function App() {
   return (
     <Routes>
@@ -85,6 +88,21 @@ function App() {
         <Route path="parking" element={<ParkingSessions />} />
         <Route path="pos" element={<MiniPOS />} />
       </Route>
+
+      {/* AUTH */}
+<Route path="/login" element={<Login />} />
+<Route path="/login/driver" element={<Login />} />
+<Route path="/login/property" element={<Login />} />
+
+<Route path="/register" element={<Register />} />
+<Route
+  path="/register/driver"
+  element={<DriverRegister />}
+/>
+<Route
+  path="/register/property"
+  element={<PropertyRegister />}
+/>
 
     </Routes>
   );
