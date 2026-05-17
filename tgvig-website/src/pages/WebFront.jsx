@@ -77,9 +77,6 @@ function WebFront() {
       Login
     </button>
 
-    <button onClick={() => navigate("/register")}>
-      Register
-    </button>
 
     <button
       onClick={() => navigate("/register")}

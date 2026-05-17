@@ -32,13 +32,6 @@ function Login() {
       navigate("/home");
     }
 
-    if (user.role === "DRIVER") {
-      navigate("/driver/rides");
-    }
-
-    if (user.role === "PARTNER") {
-      navigate("/partner/bookings");
-    }
 
    
   } catch (err) {
@@ -91,41 +84,11 @@ return (
       type="button"
       onClick={() => navigate("/register")}
     >
-      Join Free
+      Be a Groovist!
     </button>
 
     <hr />
 
-    {/* DRIVER */}
-    <p>
-      New driver?
-    </p>
-
-    <button
-      type="button"
-      onClick={() =>
-        navigate("/register/driver")
-      }
-    >
-      Create Driver Account
-    </button>
-
-    <br />
-    <br />
-
-    {/* PROPERTY */}
-    <p>
-      Own a hotel, lodge or parking business?
-    </p>
-
-    <button
-      type="button"
-      onClick={() =>
-        navigate("/register/property")
-      }
-    >
-      Register Property Business
-    </button>
 
   </form>
 );
