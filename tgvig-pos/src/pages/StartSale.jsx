@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 
 function StartSale() {
   const [menu, setMenu] = useState([]);
-  const [promos, setPromos] = useState([]);
+ const [selectedSize, setSelectedSize] = useState({});
+  const [quantity, setQuantity] = useState({});
   const { addToCart } = useCart();
 
  
@@ -44,117 +45,151 @@ function StartSale() {
   }
 };
 
+  // ADD TO CART (STRICT CHECK)
+  const addItemToCart = (item) => {
+    const size = selectedSize[item._id];
+    const qty = quantity[item._id] || 1;
+
+    if (!size) {
+      alert("Select size first");
+      return;
+    }
+
+    const pricePerUnit = item.price?.[size] || 0;
+
+    const cartItem = {
+      _id: Date.now(),
+      name: item.name,
+      size,
+      quantity: qty,
+      price: pricePerUnit,
+      total: pricePerUnit * qty,
+    };
+
+    addToCart(cartItem);
+
+    // RESET
+    setSelectedSize((prev) => ({ ...prev, [item._id]: "" }));
+    setQuantity((prev) => ({ ...prev, [item._id]: 1 }));
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>START SALE</h2>
 
-      {/* ================= PROMOTIONS ================= */}
-<h3>Promotions</h3>
+      {/* CLUB SELECT */}
+      <div style={{ marginBottom: "20px" }}>
+        <label>Select Club: </label>
 
-<div style={{ display: "grid", gap: "10px" }}>
-  {promos.map((p) => {
-    const isRushHour = p.type === "RUSH_HOUR";
-
-    return (
-      <div
-        key={p._id}
-        style={{ border: "1px solid #ccc", padding: "10px" }}
-      >
-        {p.image && (
-      <img
-        src={p.image}
-        alt={p.title}
-        style={{ width: "120px", height: "120px", objectFit: "cover" }}
-      />
-    )}
-
-        <h4>{p.title}</h4>
-        <p>Type: {p.type}</p>
-
-        {/* 🔥 TURN DESCRIPTION INTO SELECTABLE LIST */}
-        {p.items && Array.isArray(p.items) && (
-          <ul>
-            {p.items.map((item, index) => (
-              <li key={index}>
-                <label>
-                  <input
-                    type="radio"
-                    name={`promo-${p._id}`}
-                    disabled={!isRushHour}
-                    onChange={() => {
-                      p.selectedItem = item;
-                    }}
-                  />
-                  {item}
-                </label>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* ADD TO CART RULE */}
-        <button
-          disabled={!isRushHour}
-          onClick={() =>
-            addToCart({
-              _id: p._id,
-              name: p.title,
-              type: "PROMOTION",
-              selectedItem: p.selectedItem || null,
-              price: 0,
-            })
-          }
+        <select
+          value={selectedClub}
+          onChange={(e) => setSelectedClub(e.target.value)}
         >
-          {isRushHour ? "Add Selected Item" : "Not Available"}
-        </button>
+          <option value="">-- Select Club --</option>
+
+          {clubs.map((c) => (
+            <option key={c._id} value={c._id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
       </div>
-    );
-  })}
-</div>
 
-      <hr />
-
-      {/* ================= MENU ================= */}
-      <h3>Menu</h3>
-
-      <div style={{ display: "grid", gap: "10px" }}>
+      {/* MENU */}
+      <div style={{ display: "grid", gap: "15px" }}>
         {menu.map((item) => (
           <div
             key={item._id}
-            style={{ border: "1px solid #ccc", padding: "10px" }}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              borderRadius: "6px",
+            }}
           >
             {item.image && (
-      <img
-        src={item.image}
-        alt={item.title}
-        style={{ width: "120px", height: "120px", objectFit: "cover" }}
-      />
-    )}
+              <img
+                src={
+                  item.image.startsWith("http")
+                    ? item.image
+                    : `http://localhost:5000${item.image}`
+                }
+                alt=""
+                width="100%"
+                style={{ borderRadius: "6px" }}
+              />
+            )}
 
-            <h4>{item.name}</h4>
-            <p>Type: {item.type}</p>
-            <p>Tier: {item.tier}</p>
+            <h3>{item.name}</h3>
+            <p><b>{item.type}</b></p>
 
-            {/* PRICES (FIXED STRUCTURE) */}
+            {/* PRICES */}
             <p>Single: R {item.price?.single}</p>
             <p>x4: R {item.price?.x4}</p>
             <p>x6: R {item.price?.x6}</p>
 
-            {/* SPECIAL REWARDS */}
-            {item.type === "SPECIAL" && (
-              <div>
-                <p>Points: {item.rewards?.points}</p>
-                <p>Item Reward: {item.rewards?.itemReward}</p>
-                <p>Discount: {item.rewards?.discount}%</p>
-              </div>
-            )}
+            {/* SIZE */}
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name={item._id}
+                  onChange={() =>
+                    setSelectedSize((prev) => ({
+                      ...prev,
+                      [item._id]: "single",
+                    }))
+                  }
+                />
+                Single
+              </label>
 
-            <button onClick={() =>
-              addToCart({
-                ...item,
-                price: item.price?.single || 0
-              })
-            }>
+              <label>
+                <input
+                  type="radio"
+                  name={item._id}
+                  onChange={() =>
+                    setSelectedSize((prev) => ({
+                      ...prev,
+                      [item._id]: "x4",
+                    }))
+                  }
+                />
+                x4
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name={item._id}
+                  onChange={() =>
+                    setSelectedSize((prev) => ({
+                      ...prev,
+                      [item._id]: "x6",
+                    }))
+                  }
+                />
+                x6
+              </label>
+            </div>
+
+            {/* QUANTITY */}
+            <div style={{ marginTop: "10px" }}>
+              <label>Quantity: </label>
+              <input
+                type="number"
+                min="1"
+                value={quantity[item._id] || 1}
+                onChange={(e) =>
+                  setQuantity((prev) => ({
+                    ...prev,
+                    [item._id]: Number(e.target.value),
+                  }))
+                }
+                style={{ width: "60px" }}
+              />
+            </div>
+
+            <button onClick={() => addItemToCart(item)}>
               Add to Cart
             </button>
           </div>
