@@ -77,15 +77,17 @@ exports.getMyParking = async (req, res) => {
   }
 };
 
+// 🅿️ ALL PARKING SESSIONS
 exports.getAllParking = async (req, res) => {
   try {
 
-    const parking = await Parking.find()
-      .sort({ createdAt: -1 });
+    const sessions = await ParkingSession.find();
 
-    res.json(parking);
+    res.json(sessions);
 
   } catch (err) {
+
+    console.log(err);
 
     res.status(500).json({
       message: err.message
