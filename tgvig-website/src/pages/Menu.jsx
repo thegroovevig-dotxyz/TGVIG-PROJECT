@@ -34,7 +34,7 @@ useEffect(() => {
 
 const loadMenu = async (clubId) => {
   try {
-    const res = await API.get(`/menu?clubId=${clubId}`);
+    const res = await API.get(`/menu/${clubId}`);
 
     console.log("MENU RESPONSE:", res.data);
 
