@@ -13,27 +13,31 @@ const [selectedClub, setSelectedClub] = useState("");
   const { addToCart } = useCart();
 
   useEffect(() => {
-  loadClubs();
+  loadData();
 }, []);
 
-  const loadClubs = async () => {
+const loadData = async () => {
   try {
-    const res = await API.get("/clubs");
-    setClubs(res.data.clubs || []);
+    const clubsRes = await API.get("/clubs");
+
+    setClubs(clubsRes.data || []);
   } catch (err) {
     console.log(err);
   }
 };
 
-  useEffect(() => {
-  if (selectedClub) {
-    loadMenu(selectedClub);
-  }
+useEffect(() => {
+  if (!selectedClub) return;
+
+  loadMenu(selectedClub._id);
 }, [selectedClub]);
 
-  const loadMenu = async (clubId) => {
+const loadMenu = async (clubId) => {
   try {
     const res = await API.get(`/menu?clubId=${clubId}`);
+
+    console.log("MENU RESPONSE:", res.data);
+
     setMenu(res.data || []);
   } catch (err) {
     console.log(err);
