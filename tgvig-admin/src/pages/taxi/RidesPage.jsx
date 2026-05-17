@@ -8,7 +8,7 @@ function RidesPage() {
   useEffect(() => {
 
     axios
-      .get("/rides")
+      API.get("/rides")
       .then((res) => {
         setRides(res.data);
       })

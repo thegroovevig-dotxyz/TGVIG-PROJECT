@@ -13,7 +13,7 @@ function PartnerApprovalsPage() {
 
     try {
 
-      const res = await get(
+      const res = await API.get(
         "/admin/partners"
       );
 

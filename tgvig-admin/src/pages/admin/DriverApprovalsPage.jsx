@@ -13,7 +13,7 @@ function DriverApprovalsPage() {
 
     try {
 
-      const res = await get(
+      const res = await API.get(
         "/admin/summary"
       );
 

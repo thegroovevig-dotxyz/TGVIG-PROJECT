@@ -13,7 +13,7 @@ function PropertyApprovalsPage() {
 
     try {
 
-      const res = await get(
+      const res = await API.get(
         "/admin/properties"
       );
 

@@ -8,7 +8,7 @@ function PayoutsPage() {
 
   useEffect(() => {
 
-    get("/payouts/all")
+    get("/API/payouts/all")
       .then((res) => {
         setPayouts(res.data.payouts);
       })

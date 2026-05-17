@@ -8,7 +8,7 @@ function PropertiesPage() {
 
   useEffect(() => {
 
-   get("/properties")
+   get("/API/properties")
       .then((res) => {
         setProperties(res.data);
       })
