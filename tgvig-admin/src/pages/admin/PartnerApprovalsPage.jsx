@@ -13,14 +13,16 @@ function PartnerApprovalsPage() {
 
     try {
 
-      const res = await API.get(
-        "/admin/partners"
-      );
+      // ✅ FIXED ROUTE
+      const res = await API.get("/partners");
 
-      setPartners(res.data);
+      setPartners(
+        res.data.partners || res.data || []
+      );
 
     } catch (err) {
       console.log(err);
+      setPartners([]);
     }
   };
 

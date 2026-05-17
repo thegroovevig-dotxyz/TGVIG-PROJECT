@@ -13,14 +13,16 @@ function PropertyApprovalsPage() {
 
     try {
 
-      const res = await API.get(
-        "/admin/properties"
-      );
+      // ✅ FIXED ROUTE
+      const res = await API.get("/properties");
 
-      setProperties(res.data);
+      setProperties(
+        res.data.properties || res.data || []
+      );
 
     } catch (err) {
       console.log(err);
+      setProperties([]);
     }
   };
 
@@ -80,9 +82,7 @@ function PropertyApprovalsPage() {
 
           <h3>{property.name}</h3>
 
-          <p>
-            {property.propertyType}
-          </p>
+          <p>{property.propertyType}</p>
 
           <button
             onClick={() =>
