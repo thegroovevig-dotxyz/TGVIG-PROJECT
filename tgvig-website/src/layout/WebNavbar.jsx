@@ -28,14 +28,6 @@ function WebNavbar() {
 {/* RIGHT SIDE */}
 <div style={{ position: "absolute", right: "20px", top: "20px", display: "flex", gap: "10px" }}>
 
-  {/* MEMBER */}
-  <button onClick={() => navigate("/login")}>
-    Login
-  </button>
-
-  <button onClick={() => navigate("/register")}>
-    Join Free
-  </button>
 
   {/* DRIVER */}
   <button onClick={() => navigate("/login/driver")}>
