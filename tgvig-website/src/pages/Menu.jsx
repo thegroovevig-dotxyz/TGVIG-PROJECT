@@ -33,6 +33,7 @@ useEffect(() => {
 }, [selectedClub]);
 
 const loadMenu = async (clubId) => {
+   console.log("🔥 CLUB ID SENT:", clubId);
   try {
     const res = await API.get(`/menu/${clubId}`);
 
