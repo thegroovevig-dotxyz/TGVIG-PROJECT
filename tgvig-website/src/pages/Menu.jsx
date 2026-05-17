@@ -31,14 +31,14 @@ const [selectedClub, setSelectedClub] = useState("");
   }
 }, [selectedClub]);
 
-  const loadMenu = async () => {
-    try {
-      const res = await API.get("/menu/${clubId}");
-      setMenu(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const loadMenu = async (clubId) => {
+  try {
+    const res = await API.get(`/menu?clubId=${clubId}`);
+    setMenu(res.data || []);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
  const addItemToCart = (item) => {
   const size = selectedSize[item._id];
