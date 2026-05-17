@@ -30,13 +30,13 @@ function WebNavbar() {
 
 
   {/* DRIVER */}
-  <button onClick={() => navigate("/login")}>
+  <button onClick={() => navigate("/login/driver")}>
     Driver Access 
   </button>
 
   {/* PROPERTY (Hotels / Parking / Lodges) */}
-  <button onClick={() => navigate("/login")}>
-    Property Access
+  <button onClick={() => navigate("/login/property")}>
+    Property Partners Access
   </button>
 
 </div>

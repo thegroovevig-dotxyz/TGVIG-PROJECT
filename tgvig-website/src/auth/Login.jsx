@@ -32,7 +32,6 @@ function Login() {
       navigate("/home");
     }
 
-
    
   } catch (err) {
     console.log(err);
@@ -79,13 +78,7 @@ return (
       Login
     </button>
 
-    {/* MEMBER REGISTER */}
-    <button
-      type="button"
-      onClick={() => navigate("/register")}
-    >
-      Be a Groovist!
-    </button>
+   
 
     <hr />
 

@@ -85,7 +85,7 @@ function WebFront() {
         fontWeight: "bold"
       }}
     >
-      Join Free
+      BE A GROOVIST!
     </button>
 
   </div>
