@@ -27,10 +27,13 @@ import Events from "./pages/Events";
 
 import Parking from "./pages/Parking";
 import Properties from "./pages/Properties";
+
+import DriverRides from "./driver/pages/Rides";
+import MemberRides from "./pages/Rides";
 // driver
 import DriverLayout from "./driver/DriverLayout";
 import DriverHome from "./driver/pages/DriverHome";
-import Rides from "./driver/pages/Rides";
+
 
 // partner
 import PartnerLayout from "./partner/PartnerLayout";
@@ -78,12 +81,15 @@ function App() {
         <Route path="events" element={<Events />} />
 <Route path="parking" element={<Parking />} />
 <Route path="properties" element={<Properties />} />
+<Route path="/home/rides" element={<MemberRides />} />
       </Route>
 
       {/* DRIVER SYSTEM */}
       <Route path="/driver/*" element={<DriverLayout />}>
         <Route index element={<DriverHome />} />
-        <Route path="rides" element={<Rides />} />
+       
+        <Route path="rides" element={<DriverRides />} />
+
 
       </Route>
 
