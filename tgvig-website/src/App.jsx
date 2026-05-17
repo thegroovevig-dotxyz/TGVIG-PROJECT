@@ -24,6 +24,16 @@ import Benefits from "./pages/Benefits";
 import Venues from "./pages/Venues";
 import DriverLayout from "./driver/DriverLayout";
 import PartnerLayout from "./partner/PartnerLayout";
+// DRIVER
+import DriverLayout from "./driver/DriverLayout";
+import DriverHome from "./driver/pages/DriverHome";
+import Rides from "./driver/pages/Rides";
+// PARTNER
+import PartnerLayout from "./partner/PartnerLayout";
+import PartnerHome from "./partner/pages/PartnerHome";
+import PartnerBookings from "./partner/pages/PartnerBookings";
+import ParkingSessions from "./partner/pages/ParkingSessions";
+import MiniPOS from "./partner/pages/MiniPOS";
 
 function App() {
   return (
@@ -80,8 +90,21 @@ function App() {
         <Route path="events" element={<Events />} />
 <Route path="/driver/*" element={<DriverLayout />} />
 <Route path="/partner/*" element={<PartnerLayout />} />
-      </Route>
 
+      </Route>
+{/* DRIVER */}
+<Route path="/driver/*" element={<DriverLayout />}>
+  <Route index element={<DriverHome />} />
+  <Route path="rides" element={<Rides />} />
+</Route>
+
+{/* PARTNER */}
+<Route path="/partner/*" element={<PartnerLayout />}>
+  <Route index element={<PartnerHome />} />
+  <Route path="bookings" element={<PartnerBookings />} />
+  <Route path="parking" element={<ParkingSessions />} />
+  <Route path="pos" element={<MiniPOS />} />
+</Route>
     </Routes>
   );
 }
