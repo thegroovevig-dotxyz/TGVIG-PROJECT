@@ -32,7 +32,7 @@ const handleRegister = async (e) => {
       `Account created!\n\nMembership: ${membershipNo}\nPIN: ${pin}\nReferral: ${referralNumber}\nqrCode: ${qrCode}`
     );
 
-    navigate("/home");
+    navigate("/");
 
   } catch (err) {
     console.log("REGISTER ERROR:", err);

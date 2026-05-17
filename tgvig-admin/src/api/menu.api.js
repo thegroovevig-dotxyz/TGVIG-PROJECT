@@ -1,4 +1,4 @@
-import API from "./axios";
+import api from "./axios";
 
 export const getMenu = (clubId) => API.get(`/menu/${clubId}`);
 export const createMenu = (data) => API.post("/menu", data);
