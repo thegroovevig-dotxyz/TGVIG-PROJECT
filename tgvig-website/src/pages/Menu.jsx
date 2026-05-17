@@ -31,7 +31,7 @@ const [selectedClub, setSelectedClub] = useState("");
 
   const loadMenu = async () => {
     try {
-      const res = await API.get("/menu?type=WEB&clubId=${clubId}");
+      const res = await API.get("/menu/${clubId}");
       setMenu(res.data);
     } catch (err) {
       console.log(err);
