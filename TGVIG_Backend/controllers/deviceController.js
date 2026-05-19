@@ -14,8 +14,14 @@ exports.createDevice = async (req, res) => {
       name,
       type,
       status: status || "ACTIVE",
-      clubId
+      clubId,
     });
+
+const allowedTypes = ["POS", "SELFPOS", "MINIPOS"];
+
+if (!allowedTypes.includes(type)) {
+  return res.status(400).json({ message: "Invalid device type" });
+}
 
     res.json(device);
   } catch (err) {
@@ -26,7 +32,7 @@ exports.createDevice = async (req, res) => {
 
 exports.getDevices = async (req, res) => {
   try {
-    const devices = await Device.find().populate("clubId");
+    const devices = await Device.find().populate("clubId").populate("assignedStaffId");
     res.json(devices);
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -28,6 +28,7 @@ app.use(
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:5175",
+        "http://localhost:5176",
         "http://localhost:5200",
         "https://tgvig-project-self-pos.onrender.com",
         "https://tgvig-project-admin.onrender.com",
@@ -81,6 +82,7 @@ app.use("/API/properties", require("./routes/propertyRoutes"));
 app.use("/API/parking", require("./routes/parkingRoutes"));
 app.use("/API/partners", require("./routes/partnerRoutes"))
 app.use("/API/payouts", require("./routes/payoutRoutes"));
+app.use("/API", require("./routes/validator.routes"));
 
 app.use("/API/admin", require("./routes/adminRoutes"));
 

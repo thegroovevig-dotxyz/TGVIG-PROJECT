@@ -12,7 +12,7 @@ const [name, setName] = useState("");
 const [selectedType, setSelectedType] = useState("POS");
   const [form, setForm] = useState({
     name: "",
-    type: "POS", // POS | SELFPOS
+    type: "POS", // POS | SELFPOS | MINIPOS
      clubId: selectedClubId
   });
 
@@ -63,13 +63,19 @@ const loadClubs = async () => {
 
     console.log("DEVICE BODY:", payload);
 
-    await API.post("/devices", payload);
+    await API.put(`/devices`, {
+  assignedStaffId: userId
+});
+  
+
 
     loadDevices();
   } catch (err) {
     console.log(err.response?.data || err.message);
   }
 };
+
+
 
   const updateStatus = async (id, status) => {
     await API.put(`/devices/${id}`, { status });
@@ -106,7 +112,8 @@ const loadClubs = async () => {
 
       <select onChange={(e) => setSelectedType(e.target.value)}>
   <option value="POS">POS</option>
-  <option value="SELF_POS">SELF POS</option>
+  <option value="SELFPOS">SELFPOS</option>
+  <option value="MINIPOS">MINIPOS</option>
 </select>
       <input
   value={name}
@@ -133,8 +140,14 @@ const loadClubs = async () => {
 </button>
 
           <p>Type: {d.type}</p>
-          <p>Club: {d.club}</p>
+         <p>Club: {d.clubId?.name}</p>
           <p>Status: {d.status}</p>
+
+          <p>
+  Operator: {d.assignedStaffId
+    ? `${d.assignedStaffId.firstName} ${d.assignedStaffId.lastName}`
+    : "Unassigned"}
+</p>
 
           <button onClick={() => updateStatus(d._id, "ACTIVE")}>Activate</button>
           <button onClick={() => updateStatus(d._id, "INACTIVE")}>Deactivate</button>

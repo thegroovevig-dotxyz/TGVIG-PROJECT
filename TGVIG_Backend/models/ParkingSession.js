@@ -18,6 +18,12 @@ const parkingSessionSchema = new mongoose.Schema({
 
   totalCost: Number,
 
+  qrToken: {
+  type: String,
+  unique: true,
+},
+
+
   status: {
     type: String,
     enum: ["ACTIVE", "COMPLETED", "CANCELLED"],

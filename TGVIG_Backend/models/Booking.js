@@ -28,7 +28,12 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     enum: ["PENDING", "PAID", "FAILED"],
     default: "PENDING"
-  }
+  },
+
+  qrToken: {
+  type: String,
+  unique: true,
+}
 
 }, { timestamps: true });
 

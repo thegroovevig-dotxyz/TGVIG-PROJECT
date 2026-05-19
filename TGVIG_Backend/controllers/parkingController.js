@@ -1,5 +1,6 @@
 const ParkingSession = require("../models/ParkingSession");
 const transactionService = require("../services/transactionService");
+const { v4: uuidv4 } = require("uuid");
 
 // 🅿️ START SESSION
 exports.startParking = async (req, res) => {
@@ -9,7 +10,8 @@ exports.startParking = async (req, res) => {
 
     const {
       parkingId,
-      vehiclePlate
+      vehiclePlate,
+      qrToken: uuidv4,
     } = req.body;
 
     const session = await ParkingSession.create({
@@ -17,7 +19,8 @@ exports.startParking = async (req, res) => {
       parkingId,
       vehiclePlate,
       startTime: new Date(),
-      status: "ACTIVE"
+      status: "ACTIVE",
+      qrToken: uuidv4(),
     });
 
     res.json({
@@ -95,3 +98,4 @@ exports.getAllParking = async (req, res) => {
 
   }
 };
+

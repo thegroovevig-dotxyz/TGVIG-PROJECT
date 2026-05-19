@@ -1,5 +1,6 @@
 const Booking = require("../models/Booking");
 const transactionService = require("../services/transactionService");
+const { v4: uuidv4 } = require("uuid");
 
 // 🏨 CREATE BOOKING
 exports.createBooking = async (req, res) => {
@@ -12,7 +13,8 @@ exports.createBooking = async (req, res) => {
       checkIn,
       checkOut,
       guests,
-      totalPrice
+      totalPrice,
+       qrToken: uuidv4,
     } = req.body;
 
     const booking = await Booking.create({
@@ -22,8 +24,14 @@ exports.createBooking = async (req, res) => {
       checkOut,
       guests,
       totalPrice,
-      status: "PENDING"
+      status: "PENDING",
+      qrToken: uuidv4(),
     });
+
+    console.log("TOKEN:", qrToken);
+
+    const all = await Booking.find();
+console.log(all);
 
     res.json({
       success: true,
@@ -97,3 +105,4 @@ exports.getAllBookings = async (req, res) => {
 
   }
 };
+
