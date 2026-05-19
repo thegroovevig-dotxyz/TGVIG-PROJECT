@@ -10,7 +10,7 @@ exports.createDevice = async (req, res) => {
       return res.status(400).json({ message: "Missing fields" });
     }
 
-    const allowedTypes = ["POS", "SELFPOS", "MINIPOS"];
+    const allowedTypes = ["POS", "SELF_POS", "MINIPOS"];
 
     if (!allowedTypes.includes(type)) {
       return res.status(400).json({ message: "Invalid device type" });

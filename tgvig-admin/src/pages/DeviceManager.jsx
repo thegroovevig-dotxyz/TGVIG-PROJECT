@@ -12,7 +12,7 @@ const [name, setName] = useState("");
 const [selectedType, setSelectedType] = useState("POS");
   const [form, setForm] = useState({
     name: "",
-    type: "POS", // POS | SELFPOS | MINIPOS
+    type: "POS", // POS | SELF_POS | MINIPOS
      clubId: selectedClubId
   });
 
@@ -120,7 +120,7 @@ const assignDevice = async (deviceId, userId) => {
 
       <select onChange={(e) => setSelectedType(e.target.value)}>
   <option value="POS">POS</option>
-  <option value="SELFPOS">SELFPOS</option>
+  <option value="SELFPOS">SELF_POS</option>
   <option value="MINIPOS">MINIPOS</option>
 </select>
       <input
