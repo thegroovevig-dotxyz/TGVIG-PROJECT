@@ -30,6 +30,7 @@ app.use(
         "http://localhost:5175",
         "http://localhost:5176",
         "http://localhost:5200",
+        "https://tgvig-project-minipos.onrender.com",
         "https://tgvig-project-self-pos.onrender.com",
         "https://tgvig-project-admin.onrender.com",
        "https://tgvig-project-pos.onrender.com",
