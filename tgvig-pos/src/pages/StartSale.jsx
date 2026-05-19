@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 function StartSale() {
   const [menu, setMenu] = useState([]);
- const [selectedSize, setSelectedSize] = useState({});
+  const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState({});
   const { addToCart } = useCart();
 
@@ -33,19 +33,15 @@ function StartSale() {
       `/menu?clubId=${clubId}&deviceId=${deviceId}&type=POS`
     );
 
-    const promoRes = await API.get("/promotions?clubId=${clubId}&deviceId=${deviceId}&type=POS");
-
-
     console.log("✅ RESPONSE:", res.data);
+
     setMenu(res.data);
-    setPromos(promoRes.data);
 
   } catch (err) {
     console.log("❌ ERROR:", err?.response?.data || err.message);
   }
 };
 
-  // ADD TO CART (STRICT CHECK)
   const addItemToCart = (item) => {
     const size = selectedSize[item._id];
     const qty = quantity[item._id] || 1;
@@ -55,146 +51,89 @@ function StartSale() {
       return;
     }
 
-    const pricePerUnit = item.price?.[size] || 0;
+    const price = item.price?.[size] || 0;
 
-    const cartItem = {
+    addToCart({
       _id: Date.now(),
       name: item.name,
       size,
       quantity: qty,
-      price: pricePerUnit,
-      total: pricePerUnit * qty,
-    };
+      price,
+      total: price * qty,
+    });
 
-    addToCart(cartItem);
-
-    // RESET
-    setSelectedSize((prev) => ({ ...prev, [item._id]: "" }));
-    setQuantity((prev) => ({ ...prev, [item._id]: 1 }));
+    setSelectedSize((p) => ({ ...p, [item._id]: "" }));
+    setQuantity((p) => ({ ...p, [item._id]: 1 }));
   };
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>START SALE</h2>
 
-      {/* CLUB SELECT */}
-      <div style={{ marginBottom: "20px" }}>
-        <label>Select Club: </label>
+      <h3>Menu</h3>
 
-        <select
-          value={selectedClub}
-          onChange={(e) => setSelectedClub(e.target.value)}
-        >
-          <option value="">-- Select Club --</option>
+      {menu.map((item) => (
+        <div key={item._id} style={{ border: "1px solid #ccc", padding: 10 }}>
+          <h4>{item.name}</h4>
 
-          {clubs.map((c) => (
-            <option key={c._id} value={c._id}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-      </div>
+          <p>Single: R {item.price?.single}</p>
+          <p>x4: R {item.price?.x4}</p>
+          <p>x6: R {item.price?.x6}</p>
 
-      {/* MENU */}
-      <div style={{ display: "grid", gap: "15px" }}>
-        {menu.map((item) => (
-          <div
-            key={item._id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              borderRadius: "6px",
-            }}
-          >
-            {item.image && (
-              <img
-                src={
-                  item.image.startsWith("http")
-                    ? item.image
-                    : `http://localhost:5000${item.image}`
-                }
-                alt=""
-                width="100%"
-                style={{ borderRadius: "6px" }}
-              />
-            )}
-
-            <h3>{item.name}</h3>
-            <p><b>{item.type}</b></p>
-
-            {/* PRICES */}
-            <p>Single: R {item.price?.single}</p>
-            <p>x4: R {item.price?.x4}</p>
-            <p>x6: R {item.price?.x6}</p>
-
-            {/* SIZE */}
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name={item._id}
-                  onChange={() =>
-                    setSelectedSize((prev) => ({
-                      ...prev,
-                      [item._id]: "single",
-                    }))
-                  }
-                />
-                Single
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name={item._id}
-                  onChange={() =>
-                    setSelectedSize((prev) => ({
-                      ...prev,
-                      [item._id]: "x4",
-                    }))
-                  }
-                />
-                x4
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name={item._id}
-                  onChange={() =>
-                    setSelectedSize((prev) => ({
-                      ...prev,
-                      [item._id]: "x6",
-                    }))
-                  }
-                />
-                x6
-              </label>
-            </div>
-
-            {/* QUANTITY */}
-            <div style={{ marginTop: "10px" }}>
-              <label>Quantity: </label>
+          {/* SIZE */}
+          <div>
+            <label>
               <input
-                type="number"
-                min="1"
-                value={quantity[item._id] || 1}
-                onChange={(e) =>
-                  setQuantity((prev) => ({
-                    ...prev,
-                    [item._id]: Number(e.target.value),
-                  }))
+                type="radio"
+                name={item._id}
+                onChange={() =>
+                  setSelectedSize((p) => ({ ...p, [item._id]: "single" }))
                 }
-                style={{ width: "60px" }}
               />
-            </div>
+              Single
+            </label>
 
-            <button onClick={() => addItemToCart(item)}>
-              Add to Cart
-            </button>
+            <label>
+              <input
+                type="radio"
+                name={item._id}
+                onChange={() =>
+                  setSelectedSize((p) => ({ ...p, [item._id]: "x4" }))
+                }
+              />
+              x4
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name={item._id}
+                onChange={() =>
+                  setSelectedSize((p) => ({ ...p, [item._id]: "x6" }))
+                }
+              />
+              x6
+            </label>
           </div>
-        ))}
-      </div>
+
+          {/* QTY */}
+          <input
+            type="number"
+            min="1"
+            value={quantity[item._id] || 1}
+            onChange={(e) =>
+              setQuantity((p) => ({
+                ...p,
+                [item._id]: Number(e.target.value),
+              }))
+            }
+          />
+
+          <button onClick={() => addItemToCart(item)}>
+            Add to Cart
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
