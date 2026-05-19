@@ -63,9 +63,7 @@ const loadClubs = async () => {
 
     console.log("DEVICE BODY:", payload);
 
-    await API.put(`/devices`, {
-  assignedStaffId: userId
-});
+    await API.post("/devices", payload);
   
 
 
@@ -75,7 +73,17 @@ const loadClubs = async () => {
   }
 };
 
+const assignDevice = async (deviceId, userId) => {
+  try {
+    await API.put(`/devices/${deviceId}`, {
+      assignedStaffId: userId
+    });
 
+    loadDevices();
+  } catch (err) {
+    console.log(err.response?.data || err.message);
+  }
+};
 
   const updateStatus = async (id, status) => {
     await API.put(`/devices/${id}`, { status });
@@ -121,6 +129,10 @@ const loadClubs = async () => {
 />
 
       <button onClick={createDevice}>Add Device</button>
+
+      <button onClick={() => assignDevice(d._id, selectedStaffId)}>
+  Assign Staff
+</button>
 
       <hr />
 
