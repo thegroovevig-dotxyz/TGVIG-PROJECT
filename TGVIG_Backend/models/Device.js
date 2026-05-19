@@ -11,10 +11,9 @@ const deviceSchema = new mongoose.Schema(
     },
 
  assignedStaffId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "STAFF",
-    default: null
-  },
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Member",
+},
 
 
     status: {

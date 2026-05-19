@@ -15,6 +15,8 @@ const [selectedType, setSelectedType] = useState("POS");
     type: "POS", // POS | SELFPOS | MINIPOS
      clubId: selectedClubId
   });
+  const [selectedStaff, setSelectedStaff] = useState("");
+const [staffList, setStaffList] = useState([]);
 
   useEffect(() => {
     loadDevices();
@@ -64,12 +66,45 @@ const loadClubs = async () => {
     console.log("DEVICE BODY:", payload);
 
     await API.post("/devices", payload);
+    
 
     loadDevices();
   } catch (err) {
     console.log(err.response?.data || err.message);
   }
 };
+
+const loadStaff = async () => {
+  try {
+    const res = await API.get("/members");
+    setStaffList(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+useEffect(() => {
+  loadStaff();
+}, []);
+
+const assignStaff = async (deviceId) => {
+  if (!selectedStaff) {
+    alert("Select staff first");
+    return;
+  }
+
+  try {
+    await API.put(`/devices/${deviceId}`, {
+      assignedStaffId: selectedStaff,
+    });
+
+    alert("Staff assigned");
+    loadDevices();
+  } catch (err) {
+    console.log(err.response?.data || err.message);
+  }
+};
+
 
   const updateStatus = async (id, status) => {
     await API.put(`/devices/${id}`, { status });
@@ -116,6 +151,22 @@ const loadClubs = async () => {
 
       <button onClick={createDevice}>Add Device</button>
 
+      <select
+  onChange={(e) => setSelectedStaff(e.target.value)}
+>
+  <option value="">Assign Staff</option>
+
+  {staffList.map((s) => (
+    <option key={s._id} value={s._id}>
+      {s.firstName} {s.lastName}
+    </option>
+  ))}
+</select>
+
+<button onClick={() => assignStaff(d._id)}>
+  Assign
+</button>
+
       <hr />
 
       {/* LIST */}
@@ -137,7 +188,11 @@ const loadClubs = async () => {
          <p>Club: {d.clubId?.name}</p>
           <p>Status: {d.status}</p>
 
-          
+          <p>
+  Operator: {d.assignedStaffId
+    ? `${d.assignedStaffId.firstName} ${d.assignedStaffId.lastName}`
+    : "Unassigned"}
+</p>
 
           <button onClick={() => updateStatus(d._id, "ACTIVE")}>Activate</button>
           <button onClick={() => updateStatus(d._id, "INACTIVE")}>Deactivate</button>
